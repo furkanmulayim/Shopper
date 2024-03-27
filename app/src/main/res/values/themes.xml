@@ -1,0 +1,40 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.Shopper" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/dark_purple</item>
+        <item name="colorPrimaryVariant">@color/dark_purple_30_trans</item>
+        <item name="colorOnPrimary">@color/black_50_trans</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/light_purple</item>
+        <item name="colorSecondaryVariant">@color/light_purple_50_trans</item>
+        <item name="colorOnSecondary">@color/black_50_trans</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@color/dark_purple_30_trans</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="rounded_10" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">30dp</item>
+    </style>
+
+    <style name="rounden_tops">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopRight">15dp</item>
+        <item name="cornerSizeTopLeft">15dp</item>
+    </style>
+
+    <style name="rounded20" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">20dp</item>
+    </style>
+
+    <style name="product_item_round">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopRight">20dp</item>
+        <item name="cornerSizeTopLeft">20dp</item>
+    </style>
+
+
+</resources>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+
+    <color name="white">#FFFFFFFF</color>
+    <color name="not_selected">#D0D0D0</color>
+
+    <color name="theme">#F9F9F9</color>
+
+
+    <color name="white_50_trans">#80F1F1F1</color>
+    <color name="black_50_trans">#80000000</color>
+    <color name="dark_purple_30_trans">#4D443572</color>
+    <color name="light_purple_50_trans">#80D9CCFF</color>
+
+    <color name="white_70_trans">#B3FFFFFF</color>
+
+    <color name="linear_blue_left">#30CFD0</color>
+    <color name="linear_blue_right">#330867</color>
+    <color name="linear_orange_left">#FFECD2</color>
+    <color name="linear_orange_right">#FCB69F</color>
+
+    <color name="dark_purple">#443572</color>
+
+    <color name="light_purple">#D9CCFF</color>
+
+    <color name="dark_red">#E83939</color>
+    <color name="light_red">#FFDCDC</color>
+
+    <color name="dark_green">#00AB56</color>
+    <color name="light_green">#B7F3D5</color>
+
+    <color name="normal_text">#6D6E71</color>
+    <color name="hint_text">#D0D0D0</color>
+
+</resources>

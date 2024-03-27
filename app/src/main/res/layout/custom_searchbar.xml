@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/searchbarCV"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:layout_margin="12dp"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="12dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        android:paddingEnd="13dp"
+        tools:ignore="RtlSymmetry">
+
+        <EditText
+            android:id="@+id/searchbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:drawableStart="@drawable/ic_search"
+            android:hint="@string/search"
+            android:paddingStart="5dp"
+            android:textColorHint="@color/hint_text"
+            tools:ignore="RtlSymmetry"
+            android:autofillHints="Selam" />
+
+        <ImageView
+            android:id="@+id/notificationsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_notification" />
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

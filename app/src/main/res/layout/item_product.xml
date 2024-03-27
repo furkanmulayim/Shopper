@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/item_food_category_back"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="6dp"
+    android:background="@drawable/product_item_background"
+    android:elevation="2dp"
+    android:paddingBottom="15dp">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/productImage"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/item"
+        android:scaleType="centerCrop"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/product_item_round" />
+
+
+    <TextView
+        android:id="@+id/productNew"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/product_item_new_background"
+        android:fontFamily="@font/inter"
+        android:paddingStart="15dp"
+        android:paddingTop="3dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="3dp"
+        android:text="Yeni"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/productDiscountDescription"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/productDiscountDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/product_item_discount_detail_background"
+        android:fontFamily="@font/inter"
+        android:paddingStart="15dp"
+        android:paddingTop="3dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="3dp"
+        android:singleLine="true"
+        android:text="Bayrama Özel %30"
+        android:textColor="@color/dark_purple"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/productImage"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <TextView
+        android:id="@+id/productName"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/inter_semibold"
+        android:singleLine="true"
+        android:text="Ürün Adı Burda"
+        android:textColor="@color/normal_text"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/productImage" />
+
+    <TextView
+        android:id="@+id/productCurrentPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:fontFamily="@font/inter_semibold"
+        android:layout_marginTop="-3dp"
+        android:singleLine="true"
+        android:text="120₺"
+        android:textColor="@color/dark_purple"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/productName"
+        app:layout_constraintTop_toBottomOf="@+id/productName" />
+
+
+    <TextView
+        android:id="@+id/productOldPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginStart="5dp"
+        android:fontFamily="@font/inter_extralight"
+        android:singleLine="true"
+        android:text="120₺"
+        android:textColor="@color/black_50_trans"
+        android:textSize="13sp"
+        app:layout_constraintBottom_toBottomOf="@+id/productCurrentPrice"
+        app:layout_constraintStart_toEndOf="@+id/productCurrentPrice"
+        app:layout_constraintTop_toTopOf="@+id/productCurrentPrice" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/product_item_cargo_background"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="@+id/productCurrentPrice"
+        app:layout_constraintTop_toBottomOf="@+id/productCurrentPrice">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/product_item_discound_ticket" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="5dp"
+            android:text="-%50"
+            android:textColor="@color/light_purple" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/product_item_discount_background"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_marginStart="10dp"
+        app:layout_constraintStart_toEndOf="@+id/linearLayout2"
+        app:layout_constraintTop_toBottomOf="@+id/productCurrentPrice">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/product_item_cargo" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:textSize="8dp"
+            android:textAlignment="center"
+            android:layout_marginBottom="5dp"
+            android:text="Kargo Ücretsiz"
+            android:textColor="@color/dark_purple" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

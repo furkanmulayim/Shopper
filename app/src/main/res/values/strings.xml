@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Shopper</string>
+
+    <!--''''''''''''''''''''SPLASH''''''''''''''''''''''''''-->
+    <string name="int_connect_ok">Internet Bağlantısı Var</string>
+    <string name="int_connect_not">Internet Bağlantısı Yok</string>
+    <string name="accept_button">Alışverişe Başla</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!--''''''''''''''''''''SPLASH''''''''''''''''''''''''''-->
+
+
+    <!--''''''''''''''''''''HOME''''''''''''''''''''''''''-->
+    <string name="search">Aramaya Başla</string>
+    <!--''''''''''''''''''''HOME''''''''''''''''''''''''''-->
+
+</resources>
