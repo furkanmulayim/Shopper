@@ -11,7 +11,9 @@ import com.furkanmulayim.shopper.databinding.FragmentHomeBinding
 import com.furkanmulayim.shopper.ui.home.slider.ImageAdapter
 import com.furkanmulayim.shopper.ui.home.slider.ZoomOutPageTransformer
 import com.furkanmulayim.shopper.utils.onSingleClickListener
+import com.furkanmulayim.shopper.utils.viewGone
 import com.furkanmulayim.shopper.utils.viewMessage
+import com.furkanmulayim.shopper.utils.viewVisible
 
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
     private lateinit var adapter: ImageAdapter
@@ -26,9 +28,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setSlider()
-        initClicks()
-        setProductAdapter()
+        setSlider(); initClicks(); setProductAdapter(); setScrollSettings()
     }
 
     private fun setSlider() {
@@ -38,15 +38,29 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
     }
 
     private fun setProductAdapter() {
-
-        productAdapter = HomeProductAdapter(mcontext, sil(), ::selectedProductItem)
+        productAdapter =
+            HomeProductAdapter(
+                mcontext,
+                viewModel.products,
+                ::showProductDetails,
+                ::showProductVariants
+            )
         binding.productRcyc.adapter = productAdapter
-        val layoutManager = GridLayoutManager(mcontext,2)
-        binding.productRcyc.layoutManager = layoutManager
+        binding.productRcyc.layoutManager = GridLayoutManager(mcontext, 2)
     }
 
-    private fun selectedProductItem(productItemName: String) {
-        viewMessage(mcontext, productItemName)
+    private fun showProductVariants(productItemVariants: String) {
+        viewMessage(mcontext, productItemVariants)
+        val act = HomeFragmentDirections.actionHomeFragmentToColorVariantFragment()
+        navigateTo(act.actionId)
+    }
+
+    private fun showProductDetails(productItemName: ProductItem) {
+        val bundle = Bundle().apply {
+            putParcelable("ProductItem", productItemName)
+        }
+        val action = HomeFragmentDirections.actionHomeFragmentToProductDetailFragment()
+        navigateTo(action.actionId, bundle)
     }
 
     private fun initClicks() {
@@ -54,66 +68,19 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
             val act = HomeFragmentDirections.actionHomeFragmentToNotificationFragment()
             navigateTo(act.actionId)
         }
+
+        binding.upToButton.onSingleClickListener {
+            binding.nestedScrollView.smoothScrollTo(0, 0, 1500)
+        }
     }
 
-    private fun sil ():ArrayList<ProductItem>{
-           val deneme = arrayListOf<ProductItem>(
-            ProductItem(
-                yeniMi = true,
-                indirimAciklama = "Ramazana Özel %50",
-                renkleri = 5,
-                adi = "Moda Ürünü",
-                eskiFiyat = "150₺",
-                yeniFiyat = "75₺",
-                indirimOrani = "%50",
-                isKargo = true
-            ), ProductItem(
-                yeniMi = true,
-                indirimAciklama = "Ramazana Deneme Özel %50",
-                renkleri = 5,
-                adi = "Moda Ürünü",
-                eskiFiyat = "150₺",
-                yeniFiyat = "75₺",
-                indirimOrani = "%50",
-                isKargo = true
-            ), ProductItem(
-                yeniMi = true,
-                indirimAciklama = "Ramazana Özel %50",
-                renkleri = 5,
-                adi = "Moda Ürünü",
-                eskiFiyat = "150₺",
-                yeniFiyat = "75₺",
-                indirimOrani = "%50",
-                isKargo = true
-            ), ProductItem(
-                yeniMi = true,
-                indirimAciklama = "Ramazana Özel %50",
-                renkleri = 5,
-                adi = "Moda Ürünü",
-                eskiFiyat = "150₺",
-                yeniFiyat = "75₺",
-                indirimOrani = "%50",
-                isKargo = true
-            ), ProductItem(
-                yeniMi = true,
-                indirimAciklama = "Ramazana Özel %50",
-                renkleri = 5,
-                adi = "Moda Ürünü",
-                eskiFiyat = "150₺",
-                yeniFiyat = "75₺",
-                indirimOrani = "%50",
-                isKargo = true
-            ), ProductItem(
-                yeniMi = true,
-                indirimAciklama = "Ramazana Özel %50",
-                renkleri = 5,
-                adi = "Moda Ürünü",
-                eskiFiyat = "150₺",
-                yeniFiyat = "75₺",
-                indirimOrani = "%50",
-                isKargo = true
-            )
-        )
-        return deneme
+    private fun setScrollSettings() {
+        binding.nestedScrollView.setOnScrollChangeListener { _, _, scrollY, _, _ ->
+            if (scrollY == 0) {
+                viewGone(binding.upToButton)
+            } else {
+                viewVisible(binding.upToButton)
+            }
+        }
     }
 }

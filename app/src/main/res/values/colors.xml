@@ -8,10 +8,13 @@
     <color name="theme">#F9F9F9</color>
 
 
-    <color name="white_50_trans">#80F1F1F1</color>
+    <color name="white_15_trans">#26D8D8D8</color>
+    <color name="white_30_trans">#80D8D8D8</color>
+    <color name="white_50_trans">#99F1F1F1</color>
     <color name="black_50_trans">#80000000</color>
-    <color name="dark_purple_30_trans">#4D443572</color>
+    <color name="dark_purple_50_trans">#99443572</color>
     <color name="light_purple_50_trans">#80D9CCFF</color>
+    <color name="light_purple_70_trans">#4DD9CCFF</color>
 
     <color name="white_70_trans">#B3FFFFFF</color>
 

@@ -1,7 +1,8 @@
 package com.furkanmulayim.shopper.ui.notifications
 
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import com.furkanmulayim.tarifce.base.BaseViewModel
 
-class NotificationViewModel : ViewModel() {
+class NotificationViewModel(application: Application) : BaseViewModel(application) {
     // TODO: Implement the ViewModel
 }

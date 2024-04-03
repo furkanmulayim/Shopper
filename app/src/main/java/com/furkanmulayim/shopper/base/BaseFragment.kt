@@ -82,6 +82,6 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel> : Fragment() {
 
 
     fun onBackPressed() {
-        //this.onBackPressed()
+        findNavController().popBackStack()
     }
 }

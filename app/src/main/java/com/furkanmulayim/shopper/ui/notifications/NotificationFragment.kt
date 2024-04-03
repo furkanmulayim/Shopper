@@ -1,31 +1,30 @@
 package com.furkanmulayim.shopper.ui.notifications
 
-import androidx.fragment.app.viewModels
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.furkanmulayim.shopper.R
+import com.furkanmulayim.shopper.base.BaseFragment
+import com.furkanmulayim.shopper.databinding.FragmentNotificationBinding
+import com.furkanmulayim.shopper.utils.viewGone
 
-class NotificationFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = NotificationFragment()
+class NotificationFragment : BaseFragment<FragmentNotificationBinding, NotificationViewModel>() {
+    override fun getFragmentBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): FragmentNotificationBinding {
+        return FragmentNotificationBinding.inflate(inflater, container, false)
     }
 
-    private val viewModel: NotificationViewModel by viewModels()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        // TODO: Use the ViewModel
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initSetup()
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        return inflater.inflate(R.layout.fragment_notification, container, false)
+    private fun initSetup() {
+        viewGone(binding.toolBar.toolbarStart)
+        viewGone(binding.toolBar.toolbarEnd)
+        binding.toolBar.toolbarTitle.text = getString(R.string.notification)
     }
 }

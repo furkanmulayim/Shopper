@@ -4,6 +4,7 @@ apply plugin: 'kotlin-android'
 apply plugin: "androidx.navigation.safeargs.kotlin"
 apply plugin: 'kotlin-kapt'
 apply plugin: 'dagger.hilt.android.plugin'
+apply plugin: 'kotlin-parcelize'
 
 android {
     namespace 'com.furkanmulayim.shopper'
@@ -93,6 +94,9 @@ dependencies {
 
     //SHARED PREFERENCES
     implementation 'androidx.preference:preference:1.2.1'
+
+    //VIEV PAGER INDICATOR
+    implementation 'me.relex:circleindicator:2.1.6'
 
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'

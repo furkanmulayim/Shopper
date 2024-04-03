@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,27 +9,33 @@
     tools:context=".ui.home.HomeFragment">
 
     <RelativeLayout
-        android:id="@+id/tool_bar_relative"
+        android:id="@+id/headerToolBar"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="52dp"
         android:layout_weight="0"
         android:background="@color/white"
         android:elevation="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_scrollFlags="scroll|enterAlways">
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
+            android:layout_margin="5dp"
             android:scaleType="centerInside"
-            android:src="@drawable/logo" />
+            android:src="@drawable/shopper" />
 
     </RelativeLayout>
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
+        android:layout_marginTop="52dp"
         android:layout_height="match_parent"
-        android:layout_weight="1">
+        app:layout_constraintTop_toBottomOf="@+id/headerToolBar">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -61,11 +67,26 @@
                 android:id="@+id/productRcyc"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:clickable="false"
                 android:layout_marginStart="6dp"
+                android:layout_marginTop="-6dp"
                 android:layout_marginEnd="6dp"
-                android:layout_marginBottom="12dp" />
+                android:layout_marginBottom="12dp"
+                android:clickable="false"
+                android:focusable="false" />
 
         </LinearLayout>
-    </ScrollView>
-</LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <ImageView
+        android:id="@+id/upToButton"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_margin="15sp"
+        android:visibility="gone"
+        android:foregroundGravity="center"
+        android:foreground="@drawable/ic_upto"
+        android:background="@drawable/ic_upto_back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:contentDescription="@string/app_name" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,31 +1,91 @@
 package com.furkanmulayim.shopper.ui.category
 
-import androidx.fragment.app.viewModels
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.furkanmulayim.shopper.R
+import com.furkanmulayim.shopper.base.BaseFragment
+import com.furkanmulayim.shopper.data.enums.CategoryName
+import com.furkanmulayim.shopper.data.model.ProductItem
+import com.furkanmulayim.shopper.databinding.FragmentCategoryBinding
+import com.furkanmulayim.shopper.ui.category.adapters.CategoryAdapter
+import com.furkanmulayim.shopper.ui.category.adapters.CategoryProductAdapter
+import com.furkanmulayim.shopper.utils.viewGone
+import com.furkanmulayim.shopper.utils.viewMessage
 
-class CategoryFragment : Fragment() {
+class CategoryFragment : BaseFragment<FragmentCategoryBinding, CategoryViewModel>() {
 
-    companion object {
-        fun newInstance() = CategoryFragment()
+    private lateinit var categoryAdapter: CategoryAdapter
+    private lateinit var productAdapter: CategoryProductAdapter
+    override fun getFragmentBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): FragmentCategoryBinding {
+        return FragmentCategoryBinding.inflate(inflater, container, false)
     }
 
-    private val viewModel: CategoryViewModel by viewModels()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        // TODO: Use the ViewModel
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initSetup()
+        setCategoryAdapter()
+        setProductAdapter()
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        return inflater.inflate(R.layout.fragment_category, container, false)
+    private fun initSetup() {
+        viewGone(binding.toolBar.toolbarStart)
+        viewGone(binding.toolBar.toolbarEnd)
+        binding.toolBar.toolbarTitle.text = getString(R.string.category)
+    }
+
+
+    private fun setCategoryAdapter() {
+        categoryAdapter = CategoryAdapter(mcontext, viewModel.categories, ::categoryClickListener)
+        binding.categoryRcyc.layoutManager =
+            LinearLayoutManager(mcontext, LinearLayoutManager.HORIZONTAL, false)
+        binding.categoryRcyc.adapter = categoryAdapter
+    }
+
+    private fun categoryClickListener(categoryName: String) {
+        when (categoryName) {
+            CategoryName.TUMU.id -> {
+                productAdapter.updateList(viewModel.products)
+            }
+
+            CategoryName.JIK.id -> {
+                productAdapter.updateList(viewModel.products2)
+            }
+
+            CategoryName.BEBEK.id -> {
+                productAdapter.updateList(viewModel.products1)
+            }
+        }
+    }
+
+    private fun setProductAdapter() {
+        productAdapter = CategoryProductAdapter(
+            mcontext,
+            viewModel.products,
+            ::showProductDetails,
+            ::showProductVariants
+        )
+        binding.productRcyc.adapter = productAdapter
+        binding.productRcyc.layoutManager = GridLayoutManager(mcontext, 2)
+    }
+
+    private fun showProductVariants(productItemVariants: String) {
+        viewMessage(mcontext, productItemVariants)
+        val act = CategoryFragmentDirections.actionCategoryFragmentToColorVariantFragment()
+        navigateTo(act.actionId)
+    }
+
+    private fun showProductDetails(productItemName: ProductItem) {
+        val bundle = Bundle().apply {
+            putParcelable("ProductItem", productItemName)
+        }
+        val action = CategoryFragmentDirections.actionCategoryFragmentToProductDetailFragment()
+        navigateTo(action.actionId, bundle)
     }
 }

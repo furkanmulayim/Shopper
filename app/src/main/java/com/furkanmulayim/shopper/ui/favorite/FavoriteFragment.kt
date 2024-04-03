@@ -1,31 +1,41 @@
 package com.furkanmulayim.shopper.ui.favorite
 
-import androidx.fragment.app.viewModels
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.furkanmulayim.shopper.R
+import com.furkanmulayim.shopper.base.BaseFragment
+import com.furkanmulayim.shopper.databinding.FragmentFavoriteBinding
+import com.furkanmulayim.shopper.utils.viewGone
 
-class FavoriteFragment : Fragment() {
+class FavoriteFragment : BaseFragment<FragmentFavoriteBinding, FavoriteViewModel>() {
 
-    companion object {
-        fun newInstance() = FavoriteFragment()
+    private lateinit var adapter: FavoriteAdapter
+    override fun getFragmentBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): FragmentFavoriteBinding {
+        return FragmentFavoriteBinding.inflate(inflater, container, false)
     }
 
-    private val viewModel: FavoriteViewModel by viewModels()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        // TODO: Use the ViewModel
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initSetup()
+        initAdapter()
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        return inflater.inflate(R.layout.fragment_favorite, container, false)
+    private fun initSetup() {
+        viewGone(binding.toolBar.toolbarStart)
+        viewGone(binding.toolBar.toolbarEnd)
+        binding.toolBar.toolbarTitle.text = getString(R.string.favorie)
     }
+
+    private fun initAdapter() {
+        adapter = FavoriteAdapter(mcontext, viewModel.favorite)
+        binding.FavoriteRcyc.layoutManager = LinearLayoutManager(mcontext)
+        binding.FavoriteRcyc.adapter = adapter
+    }
+
 }
