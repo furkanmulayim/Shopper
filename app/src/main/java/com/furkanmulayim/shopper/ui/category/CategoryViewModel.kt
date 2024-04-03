@@ -1,16 +1,35 @@
 package com.furkanmulayim.shopper.ui.category
 
 import android.app.Application
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.viewModelScope
 import com.furkanmulayim.shopper.R
 import com.furkanmulayim.shopper.data.enums.CategoryName
 import com.furkanmulayim.shopper.data.model.Fiyat
-import com.furkanmulayim.shopper.data.model.Indirim
 import com.furkanmulayim.shopper.data.model.Lojik
 import com.furkanmulayim.shopper.data.model.ProductCategory
 import com.furkanmulayim.shopper.data.model.ProductItem
 import com.furkanmulayim.tarifce.base.BaseViewModel
+import kotlinx.coroutines.launch
 
-class CategoryViewModel(app: Application) : BaseViewModel(app) {
+class CategoryViewModel(app: Application, val ssh: SavedStateHandle) : BaseViewModel(app) {
+
+    var isSearchFocused: MutableLiveData<Boolean> = MutableLiveData()
+
+    init {
+        getBundle()
+    }
+
+    private fun getBundle() {
+        viewModelScope.launch {
+            var bundle = ssh.get<Boolean>("search")
+            bundle?.let {
+                isSearchFocused.value = it
+            }
+        }
+
+    }
 
     val categories = arrayListOf(
         ProductCategory(
@@ -40,15 +59,12 @@ class CategoryViewModel(app: Application) : BaseViewModel(app) {
             aciklama = "",
             numara = "",
             renk = 2,
-            renkSecenek = listOf("Beyaz", "Bej", "Gri"),
+            renkSecenek = "Beyaz, Bej, Gri",
             satilanAdet = 10,
+            indirimAciklama = "",
             fiyat = Fiyat(
                 oncekiFiyat = "300₺",
                 gecerliFiyat = "150₺"
-            ),
-            indirim = Indirim(
-                indirimAciklama = "Ramazan Özel",
-                indirimYuzde = "%50"
             ),
             lojik = Lojik(
                 isAktif = true,
@@ -58,7 +74,7 @@ class CategoryViewModel(app: Application) : BaseViewModel(app) {
                 isUreticiSecimi = true,
                 isReelsActive = true
             ),
-            ilgiliUrunler = listOf("Deri Ceket", "Ceket", "Kot Ceket"),
+            ilgiliUrunler = "Deri Ceket",
             hastag = "#deneme #deneme yeni #yeni etiketli"
 
         ), ProductItem(
@@ -68,16 +84,13 @@ class CategoryViewModel(app: Application) : BaseViewModel(app) {
             kategori = "",
             aciklama = "",
             numara = "",
+            indirimAciklama = "",
             renk = 2,
-            renkSecenek = listOf("Beyaz", "Bej", "Gri"),
+            renkSecenek = "Beyaz, Bej, Gri",
             satilanAdet = 10,
             fiyat = Fiyat(
                 oncekiFiyat = "300₺",
                 gecerliFiyat = "150₺"
-            ),
-            indirim = Indirim(
-                indirimAciklama = "Ramazan Özel",
-                indirimYuzde = "%50"
             ),
             lojik = Lojik(
                 isAktif = false,
@@ -87,7 +100,7 @@ class CategoryViewModel(app: Application) : BaseViewModel(app) {
                 isUreticiSecimi = true,
                 isReelsActive = true
             ),
-            ilgiliUrunler = listOf("Deri Ceket", "Ceket", "Kot Ceket"),
+            ilgiliUrunler = "Deri Ceket",
             hastag = "#deneme #deneme yeni #yeni etiketli"
 
         ), ProductItem(
@@ -98,15 +111,12 @@ class CategoryViewModel(app: Application) : BaseViewModel(app) {
             aciklama = "",
             numara = "",
             renk = 2,
-            renkSecenek = listOf("Beyaz", "Bej", "Gri"),
+            renkSecenek = "Beyaz, Bej, Gri",
             satilanAdet = 10,
+            indirimAciklama = "",
             fiyat = Fiyat(
                 oncekiFiyat = "300₺",
                 gecerliFiyat = "150₺"
-            ),
-            indirim = Indirim(
-                indirimAciklama = "Ramazan Özel",
-                indirimYuzde = "%50"
             ),
             lojik = Lojik(
                 isAktif = true,
@@ -116,7 +126,7 @@ class CategoryViewModel(app: Application) : BaseViewModel(app) {
                 isUreticiSecimi = true,
                 isReelsActive = true
             ),
-            ilgiliUrunler = listOf("Deri Ceket", "Ceket", "Kot Ceket"),
+            ilgiliUrunler = "Deri Ceket",
             hastag = "#deneme #deneme yeni #yeni etiketli"
 
         ), ProductItem(
@@ -127,15 +137,12 @@ class CategoryViewModel(app: Application) : BaseViewModel(app) {
             aciklama = "",
             numara = "",
             renk = 2,
-            renkSecenek = listOf("Beyaz", "Bej", "Gri"),
+            renkSecenek = "Beyaz, Bej, Gri",
             satilanAdet = 10,
+            indirimAciklama = "",
             fiyat = Fiyat(
                 oncekiFiyat = "300₺",
                 gecerliFiyat = "150₺"
-            ),
-            indirim = Indirim(
-                indirimAciklama = "Ramazan Özel",
-                indirimYuzde = "%50"
             ),
             lojik = Lojik(
                 isAktif = true,
@@ -145,7 +152,7 @@ class CategoryViewModel(app: Application) : BaseViewModel(app) {
                 isKargoUcret = false,
                 isReelsActive = true
             ),
-            ilgiliUrunler = listOf("Deri Ceket", "Ceket", "Kot Ceket"),
+            ilgiliUrunler = "Deri Ceket",
             hastag = "#deneme #deneme yeni #yeni etiketli"
 
         )
@@ -160,16 +167,13 @@ class CategoryViewModel(app: Application) : BaseViewModel(app) {
             kategori = "",
             aciklama = "",
             numara = "",
+            indirimAciklama = "",
             renk = 2,
-            renkSecenek = listOf("Beyaz", "Bej", "Gri"),
+            renkSecenek = "Beyaz, Bej, Gri",
             satilanAdet = 10,
             fiyat = Fiyat(
                 oncekiFiyat = "300₺",
                 gecerliFiyat = "150₺"
-            ),
-            indirim = Indirim(
-                indirimAciklama = "Ramazan Özel",
-                indirimYuzde = "%50"
             ),
             lojik = Lojik(
                 isAktif = true,
@@ -179,7 +183,7 @@ class CategoryViewModel(app: Application) : BaseViewModel(app) {
                 isUreticiSecimi = true,
                 isReelsActive = true
             ),
-            ilgiliUrunler = listOf("Deri Ceket", "Ceket", "Kot Ceket"),
+            ilgiliUrunler = "Deri Ceket",
             hastag = "#deneme #deneme yeni #yeni etiketli"
         )
 
@@ -194,16 +198,13 @@ class CategoryViewModel(app: Application) : BaseViewModel(app) {
             kategori = "",
             aciklama = "",
             numara = "",
+            indirimAciklama = "",
             renk = 2,
-            renkSecenek = listOf("Beyaz", "Bej", "Gri"),
+            renkSecenek = "Beyaz, Bej, Gri",
             satilanAdet = 10,
             fiyat = Fiyat(
                 oncekiFiyat = "300₺",
                 gecerliFiyat = "150₺"
-            ),
-            indirim = Indirim(
-                indirimAciklama = "Ramazan Özel",
-                indirimYuzde = "%50"
             ),
             lojik = Lojik(
                 isAktif = true,
@@ -213,7 +214,7 @@ class CategoryViewModel(app: Application) : BaseViewModel(app) {
                 isUreticiSecimi = true,
                 isReelsActive = true
             ),
-            ilgiliUrunler = listOf("Deri Ceket", "Ceket", "Kot Ceket"),
+            ilgiliUrunler = "Deri Ceket",
             hastag = "#deneme #deneme yeni #yeni etiketli"
         ),
         ProductItem(
@@ -224,15 +225,12 @@ class CategoryViewModel(app: Application) : BaseViewModel(app) {
             aciklama = "",
             numara = "",
             renk = 2,
-            renkSecenek = listOf("Beyaz", "Bej", "Gri"),
+            indirimAciklama = "",
+            renkSecenek = "Beyaz, Bej, Gri",
             satilanAdet = 10,
             fiyat = Fiyat(
                 oncekiFiyat = "300₺",
                 gecerliFiyat = "150₺"
-            ),
-            indirim = Indirim(
-                indirimAciklama = "Ramazan Özel",
-                indirimYuzde = "%50"
             ),
             lojik = Lojik(
                 isAktif = true,
@@ -242,7 +240,7 @@ class CategoryViewModel(app: Application) : BaseViewModel(app) {
                 isUreticiSecimi = true,
                 isReelsActive = true
             ),
-            ilgiliUrunler = listOf("Deri Ceket", "Ceket", "Kot Ceket"),
+            ilgiliUrunler = "Deri Ceket",
             hastag = "#deneme #deneme yeni #yeni etiketli"
         ),
         ProductItem(
@@ -250,18 +248,15 @@ class CategoryViewModel(app: Application) : BaseViewModel(app) {
             image = "www.google.com",
             isim = "Trençkot",
             kategori = "",
+            indirimAciklama = "",
             aciklama = "",
             numara = "",
             renk = 2,
-            renkSecenek = listOf("Beyaz", "Bej", "Gri"),
+            renkSecenek = "Beyaz, Bej, Gri",
             satilanAdet = 10,
             fiyat = Fiyat(
                 oncekiFiyat = "300₺",
                 gecerliFiyat = "150₺"
-            ),
-            indirim = Indirim(
-                indirimAciklama = "Ramazan Özel",
-                indirimYuzde = "%50"
             ),
             lojik = Lojik(
                 isAktif = true,
@@ -271,7 +266,7 @@ class CategoryViewModel(app: Application) : BaseViewModel(app) {
                 isUreticiSecimi = true,
                 isReelsActive = true
             ),
-            ilgiliUrunler = listOf("Deri Ceket", "Ceket", "Kot Ceket"),
+            ilgiliUrunler = "Deri Ceket",
             hastag = "#deneme #deneme yeni #yeni etiketli"
         )
     )

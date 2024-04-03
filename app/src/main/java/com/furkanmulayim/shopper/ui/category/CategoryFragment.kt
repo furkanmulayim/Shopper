@@ -1,9 +1,11 @@
 package com.furkanmulayim.shopper.ui.category
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.furkanmulayim.shopper.base.BaseFragment
@@ -27,7 +29,7 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding, CategoryViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setCategoryAdapter(); setProductAdapter()
+        setCategoryAdapter(); setProductAdapter(); isFocusedBunleDataObserve()
     }
 
     private fun setCategoryAdapter() {
@@ -76,5 +78,20 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding, CategoryViewModel
         }
         val action = CategoryFragmentDirections.actionCategoryFragmentToProductDetailFragment()
         navigateTo(action.actionId, bundle)
+    }
+
+    private fun isFocusedBunleDataObserve() {
+        viewModel.isSearchFocused.observe(viewLifecycleOwner) {
+            it.let { focus ->
+                if (focus) binding.toolBar.searchbar.requestFocus()
+                val inputMethodManager =
+                    requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                inputMethodManager.showSoftInput(
+                    binding.toolBar.searchbar,
+                    InputMethodManager.SHOW_IMPLICIT
+                )
+
+            }
+        }
     }
 }

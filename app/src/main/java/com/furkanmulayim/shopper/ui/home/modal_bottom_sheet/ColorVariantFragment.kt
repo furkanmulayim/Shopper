@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import com.furkanmulayim.shopper.R
 import com.furkanmulayim.shopper.databinding.FragmentColorVariantBinding
+import com.furkanmulayim.shopper.utils.viewMessage
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class ColorVariantFragment : BottomSheetDialogFragment() {
@@ -26,6 +27,8 @@ class ColorVariantFragment : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel
+        viewModel.stringList.observe(viewLifecycleOwner) {
+            viewMessage(requireContext(), it.size.toString())
+        }
     }
 }

@@ -25,7 +25,6 @@ class MainActivity : AppCompatActivity() {
     private fun setBottomNavBar() {
         val navController: NavController = findNavController(R.id.fragmentContainerView)
         binding.bottomNavMenu.setupWithNavController(navController)
-
         // Giris Yapılmadan Bottom Nav Menü Görünmeyecek
         navController.addOnDestinationChangedListener { _, destination, _ ->
             val f = destination.id

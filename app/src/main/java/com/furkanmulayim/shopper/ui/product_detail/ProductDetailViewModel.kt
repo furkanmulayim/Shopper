@@ -5,9 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.furkanmulayim.shopper.R
-import com.furkanmulayim.shopper.data.model.Fiyat
-import com.furkanmulayim.shopper.data.model.Indirim
-import com.furkanmulayim.shopper.data.model.Lojik
 import com.furkanmulayim.shopper.data.model.ProductItem
 import com.furkanmulayim.tarifce.base.BaseViewModel
 import kotlinx.coroutines.launch

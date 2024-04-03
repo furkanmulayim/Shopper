@@ -4,7 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.NavController
+import androidx.navigation.Navigation.findNavController
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.furkanmulayim.shopper.R
 import com.furkanmulayim.shopper.base.BaseFragment
 import com.furkanmulayim.shopper.data.model.ProductItem
 import com.furkanmulayim.shopper.databinding.FragmentHomeBinding
@@ -12,7 +16,6 @@ import com.furkanmulayim.shopper.ui.home.slider.ImageAdapter
 import com.furkanmulayim.shopper.ui.home.slider.ZoomOutPageTransformer
 import com.furkanmulayim.shopper.utils.onSingleClickListener
 import com.furkanmulayim.shopper.utils.viewGone
-import com.furkanmulayim.shopper.utils.viewMessage
 import com.furkanmulayim.shopper.utils.viewVisible
 
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
@@ -50,9 +53,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
     }
 
     private fun showProductVariants(productItemVariants: String) {
-        viewMessage(mcontext, productItemVariants)
+        val bundle = Bundle().apply {
+            putString("variant_ids", productItemVariants)
+        }
         val act = HomeFragmentDirections.actionHomeFragmentToColorVariantFragment()
-        navigateTo(act.actionId)
+        navigateTo(actionId = act.actionId, bundle = bundle)
     }
 
     private fun showProductDetails(productItemName: ProductItem) {
@@ -60,13 +65,22 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
             putParcelable("ProductItem", productItemName)
         }
         val action = HomeFragmentDirections.actionHomeFragmentToProductDetailFragment()
-        navigateTo(action.actionId, bundle)
+        navigateTo(actionId = action.actionId, bundle = bundle)
     }
 
     private fun initClicks() {
         binding.searchBar.notificationsButton.onSingleClickListener {
             val act = HomeFragmentDirections.actionHomeFragmentToNotificationFragment()
             navigateTo(act.actionId)
+        }
+
+        binding.searchBar.searchbar.onSingleClickListener {
+            val navController: NavController =
+                findNavController(requireActivity(), R.id.fragmentContainerView)
+            val bundle = Bundle().apply {
+                putBoolean("search", true)
+            }
+            navController.navigate(R.id.categoryFragment, bundle)
         }
 
         binding.upToButton.onSingleClickListener {

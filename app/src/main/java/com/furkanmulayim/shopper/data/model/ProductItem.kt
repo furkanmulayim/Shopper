@@ -1,26 +1,25 @@
 package com.furkanmulayim.shopper.data.model
 
 import android.os.Parcelable
-import androidx.annotation.StringRes
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class ProductItem(
-    val id: Int,
-    val image: String,
-    val isim: String,
-    val kategori: String,
-    val aciklama: String,
-    val numara: String,
-    val renk: Int,
-    val renkSecenek: List<String>,
-    val satilanAdet: Int,
-    val fiyat: Fiyat,
-    val indirim: Indirim,
-    val lojik: Lojik,
-    val ilgiliUrunler: List<String>,
-    val hastag: String
+    @SerializedName("id") val id: Int,
+    @SerializedName("image") val image: String,
+    @SerializedName("isim") val isim: String,
+    @SerializedName("kategori") val kategori: String,
+    @SerializedName("aciklama") val aciklama: String,
+    @SerializedName("numara") val numara: String,
+    @SerializedName("renk") val renk: Int,
+    @SerializedName("renkSecenek") val renkSecenek: String,
+    @SerializedName("satilanAdet") val satilanAdet: Int,
+    @SerializedName("fiyat") val fiyat: Fiyat,
+    @SerializedName("indirimAciklama") val indirimAciklama: String,
+    @SerializedName("lojik") val lojik: Lojik,
+    @SerializedName("ilgiliUrunler") val ilgiliUrunler: String,
+    @SerializedName("hastag") val hastag: String
 ) : Parcelable
 
 
@@ -28,12 +27,6 @@ data class ProductItem(
 data class Fiyat(
     @SerializedName("oncekiFiyat") val oncekiFiyat: String,
     @SerializedName("gecerliFiyat") val gecerliFiyat: String
-) : Parcelable
-
-@Parcelize
-data class Indirim(
-    @SerializedName("indirimAciklama") val indirimAciklama: String,
-    @SerializedName("indirimYuzde") val indirimYuzde: String
 ) : Parcelable
 
 @Parcelize

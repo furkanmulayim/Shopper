@@ -2,7 +2,6 @@ package com.furkanmulayim.shopper.ui.home
 
 import android.app.Application
 import com.furkanmulayim.shopper.data.model.Fiyat
-import com.furkanmulayim.shopper.data.model.Indirim
 import com.furkanmulayim.shopper.data.model.Lojik
 import com.furkanmulayim.shopper.data.model.ProductItem
 import com.furkanmulayim.shopper.utils.SharedPrefs
@@ -31,15 +30,12 @@ class HomeViewModel(application: Application) : BaseViewModel(application) {
             aciklama = "",
             numara = "",
             renk = 2,
-            renkSecenek = listOf("Beyaz", "Bej", "Gri"),
+            indirimAciklama = "",
+            renkSecenek = "Beyaz, Bej, Gri",
             satilanAdet = 10,
             fiyat = Fiyat(
                 oncekiFiyat = "300₺",
                 gecerliFiyat = "150₺"
-            ),
-            indirim = Indirim(
-                indirimAciklama = "Ramazan Özel",
-                indirimYuzde = "%50"
             ),
             lojik = Lojik(
                 isAktif = true,
@@ -49,7 +45,7 @@ class HomeViewModel(application: Application) : BaseViewModel(application) {
                 isUreticiSecimi = true,
                 isReelsActive = true
             ),
-            ilgiliUrunler = listOf("Deri Ceket", "Ceket", "Kot Ceket"),
+            ilgiliUrunler = "Deri Ceket",
             hastag = "#deneme #deneme yeni #yeni etiketli"
 
         ), ProductItem(
@@ -60,15 +56,12 @@ class HomeViewModel(application: Application) : BaseViewModel(application) {
             aciklama = "",
             numara = "",
             renk = 2,
-            renkSecenek = listOf("Beyaz", "Bej", "Gri"),
+            indirimAciklama = "",
+            renkSecenek = "Beyaz, Bej, Gri",
             satilanAdet = 10,
             fiyat = Fiyat(
                 oncekiFiyat = "300₺",
                 gecerliFiyat = "150₺"
-            ),
-            indirim = Indirim(
-                indirimAciklama = "Ramazan Özel",
-                indirimYuzde = "%50"
             ),
             lojik = Lojik(
                 isAktif = false,
@@ -78,7 +71,7 @@ class HomeViewModel(application: Application) : BaseViewModel(application) {
                 isUreticiSecimi = true,
                 isReelsActive = true
             ),
-            ilgiliUrunler = listOf("Deri Ceket", "Ceket", "Kot Ceket"),
+            ilgiliUrunler = "Deri Ceket",
             hastag = "#deneme #deneme yeni #yeni etiketli"
 
         ), ProductItem(
@@ -89,15 +82,12 @@ class HomeViewModel(application: Application) : BaseViewModel(application) {
             aciklama = "",
             numara = "",
             renk = 2,
-            renkSecenek = listOf("Beyaz", "Bej", "Gri"),
+            renkSecenek = "Beyaz, Bej, Gri",
             satilanAdet = 10,
+            indirimAciklama = "",
             fiyat = Fiyat(
                 oncekiFiyat = "300₺",
                 gecerliFiyat = "150₺"
-            ),
-            indirim = Indirim(
-                indirimAciklama = "Ramazan Özel",
-                indirimYuzde = "%50"
             ),
             lojik = Lojik(
                 isAktif = true,
@@ -107,7 +97,7 @@ class HomeViewModel(application: Application) : BaseViewModel(application) {
                 isUreticiSecimi = true,
                 isReelsActive = true
             ),
-            ilgiliUrunler = listOf("Deri Ceket", "Ceket", "Kot Ceket"),
+            ilgiliUrunler = "Deri Ceket",
             hastag = "#deneme #deneme yeni #yeni etiketli"
 
         ), ProductItem(
@@ -116,17 +106,14 @@ class HomeViewModel(application: Application) : BaseViewModel(application) {
             isim = "Trençkot",
             kategori = "",
             aciklama = "",
+            indirimAciklama = "",
             numara = "",
             renk = 2,
-            renkSecenek = listOf("Beyaz", "Bej", "Gri"),
+            renkSecenek = "Beyaz, Bej, Gri",
             satilanAdet = 10,
             fiyat = Fiyat(
                 oncekiFiyat = "300₺",
                 gecerliFiyat = "150₺"
-            ),
-            indirim = Indirim(
-                indirimAciklama = "Ramazan Özel",
-                indirimYuzde = "%50"
             ),
             lojik = Lojik(
                 isAktif = true,
@@ -136,7 +123,7 @@ class HomeViewModel(application: Application) : BaseViewModel(application) {
                 isKargoUcret = false,
                 isReelsActive = true
             ),
-            ilgiliUrunler = listOf("Deri Ceket", "Ceket", "Kot Ceket"),
+            ilgiliUrunler = "Deri Ceket",
             hastag = "#deneme #deneme yeni #yeni etiketli"
 
         )

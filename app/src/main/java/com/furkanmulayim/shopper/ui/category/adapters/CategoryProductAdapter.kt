@@ -48,13 +48,13 @@ class CategoryProductAdapter(
             if (item.lojik.isKargoUcret) viewVisible(kargoLayout)
             else viewGone(kargoLayout)
 
-            discountDescription.text = item.indirim.indirimAciklama
+            discountDescription.text = item.indirimAciklama
             currentPrice.text = item.fiyat.gecerliFiyat
             oldPrica.text = item.fiyat.oncekiFiyat
             name.text = item.isim
             oldPrica.paintFlags = oldPrica.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
-            colorVariants.text = item.renkSecenek.size.toString()
-            indirimYuzde.text = item.indirim.indirimYuzde
+            val renkSecenek = item.renkSecenek.split(",")
+            colorVariants.text = renkSecenek.size.toString()
 
         }
 
@@ -80,7 +80,9 @@ class CategoryProductAdapter(
         }
 
         holder.colorVariants.onSingleClickListener {
-            onClickVariants("Varyant: ${item.renkSecenek.size}")
+
+            val renkSecenek = item.renkSecenek.split(",")
+            onClickVariants("Varyant: ${renkSecenek.size}")
         }
 
         holder.indirimLayout.onSingleClickListener {}
