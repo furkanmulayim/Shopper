@@ -17,6 +17,7 @@ class ColorVariantAdapter(
 
         fun bind(url: String) {
             //image.loadImage(url)
+            println(url)
         }
     }
 

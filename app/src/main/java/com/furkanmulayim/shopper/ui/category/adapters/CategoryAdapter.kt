@@ -1,77 +1,70 @@
 package com.furkanmulayim.shopper.ui.category.adapters
 
-import android.annotation.SuppressLint
-import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.core.content.ContextCompat.getColor
 import androidx.recyclerview.widget.RecyclerView
 import com.furkanmulayim.shopper.R
 import com.furkanmulayim.shopper.data.model.ProductCategory
-import com.furkanmulayim.shopper.utils.onSingleClickListener
+import com.furkanmulayim.shopper.databinding.ItemProductCategoryBinding
 
 class CategoryAdapter(
-    private val context: Context,
     private val dataList: ArrayList<ProductCategory>,
     private val onClick: (String) -> Unit
 ) : RecyclerView.Adapter<CategoryAdapter.ViewHolder>() {
 
     private var selectedPosition = RecyclerView.SCROLLBAR_POSITION_DEFAULT
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(private val binding: ItemProductCategoryBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
-        val back: LinearLayout = itemView.findViewById(R.id.item_food_category_back)
-        val front: ImageView = itemView.findViewById(R.id.logo)
-        val name: TextView = itemView.findViewById(R.id.name)
+        init {
+            binding.root.setOnClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    selectedPosition = position
+                    notifyDataSetChanged()
+                    onClick(dataList[position].name)
+                }
+            }
+        }
+
+        fun bind(item: ProductCategory) {
+            binding.apply {
+                name.text = item.name
+                logo.setBackgroundResource(item.image)
+
+                if (adapterPosition == selectedPosition) {
+                    itemFoodCategoryBack.setBackgroundResource(R.drawable.product_item_discount_background)
+                    name.setTextColor(getColor(itemView.context, R.color.white))
+                    logo.setColorFilter(
+                        getColor(itemView.context, R.color.dark_purple),
+                        android.graphics.PorterDuff.Mode.SRC_OUT
+                    )
+                } else {
+                    itemFoodCategoryBack.setBackgroundResource(R.drawable.category_item_white)
+                    name.setTextColor(getColor(itemView.context, R.color.dark_purple))
+                    logo.setColorFilter(
+                        getColor(itemView.context, R.color.hint_text),
+                        android.graphics.PorterDuff.Mode.SRC_IN
+                    )
+                }
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view =
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_product_category, parent, false)
-        return ViewHolder(view)
-
+        val binding = ItemProductCategoryBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
+        return ViewHolder(binding)
     }
 
-    @SuppressLint("NotifyDataSetChanged")
-    override fun onBindViewHolder(holder: ViewHolder, @SuppressLint("RecyclerView") position: Int) {
-        val item = dataList[position]
-
-        holder.front.setBackgroundResource(item.image)
-        holder.name.text = item.name
-
-        // Tıklanan ögenin pozisyonunu kontrol et
-        if (position == selectedPosition) {
-            // Tıklanan ögenin arka planını beyaz yap
-            holder.back.setBackgroundResource(R.drawable.product_item_discount_background)
-            holder.name.setTextColor(getColor(context, R.color.white))
-            holder.front.setColorFilter(
-                getColor(context, R.color.dark_purple),
-                android.graphics.PorterDuff.Mode.SRC_OUT
-            )
-        } else {
-            // Diğer ögelerin arka planını siyah yap
-            holder.back.setBackgroundResource(R.drawable.category_item_white)
-            holder.name.setTextColor(getColor(context, R.color.dark_purple))
-            holder.front.setColorFilter(
-                getColor(context, R.color.hint_text),
-                android.graphics.PorterDuff.Mode.SRC_IN
-            )
-        }
-
-        holder.itemView.onSingleClickListener {
-            selectedPosition = position
-            onClick(item.name)
-            notifyDataSetChanged() // Veri setini güncelle
-        }
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.bind(dataList[position])
     }
 
-    override fun getItemCount(): Int {
-        return dataList.size
-    }
+    override fun getItemCount(): Int = dataList.size
 }
-

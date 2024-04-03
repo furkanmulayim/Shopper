@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,7 +13,42 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/FavoriteRcyc"
         android:layout_width="match_parent"
+        android:overScrollMode="never"
         android:layout_height="match_parent"
-        android:layout_marginTop="58dp" />
+        android:layout_marginTop="52dp" />
+
+
+    <LinearLayout
+        android:id="@+id/emptyListPanel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/favorite_empty_saved" />
+
+
+        <TextView
+            android:id="@+id/productName"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_height="match_parent"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/inter_light"
+            android:singleLine="true"
+            android:text="Favorilediğiniz bir ürün bulunmamaktadır."
+            android:textColor="@color/dark_purple_50_trans"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/productImage" />
+
+
+    </LinearLayout>
 
 </FrameLayout>

@@ -7,19 +7,20 @@
     android:orientation="vertical"
     tools:context=".ui.category.CategoryFragment">
 
-    <include
-        android:id="@+id/toolBar"
-        layout="@layout/custom_toolbar" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/categoryRcyc"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal" />
+        android:elevation="5dp"
+        android:layout_height="wrap_content">
 
+        <include
+            android:id="@+id/toolBar"
+            layout="@layout/custom_category_header" />
+
+    </androidx.cardview.widget.CardView>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
+        android:overScrollMode="never"
         android:layout_height="match_parent">
 
         <LinearLayout
@@ -27,17 +28,10 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:layout_marginStart="12dp"
-                android:layout_marginEnd="12dp"
-                android:background="@drawable/product_item_discount_detail_background"
-                android:contentDescription="@string/app_name" />
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/productRcyc"
                 android:layout_width="match_parent"
+                android:overScrollMode="never"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="6dp"

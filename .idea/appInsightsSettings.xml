@@ -8,7 +8,7 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="app.buratti.android" />
+                  <option name="appId" value="com.campbell.campbell" />
                 </ConnectionSetting>
               </option>
               <option name="failureTypes">

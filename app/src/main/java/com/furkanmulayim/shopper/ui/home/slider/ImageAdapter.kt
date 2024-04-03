@@ -8,7 +8,11 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.furkanmulayim.shopper.R
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class ImageAdapter(private val context: Context, private val viewPager: ViewPager2) :
     RecyclerView.Adapter<ImageAdapter.ImageViewHolder>() {
@@ -56,9 +60,5 @@ class ImageAdapter(private val context: Context, private val viewPager: ViewPage
                 currentItem = (currentItem + 1) % itemCount
             }
         }
-    }
-
-    fun stopAutoScroll() {
-        autoScrollJob?.cancel()
     }
 }

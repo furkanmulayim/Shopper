@@ -1,7 +1,6 @@
 package com.furkanmulayim.shopper.ui.favorite
 
 import android.app.Application
-import androidx.lifecycle.ViewModel
 import com.furkanmulayim.shopper.data.model.Fiyat
 import com.furkanmulayim.shopper.data.model.Indirim
 import com.furkanmulayim.shopper.data.model.Lojik

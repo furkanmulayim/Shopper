@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.furkanmulayim.shopper.R
@@ -24,24 +25,24 @@ class HomeProductAdapter(
     private val onClickVariants: (String) -> (Unit)
 ) : RecyclerView.Adapter<HomeProductAdapter.ViewHolder>() {
 
-    class ViewHolder(binding: ItemProductBinding) : RecyclerView.ViewHolder(binding.root) {
-        val image: ShapeableImageView = binding.productImage
-        val newText: TextView = binding.productNew
-        val discountDescription: TextView = binding.productDiscountDescription
-        val oldPrica: TextView = binding.productOldPrice
-        val currentPrice: TextView = binding.productCurrentPrice
-        val name: TextView = binding.productName
-        val colorVariants: TextView = binding.colorVariants
-        val kargoLayout: LinearLayout = binding.kargoLayout
-        val indirimLayout: LinearLayout = binding.indirimLayout
-        val indirimYuzde: TextView = binding.indirimYuzde
+    inner class ViewHolder(binding: ItemProductBinding) : RecyclerView.ViewHolder(binding.root) {
+        private val image: ShapeableImageView = binding.productImage
+        private val itemButton: ConstraintLayout = binding.itemFoodCategoryBack
+        private val newText: TextView = binding.productNew
+        private val discountDescription: TextView = binding.productDiscountDescription
+        private val oldPrica: TextView = binding.productOldPrice
+        private val currentPrice: TextView = binding.productCurrentPrice
+        private val name: TextView = binding.productName
+        private val colorVariants: TextView = binding.colorVariants
+        private val kargoLayout: LinearLayout = binding.kargoLayout
+        private val indirimLayout: LinearLayout = binding.indirimLayout
+        private val indirimYuzde: TextView = binding.indirimYuzde
 
         fun bind(item: ProductItem, context: Context) {
             // todo aktif olmayan ürünler filtrelenip gelecek !!
 
             //yeni yazısı
-            if (item.lojik.isYeni) newText.text =
-                ContextCompat.getString(context, R.string.news)
+            if (item.lojik.isYeni) newText.text = ContextCompat.getString(context, R.string.news)
             else viewGone(newText)
 
             //kargo layoutu kalkabilir
@@ -56,8 +57,14 @@ class HomeProductAdapter(
             colorVariants.text = item.renkSecenek.size.toString()
             indirimYuzde.text = item.indirim.indirimYuzde
 
-        }
+            itemButton.onSingleClickListener { onClickItem(item) }
 
+            colorVariants.onSingleClickListener {
+                onClickVariants("Varyant: ${item.renkSecenek.size}")
+            }
+            indirimLayout.onSingleClickListener {}
+            kargoLayout.onSingleClickListener {}
+        }
     }
 
 
@@ -68,22 +75,10 @@ class HomeProductAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = dataList[position]
-        holder.bind(item, context)
 
-        if (!item.lojik.isAktif) {
-            //notifyItemRemoved(position)
+        if (item.lojik.isAktif) {
+            holder.bind(item, context)
         }
-
-        holder.itemView.onSingleClickListener {
-            onClickItem(item)
-        }
-
-        holder.colorVariants.onSingleClickListener {
-            onClickVariants("Varyant: ${item.renkSecenek.size}")
-        }
-
-        holder.indirimLayout.onSingleClickListener {}
-        holder.kargoLayout.onSingleClickListener {}
     }
 
     override fun getItemCount(): Int {

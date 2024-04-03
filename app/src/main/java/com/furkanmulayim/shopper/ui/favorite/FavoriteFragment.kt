@@ -9,6 +9,8 @@ import com.furkanmulayim.shopper.R
 import com.furkanmulayim.shopper.base.BaseFragment
 import com.furkanmulayim.shopper.databinding.FragmentFavoriteBinding
 import com.furkanmulayim.shopper.utils.viewGone
+import com.furkanmulayim.shopper.utils.viewMessage
+import com.furkanmulayim.shopper.utils.viewVisible
 
 class FavoriteFragment : BaseFragment<FragmentFavoriteBinding, FavoriteViewModel>() {
 
@@ -33,9 +35,21 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding, FavoriteViewModel
     }
 
     private fun initAdapter() {
-        adapter = FavoriteAdapter(mcontext, viewModel.favorite)
+        adapter = FavoriteAdapter(viewModel.favorite, ::onClickItemDelete)
         binding.FavoriteRcyc.layoutManager = LinearLayoutManager(mcontext)
         binding.FavoriteRcyc.adapter = adapter
+        emptyAdapterControl()
     }
 
+    private fun onClickItemDelete(id: Int) {
+        viewMessage(mcontext, id.toString())
+    }
+
+    private fun emptyAdapterControl() {
+        if (adapter.itemCount == 0) {
+            viewVisible(binding.emptyListPanel)
+        } else {
+            viewGone(binding.emptyListPanel)
+        }
+    }
 }

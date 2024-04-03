@@ -1,5 +1,6 @@
 package com.furkanmulayim.shopper.ui.category.adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Paint
 import android.view.LayoutInflater
@@ -23,20 +24,17 @@ class CategoryProductAdapter(
     private val onClickVariants: (String) -> (Unit)
 ) : RecyclerView.Adapter<CategoryProductAdapter.ViewHolder>() {
 
-    private var lastAddedItemPosition: Int = -1
-
-
     class ViewHolder(binding: ItemProductBinding) : RecyclerView.ViewHolder(binding.root) {
         val image: ShapeableImageView = binding.productImage
-        val newText: TextView = binding.productNew
-        val discountDescription: TextView = binding.productDiscountDescription
-        val oldPrica: TextView = binding.productOldPrice
-        val currentPrice: TextView = binding.productCurrentPrice
+        private val newText: TextView = binding.productNew
+        private val discountDescription: TextView = binding.productDiscountDescription
+        private val oldPrica: TextView = binding.productOldPrice
+        private val currentPrice: TextView = binding.productCurrentPrice
         val name: TextView = binding.productName
         val colorVariants: TextView = binding.colorVariants
         val kargoLayout: LinearLayout = binding.kargoLayout
         val indirimLayout: LinearLayout = binding.indirimLayout
-        val indirimYuzde: TextView = binding.indirimYuzde
+        private val indirimYuzde: TextView = binding.indirimYuzde
 
         fun bind(item: ProductItem, context: Context) {
             // todo aktif olmayan ürünler filtrelenip gelecek !!
@@ -73,6 +71,7 @@ class CategoryProductAdapter(
         holder.bind(item, context)
 
         if (!item.lojik.isAktif) {
+            println("Doldurulacak Burası")
             //notifyItemRemoved(position)
         }
 
@@ -92,6 +91,7 @@ class CategoryProductAdapter(
         return dataList.size
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun updateList(newList: ArrayList<ProductItem>?) {
         if (newList != null) {
             dataList.clear()

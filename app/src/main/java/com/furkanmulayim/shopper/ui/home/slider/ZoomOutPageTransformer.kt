@@ -16,12 +16,14 @@ class ZoomOutPageTransformer(private val marginPx: Int) : ViewPager2.PageTransfo
                 page.scaleX = 0.55f
                 page.scaleY = 0.55f
             }
+
             position <= 1 -> { // Görünen sayfa
                 val scaleFactor = 0.85f.coerceAtLeast(1 - abs(position))
                 page.translationX = -marginDP * position
                 page.scaleX = scaleFactor
                 page.scaleY = scaleFactor
             }
+
             else -> { // Sağında olan sayfa
                 page.translationX = marginDP
                 page.scaleX = 0.55f

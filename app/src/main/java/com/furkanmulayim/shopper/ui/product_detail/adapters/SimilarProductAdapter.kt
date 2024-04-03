@@ -1,22 +1,10 @@
 package com.furkanmulayim.shopper.ui.product_detail.adapters
 
 import android.annotation.SuppressLint
-import android.content.Context
-import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.furkanmulayim.shopper.R
-import com.furkanmulayim.shopper.data.model.ProductItem
-import com.furkanmulayim.shopper.databinding.ItemProductBinding
-import com.furkanmulayim.shopper.databinding.ItemProductColorVariantBinding
 import com.furkanmulayim.shopper.databinding.ItemProductSimilarBinding
-import com.furkanmulayim.shopper.utils.onSingleClickListener
-import com.furkanmulayim.shopper.utils.viewGone
-import com.furkanmulayim.shopper.utils.viewVisible
 import com.google.android.material.imageview.ShapeableImageView
 
 class SimilarProductAdapter(
@@ -28,6 +16,7 @@ class SimilarProductAdapter(
 
         fun bind(url: String) {
             //image.loadImage(url)
+            println(url)
         }
     }
 

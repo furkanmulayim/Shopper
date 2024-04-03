@@ -6,14 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.furkanmulayim.shopper.R
 import com.furkanmulayim.shopper.base.BaseFragment
 import com.furkanmulayim.shopper.data.enums.CategoryName
 import com.furkanmulayim.shopper.data.model.ProductItem
 import com.furkanmulayim.shopper.databinding.FragmentCategoryBinding
 import com.furkanmulayim.shopper.ui.category.adapters.CategoryAdapter
 import com.furkanmulayim.shopper.ui.category.adapters.CategoryProductAdapter
-import com.furkanmulayim.shopper.utils.viewGone
 import com.furkanmulayim.shopper.utils.viewMessage
 
 class CategoryFragment : BaseFragment<FragmentCategoryBinding, CategoryViewModel>() {
@@ -29,23 +27,14 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding, CategoryViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initSetup()
-        setCategoryAdapter()
-        setProductAdapter()
+        setCategoryAdapter(); setProductAdapter()
     }
-
-    private fun initSetup() {
-        viewGone(binding.toolBar.toolbarStart)
-        viewGone(binding.toolBar.toolbarEnd)
-        binding.toolBar.toolbarTitle.text = getString(R.string.category)
-    }
-
 
     private fun setCategoryAdapter() {
-        categoryAdapter = CategoryAdapter(mcontext, viewModel.categories, ::categoryClickListener)
-        binding.categoryRcyc.layoutManager =
+        categoryAdapter = CategoryAdapter(viewModel.categories, ::categoryClickListener)
+        binding.toolBar.categoryRcyc.layoutManager =
             LinearLayoutManager(mcontext, LinearLayoutManager.HORIZONTAL, false)
-        binding.categoryRcyc.adapter = categoryAdapter
+        binding.toolBar.categoryRcyc.adapter = categoryAdapter
     }
 
     private fun categoryClickListener(categoryName: String) {
