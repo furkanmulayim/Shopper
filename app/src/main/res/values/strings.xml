@@ -2,59 +2,93 @@
     <string name="app_name">Shopper</string>
     <string name="app_name_uppercase">SHOPPER</string>
 
-    <!--''''''''''''''''''''SPLASH''''''''''''''''''''''''''-->
+    <!--''''''''''''''''''''SPLASH''''''''''''''''''''''''''''''''''-->
     <string name="int_connect_ok">Internet Bağlantısı Var</string>
     <string name="int_connect_not">Internet Bağlantısı Yok</string>
     <string name="accept_button">Alışverişe Başla</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <!--''''''''''''''''''''SPLASH''''''''''''''''''''''''''-->
+    <!--''''''''''''''''''''SPLASH''''''''''''''''''''''''''''''''''-->
 
 
-    <!--''''''''''''''''''''HOME''''''''''''''''''''''''''-->
+    <!--''''''''''''''''''''HOME''''''''''''''''''''''''''''''''''-->
     <string name="search">Aramaya Başla</string>
     <string name="news">Yeni</string>
 
-    <!--''''''''''''''''''''HOME''''''''''''''''''''''''''-->
+    <!--''''''''''''''''''''HOME''''''''''''''''''''''''''''''''''-->
 
 
-    <!--''''''''''''''''''''ITEM''''''''''''''''''''''''''-->
+    <!--''''''''''''''''''''ITEM''''''''''''''''''''''''''''''''''-->
     <string name="cargo">Kargo Ücretsiz</string>
 
-    <!--''''''''''''''''''''ITEM''''''''''''''''''''''''''-->
+    <!--''''''''''''''''''''ITEM''''''''''''''''''''''''''''''''''-->
 
 
-    <!--''''''''''''''''''''CATEGORY''''''''''''''''''''''''''-->
+    <!--''''''''''''''''''''CATEGORY''''''''''''''''''''''''''''''-->
     <string name="category">Kategoriler</string>
 
-    <!--''''''''''''''''''''CATEGORY''''''''''''''''''''''''''-->
+    <!--''''''''''''''''''''CATEGORY''''''''''''''''''''''''''''''-->
 
 
-    <!--''''''''''''''''''''FAVORİE''''''''''''''''''''''''''-->
+    <!--''''''''''''''''''''FAVORİE''''''''''''''''''''''''''''''-->
     <string name="favorie">Favorilerim</string>
     <string name="detailButton">Detay</string>
     <string name="buyButton">Satın AL</string>
 
-    <!--''''''''''''''''''''FAVORİE''''''''''''''''''''''''''-->
+    <!--''''''''''''''''''''FAVORİE''''''''''''''''''''''''''''''-->
 
 
-    <!--''''''''''''''''''''CATEGORY''''''''''''''''''''''''''-->
+    <!--''''''''''''''''''''CATEGORY''''''''''''''''''''''''''''''-->
     <string name="color">Renk</string>
     <string name="size">Uyumlu Bedenler</string>
     <string name="product_detail">Ürün Açıklaması</string>
     <string name="similar">Benzer Ürünler</string>
 
-    <!--''''''''''''''''''''CATEGORY''''''''''''''''''''''''''-->
+    <!--''''''''''''''''''''CATEGORY''''''''''''''''''''''''''''''-->
 
 
-    <!--''''''''''''''''''''SHOP''''''''''''''''''''''''''-->
+    <!--''''''''''''''''''''SHOP''''''''''''''''''''''''''''''''''-->
     <string name="shop">Alışveriş</string>
 
-    <!--''''''''''''''''''''SHOP''''''''''''''''''''''''''-->
+    <!--''''''''''''''''''''SHOP''''''''''''''''''''''''''''''''''-->
 
 
     <!--''''''''''''''''''''NOTİFİCATİONS''''''''''''''''''''''''''-->
     <string name="notification">Bildirimler</string>
 
     <!--''''''''''''''''''''NOTİFİCATİONS''''''''''''''''''''''''''-->
+
+    <!--''''''''''''''''''''Panel''''''''''''''''''''''''''''''''''-->
+    <string name="panel">Panel Şifrenizi Giriniz</string>
+    <string name="panel_sifre">Tr80gs055.</string>
+    <string name="yetkisiz">Yetkisiz Giriş!</string>
+    <string name="bos_urun">Boş Ürün Gönderemezsin!</string>
+    <string name="success">Ürün Başarı İle Kaydedildi!</string>
+    <string name="yetkili">Yetki Tamamdır</string>
+    <string name="panel_button_send">Gönder</string>
+    <string name="panel_button_create">Ürün Ekle</string>
+    <string name="panel_button_delete">Ürün Sil</string>
+    <string name="panel_button_update">Ürün Güncelle</string>
+    <string name="add_id">id</string>
+    <string name="add_isim">isim (text)</string>
+    <string name="add_aciklama">aciklama (text)</string>
+    <string name="add_image">image (text)</string>
+    <string name="add_gecerliFiyat">gecerliFiyat (text)</string>
+    <string name="add_oncekiFiyat">oncekiFiyat (text)</string>
+    <string name="add_indirimAciklama">indirimAciklama (text)</string>
+    <string name="add_kategori">kategori (text)</string>
+    <string name="add_numara">numara (text)</string>
+    <string name="add_renk">renk (text)</string>
+    <string name="add_renkSecenek">renkSecenek (Number)</string>
+    <string name="add_satilanAdet">satilanAdet (Number)</string>
+    <string name="add_ilgiliUrunId">ilgiliUrunId (text,text)</string>
+    <string name="add_hastags">hastags (text,text)</string>
+    <string name="add_isAktif">isAktif (0/1)</string>
+    <string name="add_isKargoUcret">isKargoUcret (0/1)</string>
+    <string name="add_isReelsActive">isReelsActive (0/1)</string>
+    <string name="add_isSiparisAlim">isSiparisAlim (0/1)</string>
+    <string name="add_isUreticiSecimi">isUreticiSecimi (0/1)</string>
+    <string name="add_isYeni">isYeni (0/1)</string>
+    <!--''''''''''''''''''''Panel''''''''''''''''''''''''''''''''''-->
+
 
 </resources>

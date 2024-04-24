@@ -12,9 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
 import com.furkanmulayim.shopper.R
 import com.furkanmulayim.tarifce.base.BaseViewModel
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.lang.reflect.ParameterizedType
-import javax.inject.Inject
 
 abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel> : Fragment() {
 
@@ -35,16 +33,16 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel> : Fragment() {
         return binding.root
     }
 
-/*    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        viewModel.loadingLV.observe(viewLifecycleOwner) {
-            if (it) {
-                // show loading
-            } else {
-                // hide loading
+    /*    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+            super.onViewCreated(view, savedInstanceState)
+            viewModel.loadingLV.observe(viewLifecycleOwner) {
+                if (it) {
+                    // show loading
+                } else {
+                    // hide loading
+                }
             }
-        }
-    }*/
+        }*/
 
     abstract fun getFragmentBinding(inflater: LayoutInflater, container: ViewGroup?): VB
 
@@ -64,7 +62,12 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel> : Fragment() {
         return this as T
     }
 
-    fun navigateTo(actionId: Int, bundle: Bundle? = null, popUpToId: Int? = null, inclusive: Boolean = false) {
+    fun navigateTo(
+        actionId: Int,
+        bundle: Bundle? = null,
+        popUpToId: Int? = null,
+        inclusive: Boolean = false
+    ) {
         val navController = findNavController()
         val options = NavOptions.Builder()
             .setEnterAnim(R.anim.slide_in_right)

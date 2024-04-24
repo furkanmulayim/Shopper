@@ -1,5 +1,8 @@
 package com.furkanmulayim.shopper.ui.product_detail
 
+import android.content.Intent
+import android.graphics.Paint
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,15 +10,16 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.furkanmulayim.shopper.base.BaseFragment
-import com.furkanmulayim.shopper.data.model.ProductItem
+import com.furkanmulayim.shopper.data.model.Product
 import com.furkanmulayim.shopper.databinding.FragmentProductDetailBinding
 import com.furkanmulayim.shopper.ui.product_detail.adapters.ColorVariantAdapter
 import com.furkanmulayim.shopper.ui.product_detail.adapters.CompatibleSizeAdapter
 import com.furkanmulayim.shopper.ui.product_detail.adapters.SimilarProductAdapter
 import com.furkanmulayim.shopper.ui.product_detail.slider.ProductImageAdapter
 import com.furkanmulayim.shopper.utils.onSingleClickListener
-import com.furkanmulayim.shopper.utils.viewMessage
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding, ProductDetailViewModel>() {
 
     private lateinit var productVP: ViewPager2
@@ -33,12 +37,21 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding, Product
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        observeData(); initClickListeners(); initAdapters()
+        binding.buyToolBar.productOldPrice.paintFlags =
+            binding.buyToolBar.productOldPrice.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+        observeData(); initAdapters()
     }
 
     private fun observeData() {
         viewModel.productItem.observe(viewLifecycleOwner) { item ->
-            viewMessage(mcontext, item.isim)
+            with(binding) {
+                productName.text = item.isim
+                productDetail.text = item.aciklama
+                buyToolBar.productOldPrice.text = item.oncekiFiyat
+                buyToolBar.productCurrentPrice.text = item.gecerliFiyat
+            }
+            item.isim?.let { buyButtoClickListener(it) }
+            initClickListeners()
             setSliderImages(viewModel.imagesList)
         }
     }
@@ -62,10 +75,16 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding, Product
         binding.backButton.onSingleClickListener {
             onBackPressed()
         }
+
+    }
+
+    private fun buyButtoClickListener(description: String) {
+        binding.buyToolBar.productBuyButton.onSingleClickListener {
+            sendWhatsAppMessage("+905344533008", description)
+        }
     }
 
     private fun initAdapters() {
-        //Renk Seçenekleri için Recycler View
         colorVariantAdapter = ColorVariantAdapter(viewModel.colorVariantList)
         binding.colorVariantRcyc.layoutManager =
             LinearLayoutManager(mcontext, LinearLayoutManager.HORIZONTAL, false)
@@ -87,14 +106,19 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding, Product
 
     }
 
-
-    private fun deneme(item: ProductItem) {
+    private fun deneme(item: Product) {
 
     }
 
 
     private fun deneme2(stri: String) {
 
+    }
+
+    fun sendWhatsAppMessage(phoneNumber: String, message: String) {
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.data = Uri.parse("https://api.whatsapp.com/send?phone=$phoneNumber&text=$message")
+        startActivity(intent)
     }
 
 

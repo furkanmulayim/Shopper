@@ -1,0 +1,556 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/theme"
+    android:orientation="vertical"
+    tools:context=".ui.panel.PanelFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/relativeLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_weight="0"
+                android:background="@color/white"
+                android:elevation="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_scrollFlags="scroll|enterAlways">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:layout_margin="5dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/shopper" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/authPanel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="visible"
+                app:layout_constraintTop_toBottomOf="@+id/relativeLayout2">
+
+                <EditText
+                    android:id="@+id/authEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:background="@drawable/panel_et_back"
+                    android:hint="@string/panel"
+                    android:paddingStart="20sp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="20sp"
+                    android:paddingBottom="10dp"
+                    android:textColorHint="@color/dark_purple_50_trans" />
+
+                <Button
+                    android:id="@+id/authButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:text="@string/panel_button_send"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/buttonsPanel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/authPanel">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:hint="@string/add_id"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_height="match_parent" />
+
+                <EditText
+                    android:id="@+id/addId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:background="@drawable/panel_et_back"
+                    android:inputType="number"
+                    android:hint="@string/add_id"
+                    android:paddingStart="20sp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="20sp"
+                    android:paddingBottom="10dp"
+                    android:textColorHint="@color/dark_purple_50_trans" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:hint="@string/add_isim"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_height="match_parent" />
+
+                <EditText
+                    android:id="@+id/addIsim"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:background="@drawable/panel_et_back"
+                    android:hint="@string/add_isim"
+                    android:inputType="text"
+                    android:paddingStart="20sp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="20sp"
+                    android:paddingBottom="10dp"
+                    android:textColorHint="@color/dark_purple_50_trans" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:hint="@string/add_aciklama"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_height="match_parent" />
+
+                <EditText
+                    android:id="@+id/addAciklama"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:background="@drawable/panel_et_back"
+                    android:hint="@string/add_aciklama"
+                    android:inputType="text"
+                    android:paddingStart="20sp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="20sp"
+                    android:paddingBottom="10dp"
+                    android:textColorHint="@color/dark_purple_50_trans" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:hint="@string/add_image"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_height="match_parent" />
+
+                <EditText
+                    android:id="@+id/addImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:background="@drawable/panel_et_back"
+                    android:hint="@string/add_image"
+                    android:inputType="text"
+                    android:paddingStart="20sp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="20sp"
+                    android:paddingBottom="10dp"
+                    android:textColorHint="@color/dark_purple_50_trans" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:hint="@string/add_gecerliFiyat"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_height="match_parent" />
+
+                <EditText
+                    android:id="@+id/addGuncelFiyat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:background="@drawable/panel_et_back"
+                    android:hint="@string/add_gecerliFiyat"
+                    android:inputType="text"
+                    android:paddingStart="20sp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="20sp"
+                    android:paddingBottom="10dp"
+                    android:textColorHint="@color/dark_purple_50_trans" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:hint="@string/add_oncekiFiyat"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_height="match_parent" />
+
+                <EditText
+                    android:id="@+id/addOnceki"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:background="@drawable/panel_et_back"
+                    android:hint="@string/add_oncekiFiyat"
+                    android:inputType="text"
+                    android:paddingStart="20sp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="20sp"
+                    android:paddingBottom="10dp"
+                    android:textColorHint="@color/dark_purple_50_trans" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:hint="@string/add_indirimAciklama"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_height="match_parent" />
+
+                <EditText
+                    android:id="@+id/addIndirimAciklama"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:background="@drawable/panel_et_back"
+                    android:hint="@string/add_indirimAciklama"
+                    android:inputType="text"
+                    android:paddingStart="20sp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="20sp"
+                    android:paddingBottom="10dp"
+                    android:textColorHint="@color/dark_purple_50_trans" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:hint="@string/add_kategori"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_height="match_parent" />
+
+                <EditText
+                    android:id="@+id/addKategori"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:background="@drawable/panel_et_back"
+                    android:hint="@string/add_kategori"
+                    android:inputType="text"
+                    android:paddingStart="20sp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="20sp"
+                    android:paddingBottom="10dp"
+                    android:textColorHint="@color/dark_purple_50_trans" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:hint="@string/add_numara"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_height="match_parent" />
+
+                <EditText
+                    android:id="@+id/addNumara"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:background="@drawable/panel_et_back"
+                    android:hint="@string/add_numara"
+                    android:inputType="text"
+                    android:paddingStart="20sp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="20sp"
+                    android:paddingBottom="10dp"
+                    android:textColorHint="@color/dark_purple_50_trans" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:hint="@string/add_renk"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_height="match_parent" />
+
+                <EditText
+                    android:id="@+id/addRenk"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:background="@drawable/panel_et_back"
+                    android:hint="@string/add_renk"
+                    android:inputType="text"
+                    android:paddingStart="20sp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="20sp"
+                    android:paddingBottom="10dp"
+                    android:textColorHint="@color/dark_purple_50_trans" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:hint="@string/add_renkSecenek"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_height="match_parent" />
+
+                <EditText
+                    android:id="@+id/addRenkSecenek"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:background="@drawable/panel_et_back"
+                    android:hint="@string/add_renkSecenek"
+                    android:inputType="number"
+                    android:paddingStart="20sp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="20sp"
+                    android:paddingBottom="10dp"
+                    android:textColorHint="@color/dark_purple_50_trans" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:hint="@string/add_satilanAdet"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_height="match_parent" />
+
+                <EditText
+                    android:id="@+id/addSatilanAdet"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:background="@drawable/panel_et_back"
+                    android:hint="@string/add_satilanAdet"
+                    android:inputType="number"
+                    android:paddingStart="20sp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="20sp"
+                    android:paddingBottom="10dp"
+                    android:textColorHint="@color/dark_purple_50_trans" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:hint="@string/add_ilgiliUrunId"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_height="match_parent" />
+
+                <EditText
+                    android:id="@+id/addIlgiliUrunId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:background="@drawable/panel_et_back"
+                    android:hint="@string/add_ilgiliUrunId"
+                    android:inputType="text"
+                    android:paddingStart="20sp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="20sp"
+                    android:paddingBottom="10dp"
+                    android:textColorHint="@color/dark_purple_50_trans" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:hint="@string/add_hastags"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_height="match_parent" />
+
+                <EditText
+                    android:id="@+id/addHastag"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:background="@drawable/panel_et_back"
+                    android:hint="@string/add_hastags"
+                    android:inputType="text"
+                    android:paddingStart="20sp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="20sp"
+                    android:paddingBottom="10dp"
+                    android:textColorHint="@color/dark_purple_50_trans" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:hint="@string/add_isAktif"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_height="match_parent" />
+
+                <EditText
+                    android:id="@+id/addIsAktif"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:background="@drawable/panel_et_back"
+                    android:hint="@string/add_isAktif"
+                    android:inputType="number"
+                    android:paddingStart="20sp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="20sp"
+                    android:paddingBottom="10dp"
+                    android:textColorHint="@color/dark_purple_50_trans" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:hint="@string/add_isKargoUcret"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_height="match_parent" />
+
+                <EditText
+                    android:id="@+id/addIsKargoUcret"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:background="@drawable/panel_et_back"
+                    android:hint="@string/add_isKargoUcret"
+                    android:inputType="number"
+                    android:paddingStart="20sp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="20sp"
+                    android:paddingBottom="10dp"
+                    android:textColorHint="@color/dark_purple_50_trans" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:hint="@string/add_isReelsActive"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_height="match_parent" />
+
+                <EditText
+                    android:id="@+id/addIsReelsActive"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:background="@drawable/panel_et_back"
+                    android:hint="@string/add_isReelsActive"
+                    android:inputType="number"
+                    android:paddingStart="20sp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="20sp"
+                    android:paddingBottom="10dp"
+                    android:textColorHint="@color/dark_purple_50_trans" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:hint="@string/add_isSiparisAlim"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_height="match_parent" />
+
+                <EditText
+                    android:id="@+id/addIsSiparisAlim"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:background="@drawable/panel_et_back"
+                    android:hint="@string/add_isSiparisAlim"
+                    android:inputType="number"
+                    android:paddingStart="20sp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="20sp"
+                    android:paddingBottom="10dp"
+                    android:textColorHint="@color/dark_purple_50_trans" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:hint="@string/add_isUreticiSecimi"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_height="match_parent" />
+
+                <EditText
+                    android:id="@+id/addIsUreticiSecimi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:background="@drawable/panel_et_back"
+                    android:hint="@string/add_isUreticiSecimi"
+                    android:inputType="number"
+                    android:paddingStart="20sp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="20sp"
+                    android:paddingBottom="10dp"
+                    android:textColorHint="@color/dark_purple_50_trans" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:hint="@string/add_isYeni"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_height="match_parent" />
+
+                <EditText
+                    android:id="@+id/addIsYeni"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:background="@drawable/panel_et_back"
+                    android:hint="@string/add_isYeni"
+                    android:inputType="number"
+                    android:paddingStart="20sp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="20sp"
+                    android:paddingBottom="10dp"
+                    android:textColorHint="@color/dark_purple_50_trans" />
+
+                <Button
+                    android:id="@+id/createButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="15dp"
+                    android:text="@string/panel_button_create"
+                    android:textColor="@color/white" />
+
+
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+
+</LinearLayout>

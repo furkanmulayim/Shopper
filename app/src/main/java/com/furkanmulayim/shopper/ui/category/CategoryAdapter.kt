@@ -1,4 +1,4 @@
-package com.furkanmulayim.shopper.ui.category.adapters
+package com.furkanmulayim.shopper.ui.category
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

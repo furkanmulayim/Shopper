@@ -4,9 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.furkanmulayim.shopper.R
 import com.furkanmulayim.shopper.base.BaseFragment
+import com.furkanmulayim.shopper.data.model.Product
 import com.furkanmulayim.shopper.databinding.FragmentFavoriteBinding
 import com.furkanmulayim.shopper.utils.viewGone
 import com.furkanmulayim.shopper.utils.viewMessage
@@ -35,10 +35,18 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding, FavoriteViewModel
     }
 
     private fun initAdapter() {
-        adapter = FavoriteAdapter(viewModel.favorite, ::onClickItemDelete)
-        binding.FavoriteRcyc.layoutManager = LinearLayoutManager(mcontext)
-        binding.FavoriteRcyc.adapter = adapter
-        emptyAdapterControl()
+        // adapter = FavoriteAdapter(viewModel.favorite, ::onClickItemDelete, ::onClickItem)
+        //binding.FavoriteRcyc.layoutManager = LinearLayoutManager(mcontext)
+        // binding.FavoriteRcyc.adapter = adapter
+        // emptyAdapterControl()
+    }
+
+    private fun onClickItem(item: Product) {
+        val bundle = Bundle().apply {
+            putParcelable("ProductItem", item)
+        }
+        val act = FavoriteFragmentDirections.actionFavoriteFragmentToProductDetailFragment()
+        navigateTo(actionId = act.actionId, bundle = bundle)
     }
 
     private fun onClickItemDelete(id: Int) {

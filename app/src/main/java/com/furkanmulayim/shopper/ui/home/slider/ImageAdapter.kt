@@ -1,6 +1,7 @@
 package com.furkanmulayim.shopper.ui.home.slider
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,23 +9,20 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.furkanmulayim.shopper.R
+import com.furkanmulayim.shopper.data.model.Slider
+import com.furkanmulayim.shopper.utils.loadImage
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class ImageAdapter(private val context: Context, private val viewPager: ViewPager2) :
+class ImageAdapter(
+    private val context: Context,
+    private val viewPager: ViewPager2,
+    private val images: List<Slider>
+) :
     RecyclerView.Adapter<ImageAdapter.ImageViewHolder>() {
-
-    private val images = arrayOf(
-        R.drawable.denek,
-        R.drawable.denek,
-        R.drawable.denek,
-        R.drawable.denek,
-        R.drawable.denek,
-        R.drawable.denek
-    )
 
     private var autoScrollJob: Job? = null
     private var currentItem = 0
@@ -46,8 +44,9 @@ class ImageAdapter(private val context: Context, private val viewPager: ViewPage
     inner class ImageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val imageView: ImageView = itemView.findViewById(R.id.imageView)
 
-        fun bind(imageResId: Int) {
-            imageView.setImageResource(imageResId)
+        fun bind(item: Slider) {
+            imageView.loadImage(item.image)
+            Log.d("logdf - hata ", item.image)
         }
     }
 

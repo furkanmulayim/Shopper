@@ -27,10 +27,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.furkanmulayim.shopper" />
+                  <option name="mobileSdkAppId" value="1:569387754274:android:c45cca1a30b29ba674bb7b" />
+                  <option name="projectId" value="shopper-32f21" />
+                  <option name="projectNumber" value="569387754274" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

@@ -10,16 +10,17 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.furkanmulayim.shopper.base.BaseFragment
 import com.furkanmulayim.shopper.data.enums.CategoryName
-import com.furkanmulayim.shopper.data.model.ProductItem
+import com.furkanmulayim.shopper.data.model.Product
 import com.furkanmulayim.shopper.databinding.FragmentCategoryBinding
-import com.furkanmulayim.shopper.ui.category.adapters.CategoryAdapter
-import com.furkanmulayim.shopper.ui.category.adapters.CategoryProductAdapter
+import com.furkanmulayim.shopper.ui.home.HomeProductAdapter
 import com.furkanmulayim.shopper.utils.viewMessage
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CategoryFragment : BaseFragment<FragmentCategoryBinding, CategoryViewModel>() {
 
     private lateinit var categoryAdapter: CategoryAdapter
-    private lateinit var productAdapter: CategoryProductAdapter
+    private lateinit var productAdapter: HomeProductAdapter
     override fun getFragmentBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
@@ -29,9 +30,19 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding, CategoryViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setCategoryAdapter(); setProductAdapter(); isFocusedBunleDataObserve()
+        isFocusedBunleDataObserve(); observeData()
     }
 
+    private fun observeData() {
+        viewModel.products.observe(viewLifecycleOwner) {
+            it?.let {
+                setCategoryAdapter()
+                setProductAdapter(it as ArrayList<Product>)
+            }
+        }
+    }
+
+    //Kategorileri Listelemek İçin Kullanılan adapter
     private fun setCategoryAdapter() {
         categoryAdapter = CategoryAdapter(viewModel.categories, ::categoryClickListener)
         binding.toolBar.categoryRcyc.layoutManager =
@@ -39,26 +50,11 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding, CategoryViewModel
         binding.toolBar.categoryRcyc.adapter = categoryAdapter
     }
 
-    private fun categoryClickListener(categoryName: String) {
-        when (categoryName) {
-            CategoryName.TUMU.id -> {
-                productAdapter.updateList(viewModel.products)
-            }
-
-            CategoryName.JIK.id -> {
-                productAdapter.updateList(viewModel.products2)
-            }
-
-            CategoryName.BEBEK.id -> {
-                productAdapter.updateList(viewModel.products1)
-            }
-        }
-    }
-
-    private fun setProductAdapter() {
-        productAdapter = CategoryProductAdapter(
+    //Ürünleri Listelemek İçin Kullanılan adapter
+    private fun setProductAdapter(list: ArrayList<Product>) {
+        productAdapter = HomeProductAdapter(
             mcontext,
-            viewModel.products,
+            list,
             ::showProductDetails,
             ::showProductVariants
         )
@@ -66,13 +62,31 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding, CategoryViewModel
         binding.productRcyc.layoutManager = GridLayoutManager(mcontext, 2)
     }
 
+    //Kategorilerde tıklanan itemler için kullanılan higher order fonks.
+    private fun categoryClickListener(categoryName: String) {
+        when (categoryName) {
+            CategoryName.TUMU.id -> {
+                //productAdapter.updateList(viewModel.products)
+            }
+
+            CategoryName.JIK.id -> {
+                //productAdapter.updateList(viewModel.products2)
+            }
+
+            CategoryName.BEBEK.id -> {
+                //productAdapter.updateList(viewModel.products1)
+            }
+        }
+    }
+
+
     private fun showProductVariants(productItemVariants: String) {
         viewMessage(mcontext, productItemVariants)
         val act = CategoryFragmentDirections.actionCategoryFragmentToColorVariantFragment()
         navigateTo(act.actionId)
     }
 
-    private fun showProductDetails(productItemName: ProductItem) {
+    private fun showProductDetails(productItemName: Product) {
         val bundle = Bundle().apply {
             putParcelable("ProductItem", productItemName)
         }
@@ -90,7 +104,6 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding, CategoryViewModel
                     binding.toolBar.searchbar,
                     InputMethodManager.SHOW_IMPLICIT
                 )
-
             }
         }
     }

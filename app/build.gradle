@@ -5,6 +5,8 @@ apply plugin: "androidx.navigation.safeargs.kotlin"
 apply plugin: 'kotlin-kapt'
 apply plugin: 'dagger.hilt.android.plugin'
 apply plugin: 'kotlin-parcelize'
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'
 
 android {
     namespace 'com.furkanmulayim.shopper'
@@ -42,6 +44,8 @@ android {
 }
 
 dependencies {
+    implementation 'com.google.firebase:firebase-crashlytics:18.6.4'
+    implementation 'com.google.firebase:firebase-firestore-ktx:24.11.1'
     def navVersion = '2.4.1'
     def fragmentVersion = '1.6.0'
     def retrofitVersion = '2.8.1'
@@ -82,7 +86,7 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:$navVersion"
     implementation "androidx.fragment:fragment-ktx:$fragmentVersion"
 
-    //RXJAVA //noinspection GradleDependency
+    //RXJAVA
     implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
     implementation "io.reactivex.rxjava2:rxandroid:$rxJavaVersion"
 
@@ -97,6 +101,11 @@ dependencies {
 
     //VIEV PAGER INDICATOR
     implementation 'me.relex:circleindicator:2.1.6'
+
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
+    implementation 'com.github.AnyChart:AnyChart-Android:1.1.5'
+
 
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'

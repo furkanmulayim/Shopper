@@ -3,13 +3,14 @@ package com.furkanmulayim.shopper.ui.favorite
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.furkanmulayim.shopper.data.model.ProductItem
+import com.furkanmulayim.shopper.data.model.Product
 import com.furkanmulayim.shopper.databinding.ItemProductFavoriBinding
 import com.furkanmulayim.shopper.utils.onSingleClickListener
 
 class FavoriteAdapter(
-    private val dataList: ArrayList<ProductItem>,
-    val onClickDeleteItem: (Int) -> (Unit)
+    private val dataList: ArrayList<Product>,
+    val onClickDeleteItem: (Int) -> (Unit),
+    private val onClickItem: (Product) -> (Unit),
 ) : RecyclerView.Adapter<FavoriteAdapter.ViewHolder>() {
 
 
@@ -18,13 +19,12 @@ class FavoriteAdapter(
         private val detailButton = binding.productDetailButton
         private val buyButton = binding.productBuyButton
         private val deleteButton = binding.deleteButton
-        fun bind(item: ProductItem) {
+        private val itemButton = binding.itemFoodCategoryBack
+        fun bind(item: Product) {
             buyButton.onSingleClickListener {}
-            detailButton.onSingleClickListener {}
-            deleteButton.onSingleClickListener {
-                onClickDeleteItem(item.id)
-            }
-
+            detailButton.onSingleClickListener { onClickItem(item) }
+            itemButton.onSingleClickListener { onClickItem(item) }
+            deleteButton.onSingleClickListener { item.id?.let { it1 -> onClickDeleteItem(it1) } }
         }
     }
 

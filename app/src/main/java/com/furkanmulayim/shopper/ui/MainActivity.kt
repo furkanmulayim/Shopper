@@ -10,9 +10,10 @@ import com.furkanmulayim.shopper.R
 import com.furkanmulayim.shopper.databinding.ActivityMainBinding
 import com.furkanmulayim.shopper.utils.viewGone
 import com.furkanmulayim.shopper.utils.viewVisible
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-
 
     private lateinit var binding: ActivityMainBinding
 

@@ -40,6 +40,9 @@
         <action
             android:id="@+id/action_homeFragment_to_colorVariantFragment"
             app:destination="@id/colorVariantFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_panelFragment"
+            app:destination="@id/panelFragment" />
     </fragment>
     <fragment
         android:id="@+id/categoryFragment"
@@ -62,7 +65,11 @@
         android:id="@+id/favoriteFragment"
         android:name="com.furkanmulayim.shopper.ui.favorite.FavoriteFragment"
         android:label="fragment_favorite"
-        tools:layout="@layout/fragment_favorite" />
+        tools:layout="@layout/fragment_favorite">
+        <action
+            android:id="@+id/action_favoriteFragment_to_productDetailFragment"
+            app:destination="@id/productDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/notificationFragment"
         android:name="com.furkanmulayim.shopper.ui.notifications.NotificationFragment"
@@ -77,4 +84,9 @@
         android:id="@+id/colorVariantFragment"
         android:name="com.furkanmulayim.shopper.ui.home.modal_bottom_sheet.ColorVariantFragment"
         android:label="ColorVariantFragment" />
+    <fragment
+        android:id="@+id/panelFragment"
+        android:name="com.furkanmulayim.shopper.ui.panel.PanelFragment"
+        android:label="fragment_panel"
+        tools:layout="@layout/fragment_panel" />
 </navigation>

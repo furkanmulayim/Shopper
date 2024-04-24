@@ -6,18 +6,20 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.NavController
 import androidx.navigation.Navigation.findNavController
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.furkanmulayim.shopper.R
 import com.furkanmulayim.shopper.base.BaseFragment
-import com.furkanmulayim.shopper.data.model.ProductItem
+import com.furkanmulayim.shopper.data.model.Product
+import com.furkanmulayim.shopper.data.model.Slider
 import com.furkanmulayim.shopper.databinding.FragmentHomeBinding
 import com.furkanmulayim.shopper.ui.home.slider.ImageAdapter
 import com.furkanmulayim.shopper.ui.home.slider.ZoomOutPageTransformer
 import com.furkanmulayim.shopper.utils.onSingleClickListener
 import com.furkanmulayim.shopper.utils.viewGone
 import com.furkanmulayim.shopper.utils.viewVisible
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
     private lateinit var adapter: ImageAdapter
     private lateinit var productAdapter: HomeProductAdapter
@@ -31,20 +33,20 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setSlider(); initClicks(); setProductAdapter(); setScrollSettings()
+        initClicks(); observeData(); observSlider(); setScrollSettings();deneme()
     }
 
-    private fun setSlider() {
-        adapter = ImageAdapter(requireContext(), binding.viewPager)
+    private fun setSlider(list: List<Slider>) {
+        adapter = ImageAdapter(requireContext(), binding.viewPager, list)
         binding.viewPager.adapter = adapter
         binding.viewPager.setPageTransformer(ZoomOutPageTransformer(5))
     }
 
-    private fun setProductAdapter() {
+    private fun setProductAdapter(arrayList: ArrayList<Product>) {
         productAdapter =
             HomeProductAdapter(
                 mcontext,
-                viewModel.products,
+                arrayList,
                 ::showProductDetails,
                 ::showProductVariants
             )
@@ -52,39 +54,64 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
         binding.productRcyc.layoutManager = GridLayoutManager(mcontext, 2)
     }
 
+    private fun observSlider() {
+        viewModel.sliderList.observe(viewLifecycleOwner) {
+            it?.let {
+                setSlider(it)
+            }
+        }
+    }
+
+    private fun observeData() {
+        viewModel.productList.observe(viewLifecycleOwner) {
+            it?.let {
+                setProductAdapter(it as ArrayList<Product>)
+            }
+        }
+    }
+
     private fun showProductVariants(productItemVariants: String) {
         val bundle = Bundle().apply {
             putString("variant_ids", productItemVariants)
         }
-        val act = HomeFragmentDirections.actionHomeFragmentToColorVariantFragment()
-        navigateTo(actionId = act.actionId, bundle = bundle)
+        val action = HomeFragmentDirections.actionHomeFragmentToColorVariantFragment().actionId
+        navigateTo(actionId = action, bundle = bundle)
     }
 
-    private fun showProductDetails(productItemName: ProductItem) {
+    private fun showProductDetails(productItemName: Product) {
         val bundle = Bundle().apply {
             putParcelable("ProductItem", productItemName)
         }
-        val action = HomeFragmentDirections.actionHomeFragmentToProductDetailFragment()
-        navigateTo(actionId = action.actionId, bundle = bundle)
+        val action = HomeFragmentDirections.actionHomeFragmentToProductDetailFragment().actionId
+        navigateTo(actionId = action, bundle = bundle)
     }
 
     private fun initClicks() {
-        binding.searchBar.notificationsButton.onSingleClickListener {
-            val act = HomeFragmentDirections.actionHomeFragmentToNotificationFragment()
-            navigateTo(act.actionId)
-        }
-
-        binding.searchBar.searchbar.onSingleClickListener {
-            val navController: NavController =
-                findNavController(requireActivity(), R.id.fragmentContainerView)
-            val bundle = Bundle().apply {
-                putBoolean("search", true)
+        with(binding) {
+            searchBar.notificationsButton.onSingleClickListener {
+                val action =
+                    HomeFragmentDirections.actionHomeFragmentToNotificationFragment().actionId
+                navigateTo(action)
             }
-            navController.navigate(R.id.categoryFragment, bundle)
-        }
 
-        binding.upToButton.onSingleClickListener {
-            binding.nestedScrollView.smoothScrollTo(0, 0, 1500)
+            searchBar.searchbar.onSingleClickListener {
+                val navController: NavController =
+                    findNavController(requireActivity(), R.id.fragmentContainerView)
+                val bundle = Bundle().apply {
+                    putBoolean("search", true)
+                }
+                navController.navigate(R.id.categoryFragment, bundle)
+            }
+
+            upToButton.onSingleClickListener {
+                binding.nestedScrollView.smoothScrollTo(0, 0, 1500)
+            }
+
+            headerToolBar.setOnLongClickListener {
+                val action = HomeFragmentDirections.actionHomeFragmentToPanelFragment().actionId
+                navigateTo(action)
+                return@setOnLongClickListener true
+            }
         }
     }
 
@@ -97,4 +124,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
             }
         }
     }
+
+    private fun deneme() {
+        viewModel.denek.observe(viewLifecycleOwner) {
+            it?.let { x ->
+                println("LOGDF" + x.size)
+            }
+        }
+    }
 }
+

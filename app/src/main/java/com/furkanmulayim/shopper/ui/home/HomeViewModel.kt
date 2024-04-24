@@ -1,131 +1,50 @@
 package com.furkanmulayim.shopper.ui.home
 
 import android.app.Application
-import com.furkanmulayim.shopper.data.model.Fiyat
-import com.furkanmulayim.shopper.data.model.Lojik
-import com.furkanmulayim.shopper.data.model.ProductItem
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import com.furkanmulayim.shopper.data.model.Product
+import com.furkanmulayim.shopper.data.model.Slider
+import com.furkanmulayim.shopper.repository.ProductRepository
+import com.furkanmulayim.shopper.repository.SliderRepository
 import com.furkanmulayim.shopper.utils.SharedPrefs
 import com.furkanmulayim.tarifce.base.BaseViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class HomeViewModel(application: Application) : BaseViewModel(application) {
+@HiltViewModel
+class HomeViewModel @Inject constructor(
+    application: Application,
+    private val sliderRepository: SliderRepository,
+    private val cpr: ProductRepository
+) : BaseViewModel(application) {
 
     private var sharedPrefs = SharedPrefs(getApplication())
+    var denek = MutableLiveData<List<Product>>()
+
+
+    //Product
+    private var _productList = MutableLiveData<List<Product>>()
+    val productList: LiveData<List<Product>>
+        get() = _productList
+
+
+    //Slider
+    private var _sliderList = MutableLiveData<List<Slider>>()
+    val sliderList: LiveData<List<Slider>>
+        get() = _sliderList
 
     init {
         isAppAlreadyBefore()
+        fetchData()
     }
 
     private fun isAppAlreadyBefore() {
-        //kullanıcı uygulamayı daha önceden açtıysa kaydeder
         sharedPrefs.saveWelcome()
     }
 
-
-    val products = arrayListOf(
-        ProductItem(
-            id = 1,
-            image = "www.google.com",
-            isim = "Trençkot",
-            kategori = "",
-            aciklama = "",
-            numara = "",
-            renk = 2,
-            indirimAciklama = "",
-            renkSecenek = "Beyaz, Bej, Gri",
-            satilanAdet = 10,
-            fiyat = Fiyat(
-                oncekiFiyat = "300₺",
-                gecerliFiyat = "150₺"
-            ),
-            lojik = Lojik(
-                isAktif = true,
-                isYeni = false,
-                isKargoUcret = true,
-                isSiparisAlim = true,
-                isUreticiSecimi = true,
-                isReelsActive = true
-            ),
-            ilgiliUrunler = "Deri Ceket",
-            hastag = "#deneme #deneme yeni #yeni etiketli"
-
-        ), ProductItem(
-            id = 1,
-            image = "www.google.com",
-            isim = "Trençkot",
-            kategori = "",
-            aciklama = "",
-            numara = "",
-            renk = 2,
-            indirimAciklama = "",
-            renkSecenek = "Beyaz, Bej, Gri",
-            satilanAdet = 10,
-            fiyat = Fiyat(
-                oncekiFiyat = "300₺",
-                gecerliFiyat = "150₺"
-            ),
-            lojik = Lojik(
-                isAktif = false,
-                isYeni = true,
-                isKargoUcret = true,
-                isSiparisAlim = true,
-                isUreticiSecimi = true,
-                isReelsActive = true
-            ),
-            ilgiliUrunler = "Deri Ceket",
-            hastag = "#deneme #deneme yeni #yeni etiketli"
-
-        ), ProductItem(
-            id = 1,
-            image = "www.google.com",
-            isim = "Trençkot",
-            kategori = "",
-            aciklama = "",
-            numara = "",
-            renk = 2,
-            renkSecenek = "Beyaz, Bej, Gri",
-            satilanAdet = 10,
-            indirimAciklama = "",
-            fiyat = Fiyat(
-                oncekiFiyat = "300₺",
-                gecerliFiyat = "150₺"
-            ),
-            lojik = Lojik(
-                isAktif = true,
-                isYeni = true,
-                isSiparisAlim = true,
-                isKargoUcret = false,
-                isUreticiSecimi = true,
-                isReelsActive = true
-            ),
-            ilgiliUrunler = "Deri Ceket",
-            hastag = "#deneme #deneme yeni #yeni etiketli"
-
-        ), ProductItem(
-            id = 1,
-            image = "www.google.com",
-            isim = "Trençkot",
-            kategori = "",
-            aciklama = "",
-            indirimAciklama = "",
-            numara = "",
-            renk = 2,
-            renkSecenek = "Beyaz, Bej, Gri",
-            satilanAdet = 10,
-            fiyat = Fiyat(
-                oncekiFiyat = "300₺",
-                gecerliFiyat = "150₺"
-            ),
-            lojik = Lojik(
-                isAktif = true,
-                isYeni = true,
-                isSiparisAlim = true,
-                isUreticiSecimi = true,
-                isKargoUcret = false,
-                isReelsActive = true
-            ),
-            ilgiliUrunler = "Deri Ceket",
-            hastag = "#deneme #deneme yeni #yeni etiketli"
-
-        )
-    )
+    private fun fetchData() {
+        _productList = cpr.getData()
+        _sliderList = sliderRepository.getData()
+    }
 }

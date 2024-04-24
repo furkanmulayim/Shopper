@@ -1,28 +1,42 @@
 package com.furkanmulayim.shopper.ui.product_detail
 
 import android.app.Application
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.furkanmulayim.shopper.R
-import com.furkanmulayim.shopper.data.model.ProductItem
+import com.furkanmulayim.shopper.data.model.Product
+import com.furkanmulayim.shopper.repository.ProductRepository
 import com.furkanmulayim.tarifce.base.BaseViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class ProductDetailViewModel(
+@HiltViewModel
+class ProductDetailViewModel @Inject constructor(
     application: Application,
     private val savedStateHandle: SavedStateHandle,
+    private val cpr: ProductRepository
 ) : BaseViewModel(application) {
 
-    var productItem: MutableLiveData<ProductItem> = MutableLiveData()
+    var productItem: MutableLiveData<Product> = MutableLiveData()
+    private var _productList = MutableLiveData<List<Product>>()
+    val productList: LiveData<List<Product>>
+        get() = _productList
 
     init {
         getSavedStateHandle()
+        fetchData()
+    }
+
+    private fun fetchData() {
+        _productList = cpr.getData()
     }
 
     private fun getSavedStateHandle() {
         viewModelScope.launch {
-            savedStateHandle.get<ProductItem>("ProductItem")?.let {
+            savedStateHandle.get<Product>("ProductItem")?.let {
                 productItem.value = it
             }
         }

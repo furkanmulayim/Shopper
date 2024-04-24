@@ -8,20 +8,17 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.furkanmulayim.shopper.R
-import com.furkanmulayim.shopper.data.model.ProductItem
+import com.furkanmulayim.shopper.data.model.Product
 import com.furkanmulayim.shopper.databinding.ItemProductBinding
 import com.furkanmulayim.shopper.utils.onSingleClickListener
 import com.furkanmulayim.shopper.utils.viewGone
-import com.furkanmulayim.shopper.utils.viewVisible
 import com.google.android.material.imageview.ShapeableImageView
 
 class HomeProductAdapter(
     val context: Context,
-    private val dataList: ArrayList<ProductItem>,
-    private val onClickItem: (ProductItem) -> (Unit),
+    private val dataList: ArrayList<Product>,
+    private val onClickItem: (Product) -> (Unit),
     private val onClickVariants: (String) -> (Unit)
 ) : RecyclerView.Adapter<HomeProductAdapter.ViewHolder>() {
 
@@ -30,40 +27,49 @@ class HomeProductAdapter(
         private val itemButton: ConstraintLayout = binding.itemFoodCategoryBack
         private val newText: TextView = binding.productNew
         private val discountDescription: TextView = binding.productDiscountDescription
-        private val oldPrica: TextView = binding.productOldPrice
-        private val currentPrice: TextView = binding.productCurrentPrice
+        private val oldPrice: TextView = binding.productOldPrice
+        private val newPrice: TextView = binding.productCurrentPrice
         private val name: TextView = binding.productName
         private val colorVariants: TextView = binding.colorVariants
         private val kargoLayout: LinearLayout = binding.kargoLayout
         private val indirimLayout: LinearLayout = binding.indirimLayout
         private val indirimYuzde: TextView = binding.indirimYuzde
 
-        fun bind(item: ProductItem, context: Context) {
+        fun bind(item: Product, context: Context) {
             // todo aktif olmayan ürünler filtrelenip gelecek !!
 
-            //yeni yazısı
-            if (item.lojik.isYeni) newText.text = ContextCompat.getString(context, R.string.news)
-            else viewGone(newText)
+            if (item.isYeni == false) viewGone(newText)
 
-            //kargo layoutu kalkabilir
-            if (item.lojik.isKargoUcret) viewVisible(kargoLayout)
-            else viewGone(kargoLayout)
+            val currentPriceText = item.gecerliFiyat + "₺"
+            val oldPriceText = item.oncekiFiyat + "₺"
+            val discountPercentage = "-%" + item.oncekiFiyat?.toDoubleOrNull()?.let {
+                item.gecerliFiyat?.toDoubleOrNull()?.let { it1 ->
+                    discountCalculate(
+                        it,
+                        it1
+                    )
+                }
+            }
 
             discountDescription.text = item.indirimAciklama
-            currentPrice.text = item.fiyat.gecerliFiyat
-            oldPrica.text = item.fiyat.oncekiFiyat
+            indirimYuzde.text = discountPercentage
+            newPrice.text = currentPriceText
+            oldPrice.text = oldPriceText
             name.text = item.isim
-            oldPrica.paintFlags = oldPrica.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
-            val renkSecenek = item.renkSecenek.split(",")
-            colorVariants.text = renkSecenek.size.toString()
+            oldPrice.paintFlags = oldPrice.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+            colorVariants.text = item.renkSecenek.toString()
 
             itemButton.onSingleClickListener { onClickItem(item) }
 
             colorVariants.onSingleClickListener {
-                onClickVariants(item.renkSecenek)
+                onClickVariants(item.renkSecenek.toString())
             }
             indirimLayout.onSingleClickListener {}
             kargoLayout.onSingleClickListener {}
+        }
+
+        private fun discountCalculate(oldPrice: Double, newPrice: Double): Int {
+            return (((oldPrice - newPrice) / oldPrice) * 100).toInt()
         }
     }
 
@@ -75,10 +81,7 @@ class HomeProductAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = dataList[position]
-
         holder.bind(item, context)
-        if (item.lojik.isAktif) {
-        }
     }
 
     override fun getItemCount(): Int {
@@ -86,7 +89,7 @@ class HomeProductAdapter(
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun updateList(newList: ArrayList<ProductItem>?) {
+    fun updateList(newList: ArrayList<Product>?) {
         if (newList != null) {
             dataList.clear()
             dataList.addAll(newList)
