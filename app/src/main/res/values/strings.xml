@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">Shopper</string>
-    <string name="app_name_uppercase">SHOPPER</string>
+    <string name="app_name">Moda Mula</string>
+    <string name="app_name_uppercase">MODA MULA</string>
 
     <!--''''''''''''''''''''SPLASH''''''''''''''''''''''''''''''''''-->
     <string name="int_connect_ok">Internet Bağlantısı Var</string>
@@ -13,6 +13,8 @@
     <!--''''''''''''''''''''HOME''''''''''''''''''''''''''''''''''-->
     <string name="search">Aramaya Başla</string>
     <string name="news">Yeni</string>
+    <string name="kargo">Kargo Ücretsiz</string>
+
 
     <!--''''''''''''''''''''HOME''''''''''''''''''''''''''''''''''-->
 
@@ -48,6 +50,20 @@
 
     <!--''''''''''''''''''''SHOP''''''''''''''''''''''''''''''''''-->
     <string name="shop">Alışveriş</string>
+    <string name="desc">Açıklama</string>
+
+    <string name="acc_detail">Banka Hesap Bilgileri</string>
+
+    <string name="name_surname">İsim Soyisim:</string>
+    <string name="in_touch">İletişim:</string>
+    <string name="b_name">Banka Adı:</string>
+    <string name="desCargoCompany">İban No:</string>
+    <string name="iban">İban No:</string>
+
+    <string name="acc_social_detail">Sosyal Medya Bilgileri</string>
+    <string name="instagramAccount">İnstagram Hesabım:</string>
+    <string name="dolapAccount">Dolap Hesabım:</string>
+
 
     <!--''''''''''''''''''''SHOP''''''''''''''''''''''''''''''''''-->
 
@@ -56,6 +72,12 @@
     <string name="notification">Bildirimler</string>
 
     <!--''''''''''''''''''''NOTİFİCATİONS''''''''''''''''''''''''''-->
+
+
+    <!--''''''''''''''''''''DETAİL''''''''''''''''''''''''''-->
+    <string name="tl">₺</string>
+
+    <!--''''''''''''''''''''DETAİL''''''''''''''''''''''''''-->
 
     <!--''''''''''''''''''''Panel''''''''''''''''''''''''''''''''''-->
     <string name="panel">Panel Şifrenizi Giriniz</string>
@@ -78,7 +100,7 @@
     <string name="add_kategori">kategori (text)</string>
     <string name="add_numara">numara (text)</string>
     <string name="add_renk">renk (text)</string>
-    <string name="add_renkSecenek">renkSecenek (Number)</string>
+    <string name="uyumluBedenler">uyumluBedenler (text,text)</string>
     <string name="add_satilanAdet">satilanAdet (Number)</string>
     <string name="add_ilgiliUrunId">ilgiliUrunId (text,text)</string>
     <string name="add_hastags">hastags (text,text)</string>

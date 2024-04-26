@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_weight="0"
-    android:background="@color/white"
+    android:background="@color/light_purple_70_trans"
     android:elevation="4dp"
     android:minHeight="52dp">
 
@@ -24,7 +24,6 @@
             android:layout_height="match_parent"
             android:fontFamily="@font/inter_light"
             android:singleLine="true"
-            android:text="120.00₺"
             android:textColor="@color/black_50_trans"
             android:textSize="14sp" />
 
@@ -34,7 +33,6 @@
             android:layout_height="match_parent"
             android:fontFamily="@font/inter_semibold"
             android:singleLine="true"
-            android:text="120.00₺"
             android:textColor="@color/dark_purple"
             android:textSize="16sp" />
 

@@ -9,11 +9,11 @@ apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.google.firebase.crashlytics'
 
 android {
-    namespace 'com.furkanmulayim.shopper'
+    namespace 'com.furkanmulayim.modamula'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.furkanmulayim.shopper"
+        applicationId "com.furkanmulayim.modamula"
         minSdk 26
         targetSdk 33
         versionCode 1

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/splashFragment"
-        android:name="com.furkanmulayim.shopper.ui.splash.SplashFragment"
+        android:name="com.furkanmulayim.modamula.ui.splash.SplashFragment"
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash" >
         <action
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/welcomeFragment"
-        android:name="com.furkanmulayim.shopper.ui.welcome.WelcomeFragment"
+        android:name="com.furkanmulayim.modamula.ui.welcome.WelcomeFragment"
         android:label="fragment_welcome"
         tools:layout="@layout/fragment_welcome" >
         <action
@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.furkanmulayim.shopper.ui.home.HomeFragment"
+        android:name="com.furkanmulayim.modamula.ui.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -46,7 +46,7 @@
     </fragment>
     <fragment
         android:id="@+id/categoryFragment"
-        android:name="com.furkanmulayim.shopper.ui.category.CategoryFragment"
+        android:name="com.furkanmulayim.modamula.ui.category.CategoryFragment"
         android:label="fragment_category"
         tools:layout="@layout/fragment_category">
         <action
@@ -58,12 +58,12 @@
     </fragment>
     <fragment
         android:id="@+id/shopFragment"
-        android:name="com.furkanmulayim.shopper.ui.shop.ShopFragment"
+        android:name="com.furkanmulayim.modamula.ui.shop.ShopFragment"
         android:label="fragment_shop"
         tools:layout="@layout/fragment_shop" />
     <fragment
         android:id="@+id/favoriteFragment"
-        android:name="com.furkanmulayim.shopper.ui.favorite.FavoriteFragment"
+        android:name="com.furkanmulayim.modamula.ui.favorite.FavoriteFragment"
         android:label="fragment_favorite"
         tools:layout="@layout/fragment_favorite">
         <action
@@ -72,21 +72,21 @@
     </fragment>
     <fragment
         android:id="@+id/notificationFragment"
-        android:name="com.furkanmulayim.shopper.ui.notifications.NotificationFragment"
+        android:name="com.furkanmulayim.modamula.ui.notifications.NotificationFragment"
         android:label="fragment_notification"
         tools:layout="@layout/fragment_notification" />
     <fragment
         android:id="@+id/productDetailFragment"
-        android:name="com.furkanmulayim.shopper.ui.product_detail.ProductDetailFragment"
+        android:name="com.furkanmulayim.modamula.ui.detail.DetailFragment"
         android:label="fragment_product_detail"
         tools:layout="@layout/fragment_product_detail" />
     <dialog
         android:id="@+id/colorVariantFragment"
-        android:name="com.furkanmulayim.shopper.ui.home.modal_bottom_sheet.ColorVariantFragment"
+        android:name="com.furkanmulayim.modamula.ui.home.modal_bottom_sheet.ColorVariantFragment"
         android:label="ColorVariantFragment" />
     <fragment
         android:id="@+id/panelFragment"
-        android:name="com.furkanmulayim.shopper.ui.panel.PanelFragment"
+        android:name="com.furkanmulayim.modamula.ui.panel.PanelFragment"
         android:label="fragment_panel"
         tools:layout="@layout/fragment_panel" />
 </navigation>

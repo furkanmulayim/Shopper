@@ -309,20 +309,20 @@
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:hint="@string/add_renkSecenek"
+                    android:hint="@string/uyumluBedenler"
                     android:layout_marginStart="15dp"
                     android:layout_marginEnd="15dp"
                     android:layout_marginTop="15dp"
                     android:layout_height="match_parent" />
 
                 <EditText
-                    android:id="@+id/addRenkSecenek"
+                    android:id="@+id/uyumluBedenler"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
                     android:layout_marginEnd="15dp"
                     android:background="@drawable/panel_et_back"
-                    android:hint="@string/add_renkSecenek"
+                    android:hint="@string/uyumluBedenler"
                     android:inputType="number"
                     android:paddingStart="20sp"
                     android:paddingTop="10dp"

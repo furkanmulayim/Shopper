@@ -14,7 +14,6 @@
         android:id="@+id/productImage"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@drawable/item"
         android:scaleType="centerCrop"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,7 +34,6 @@
         android:paddingTop="3dp"
         android:paddingEnd="5dp"
         android:paddingBottom="3dp"
-        android:text="2"
         android:textAlignment="center"
         android:textColor="@color/normal_text"
         android:textColorHint="@color/hint_text"
@@ -57,7 +55,6 @@
         android:paddingTop="3dp"
         android:paddingEnd="10dp"
         android:paddingBottom="3dp"
-        android:text="Yeni"
         android:textColor="@color/dark_purple"
         android:textSize="13sp"
         app:layout_constraintBottom_toBottomOf="@+id/productImage"
@@ -76,7 +73,6 @@
         android:paddingEnd="10dp"
         android:paddingBottom="3dp"
         android:singleLine="true"
-        android:text="Bayrama Özel %30"
         android:textColor="@color/white"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/productImage"
@@ -91,7 +87,6 @@
         android:layout_marginTop="3dp"
         android:fontFamily="@font/inter_semibold"
         android:singleLine="true"
-        android:text="Ürün Adı Burda"
         android:textColor="@color/normal_text"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -104,7 +99,6 @@
         android:layout_marginTop="-3dp"
         android:fontFamily="@font/inter_semibold"
         android:singleLine="true"
-        android:text="120₺"
         android:textColor="@color/dark_purple"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@+id/productName"
@@ -118,7 +112,6 @@
         android:layout_marginStart="5dp"
         android:fontFamily="@font/inter_light"
         android:singleLine="true"
-        android:text="120₺"
         android:textColor="@color/black_50_trans"
         android:textSize="13sp"
         app:layout_constraintBottom_toBottomOf="@+id/productCurrentPrice"
@@ -153,7 +146,6 @@
             android:textSize="11sp"
             tools:text="-%50" />
     </LinearLayout>
-
     <LinearLayout
         android:id="@+id/kargoLayout"
         android:layout_width="40dp"
@@ -177,8 +169,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
-            android:text="@string/cargo"
             android:textAlignment="center"
+            android:text="@string/kargo"
             android:textColor="@color/dark_purple"
             android:textSize="8sp" />
     </LinearLayout>

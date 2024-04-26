@@ -33,7 +33,6 @@
         android:layout_gravity="center_vertical"
         android:layout_marginStart="5dp"
         android:layout_marginEnd="10dp"
-        android:text="furkan"
         android:fontFamily="@font/inter_semibold"
         android:textColor="@color/normal_text"
         android:textSize="12sp" />
