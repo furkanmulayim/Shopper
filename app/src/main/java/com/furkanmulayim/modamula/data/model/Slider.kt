@@ -5,7 +5,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Slider(
-    val image: String,
-    val name: String,
-    val guide: String
+    val guide: String? = null,
+    val image: String? = null,
+    val name: String? = null
 ) : Parcelable

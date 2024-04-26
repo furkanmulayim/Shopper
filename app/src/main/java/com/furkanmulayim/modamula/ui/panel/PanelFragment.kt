@@ -65,7 +65,7 @@ class PanelFragment : BaseFragment<FragmentPanelBinding, PanelViewModel>() {
                             unitSold = satilanAdet,
                             relatedProductId = addIlgiliUrunId.text.toString(),
                             hastags = addHastag.text.toString(),
-                            active = addIsAktif.text.toString().toInt(),
+                            active = 0,
                             cargoPrice = addIsKargoUcret.text.toString().toInt(),
                             producerSelect = addIsUreticiSecimi.text.toString().toInt(),
                             new = addIsYeni.text.toString().toInt()
@@ -74,7 +74,7 @@ class PanelFragment : BaseFragment<FragmentPanelBinding, PanelViewModel>() {
                         onBackPressed()
                     }
                 } else {
-                    viewErrorMessage(mcontext, getString(R.string.yetkisiz))
+                    viewErrorMessage(mcontext, getString(R.string.bos_urun))
                 }
             }
         }

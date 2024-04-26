@@ -32,7 +32,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_centerInParent="true"
-                    android:layout_margin="5dp"
+                    android:layout_margin="15dp"
                     android:scaleType="centerInside"
                     android:src="@drawable/shopper" />
 
@@ -323,7 +323,7 @@
                     android:layout_marginEnd="15dp"
                     android:background="@drawable/panel_et_back"
                     android:hint="@string/uyumluBedenler"
-                    android:inputType="number"
+                    android:inputType="text"
                     android:paddingStart="20sp"
                     android:paddingTop="10dp"
                     android:paddingEnd="20sp"
@@ -401,29 +401,6 @@
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:hint="@string/add_isAktif"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginEnd="15dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_height="match_parent" />
-
-                <EditText
-                    android:id="@+id/addIsAktif"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginEnd="15dp"
-                    android:background="@drawable/panel_et_back"
-                    android:hint="@string/add_isAktif"
-                    android:inputType="number"
-                    android:paddingStart="20sp"
-                    android:paddingTop="10dp"
-                    android:paddingEnd="20sp"
-                    android:paddingBottom="10dp"
-                    android:textColorHint="@color/dark_purple_50_trans" />
-
-                <TextView
-                    android:layout_width="match_parent"
                     android:hint="@string/add_isKargoUcret"
                     android:layout_marginStart="15dp"
                     android:layout_marginEnd="15dp"
@@ -438,52 +415,6 @@
                     android:layout_marginEnd="15dp"
                     android:background="@drawable/panel_et_back"
                     android:hint="@string/add_isKargoUcret"
-                    android:inputType="number"
-                    android:paddingStart="20sp"
-                    android:paddingTop="10dp"
-                    android:paddingEnd="20sp"
-                    android:paddingBottom="10dp"
-                    android:textColorHint="@color/dark_purple_50_trans" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:hint="@string/add_isReelsActive"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginEnd="15dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_height="match_parent" />
-
-                <EditText
-                    android:id="@+id/addIsReelsActive"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginEnd="15dp"
-                    android:background="@drawable/panel_et_back"
-                    android:hint="@string/add_isReelsActive"
-                    android:inputType="number"
-                    android:paddingStart="20sp"
-                    android:paddingTop="10dp"
-                    android:paddingEnd="20sp"
-                    android:paddingBottom="10dp"
-                    android:textColorHint="@color/dark_purple_50_trans" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:hint="@string/add_isSiparisAlim"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginEnd="15dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_height="match_parent" />
-
-                <EditText
-                    android:id="@+id/addIsSiparisAlim"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginEnd="15dp"
-                    android:background="@drawable/panel_et_back"
-                    android:hint="@string/add_isSiparisAlim"
                     android:inputType="number"
                     android:paddingStart="20sp"
                     android:paddingTop="10dp"

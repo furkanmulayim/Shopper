@@ -10,11 +10,11 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.furkanmulayim.modamula.R
 import com.furkanmulayim.modamula.base.BaseFragment
 import com.furkanmulayim.modamula.data.model.Product
-import com.furkanmulayim.modamula.data.model.Slider
 import com.furkanmulayim.modamula.databinding.FragmentHomeBinding
 import com.furkanmulayim.modamula.ui.home.slider.ImageAdapter
 import com.furkanmulayim.modamula.ui.home.slider.ZoomOutPageTransformer
 import com.furkanmulayim.modamula.utils.onSingleClickListener
+import com.furkanmulayim.modamula.utils.stringToList
 import com.furkanmulayim.modamula.utils.viewGone
 import com.furkanmulayim.modamula.utils.viewVisible
 import dagger.hilt.android.AndroidEntryPoint
@@ -36,7 +36,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
         initClicks(); observeData(); observSlider(); setScrollSettings();deneme()
     }
 
-    private fun setSlider(list: List<Slider>) {
+    private fun setSlider(list: List<String>) {
         adapter = ImageAdapter(requireContext(), binding.viewPager, list)
         binding.viewPager.adapter = adapter
         binding.viewPager.setPageTransformer(ZoomOutPageTransformer(5))
@@ -57,7 +57,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
     private fun observSlider() {
         viewModel.sliderList.observe(viewLifecycleOwner) {
             it?.let {
-                setSlider(it)
+                it[0].image?.let { filteredlist -> stringToList(filteredlist) }
+                    ?.let { list -> setSlider(list) }
             }
         }
     }

@@ -90,26 +90,25 @@
     <string name="panel_button_create">Ürün Ekle</string>
     <string name="panel_button_delete">Ürün Sil</string>
     <string name="panel_button_update">Ürün Güncelle</string>
-    <string name="add_id">id</string>
-    <string name="add_isim">isim (text)</string>
-    <string name="add_aciklama">aciklama (text)</string>
-    <string name="add_image">image (text)</string>
-    <string name="add_gecerliFiyat">gecerliFiyat (text)</string>
-    <string name="add_oncekiFiyat">oncekiFiyat (text)</string>
-    <string name="add_indirimAciklama">indirimAciklama (text)</string>
-    <string name="add_kategori">kategori (text)</string>
-    <string name="add_numara">numara (text)</string>
-    <string name="add_renk">renk (text)</string>
-    <string name="uyumluBedenler">uyumluBedenler (text,text)</string>
-    <string name="add_satilanAdet">satilanAdet (Number)</string>
-    <string name="add_ilgiliUrunId">ilgiliUrunId (text,text)</string>
-    <string name="add_hastags">hastags (text,text)</string>
-    <string name="add_isAktif">isAktif (0/1)</string>
-    <string name="add_isKargoUcret">isKargoUcret (0/1)</string>
-    <string name="add_isReelsActive">isReelsActive (0/1)</string>
-    <string name="add_isSiparisAlim">isSiparisAlim (0/1)</string>
-    <string name="add_isUreticiSecimi">isUreticiSecimi (0/1)</string>
-    <string name="add_isYeni">isYeni (0/1)</string>
+
+    <string name="add_id">ürün id - Int</string>
+    <string name="add_isim">ürün ismi - String</string>
+    <string name="add_aciklama">ürün açıklaması - String</string>
+    <string name="add_image">image - String</string>
+    <string name="add_gecerliFiyat">şuanki fiyat - String</string>
+    <string name="add_oncekiFiyat">önceki fiyat - String</string>
+    <string name="add_indirimAciklama">indirim Aciklaması - String</string>
+    <string name="add_kategori">kategori - String</string>
+    <string name="add_numara">beden - String</string>
+    <string name="add_renk">rengi - String</string>
+    <string name="uyumluBedenler">uyumlu Bedenler - String (,)</string>
+    <string name="add_satilanAdet">satilan Adet - Int</string>
+    <string name="add_ilgiliUrunId">benzer ürünler - String (,)</string>
+    <string name="add_hastags">hastags - String</string>
+    <string name="add_isAktif">aktif mi - Int (0,1)</string>
+    <string name="add_isKargoUcret">kargo free mi - Int (0,1)</string>
+    <string name="add_isUreticiSecimi">üretici seçimi - Int (0,1)</string>
+    <string name="add_isYeni">yeni mi - Int (0,1)</string>
     <!--''''''''''''''''''''Panel''''''''''''''''''''''''''''''''''-->
 
 
