@@ -52,7 +52,7 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding, CategoryViewModel
 
     //Ürünleri Listelemek İçin Kullanılan adapter
     private fun setProductAdapter(list: ArrayList<Product>) {
-        val filteredList = list.filter { it.isAktif == 1 }
+        val filteredList = list.filter { it.active == 1 }
         productAdapter = HomeProductAdapter(
             mcontext,
             filteredList as ArrayList<Product>,

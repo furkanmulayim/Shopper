@@ -51,23 +51,24 @@ class PanelFragment : BaseFragment<FragmentPanelBinding, PanelViewModel>() {
                     with(binding) {
                         viewModel.createProduct(
                             id = id,
-                            isim = addIsim.text.toString(),
-                            aciklama = addAciklama.text.toString(),
+                            name = addIsim.text.toString(),
+                            description = addAciklama.text.toString(),
                             image = addImage.text.toString(),
-                            gecerliFiyat = addGuncelFiyat.text.toString(),
-                            oncekiFiyat = addOnceki.text.toString(),
-                            indirimAciklama = addIndirimAciklama.text.toString(),
-                            kategori = addKategori.text.toString(),
-                            numara = addNumara.text.toString(),
-                            renk = addRenk.text.toString(),
-                            uyumluBedenler = uyumluBedenler,
-                            satilanAdet = satilanAdet,
-                            ilgiliUrunId = addIlgiliUrunId.text.toString(),
+                            documentId = "",
+                            currentPrice = addGuncelFiyat.text.toString(),
+                            beforePrice = addOnceki.text.toString(),
+                            discDesc = addIndirimAciklama.text.toString(),
+                            category = addKategori.text.toString(),
+                            number = addNumara.text.toString(),
+                            color = addRenk.text.toString(),
+                            compatibleSize = uyumluBedenler,
+                            unitSold = satilanAdet,
+                            relatedProductId = addIlgiliUrunId.text.toString(),
                             hastags = addHastag.text.toString(),
-                            isAktif = addIsAktif.text.toString().toInt(),
-                            isKargoUcret = addIsKargoUcret.text.toString().toInt(),
-                            isUreticiSecimi = addIsUreticiSecimi.text.toString().toInt(),
-                            isYeni = addIsYeni.text.toString().toInt()
+                            active = addIsAktif.text.toString().toInt(),
+                            cargoPrice = addIsKargoUcret.text.toString().toInt(),
+                            producerSelect = addIsUreticiSecimi.text.toString().toInt(),
+                            new = addIsYeni.text.toString().toInt()
                         )
                         viewMessage(mcontext, getString(R.string.success))
                         onBackPressed()

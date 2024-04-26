@@ -11,44 +11,20 @@ class ProductRepository(private var pds: ProductDataSource) {
     fun search(searchText: String): MutableLiveData<List<Product>> = pds.search(searchText)
 
     fun saveData(
-        id: Int,
-        isim: String,
-        aciklama: String,
-        image: String,
-        gecerliFiyat: String,
-        oncekiFiyat: String,
-        indirimAciklama: String,
-        kategori: String,
-        numara: String,
-        renk: String,
-        uyumluBedenler: String,
-        satilanAdet: Int,
-        ilgiliUrunId: String,
-        hastags: String,
-        isAktif: Int,
-        isKargoUcret: Int,
-        isUreticiSecimi: Int,
-        isYeni: Int,
+        description: String, documentId: String, currentPrice: String,
+        hastags: String, id: Int, relatedProductId: String,
+        image: String, discDesc: String, active: Int,
+        cargoPrice: Int, producerSelect: Int, new: Int, name: String,
+        category: String, number: String, beforePrice: String,
+        color: String, unitSold: Int, compatibleSize: String
     ) {
         pds.saveData(
-            id = id,
-            isim = isim,
-            aciklama = aciklama,
-            image = image,
-            gecerliFiyat = gecerliFiyat,
-            oncekiFiyat = oncekiFiyat,
-            indirimAciklama = indirimAciklama,
-            kategori = kategori,
-            numara = numara,
-            renk = renk,
-            uyumluBedenler = uyumluBedenler,
-            satilanAdet = satilanAdet,
-            ilgiliUrunId = ilgiliUrunId,
-            hastags = hastags,
-            isAktif = isAktif,
-            isKargoUcret = isKargoUcret,
-            isUreticiSecimi = isUreticiSecimi,
-            isYeni = isYeni
+            description = description, documentId = documentId, currentPrice = currentPrice,
+            hastags = hastags, id = id, relatedProductId = relatedProductId,
+            image = image, discDesc = discDesc, active = active, cargoPrice = cargoPrice,
+            producerSelect = producerSelect, new = new, name = name,
+            category = category, number = number, beforePrice = beforePrice,
+            color = color, unitSold = unitSold, compatibleSize = compatibleSize
         )
     }
 

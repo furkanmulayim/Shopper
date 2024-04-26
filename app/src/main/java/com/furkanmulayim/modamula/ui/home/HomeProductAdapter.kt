@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.furkanmulayim.modamula.R
 import com.furkanmulayim.modamula.data.model.Product
 import com.furkanmulayim.modamula.databinding.ItemProductBinding
+import com.furkanmulayim.modamula.utils.discountCalculate
 import com.furkanmulayim.modamula.utils.loadImage
 import com.furkanmulayim.modamula.utils.onSingleClickListener
 import com.furkanmulayim.modamula.utils.stringToList
@@ -40,46 +41,37 @@ class HomeProductAdapter(
 
         fun bind(item: Product, context: Context) {
 
-            if (item.isYeni == 1) viewGone(newText)
+            if (item.new == 1) viewGone(newText)
 
             val firstImage = item.image?.split(",")?.get(0)
             if (firstImage != null) {
                 image.loadImage(firstImage, R.drawable.png_failed)
             }
 
-            if (item.isKargoUcret == 0) viewGone(kargoLayout)
+            if (item.cargoPrice == 0) viewGone(kargoLayout)
 
-            val currentPriceText = item.gecerliFiyat + "₺"
-            val oldPriceText = item.oncekiFiyat + "₺"
-            val discountPercentage = "-%" + item.oncekiFiyat?.toDoubleOrNull()?.let {
-                item.gecerliFiyat?.toDoubleOrNull()?.let { it1 ->
-                    discountCalculate(
-                        it,
-                        it1
-                    )
-                }
+            val currentPriceText = item.currentPrice + "₺"
+            val oldPriceText = item.beforePrice + "₺"
+            val discountPercentage = item.beforePrice?.toDoubleOrNull()?.let {
+                item.currentPrice?.toDoubleOrNull()?.let { it1 -> discountCalculate(it, it1) }
             }
 
-            discountDescription.text = item.indirimAciklama
+            discountDescription.text = item.discDesc
             indirimYuzde.text = discountPercentage
             newPrice.text = currentPriceText
             oldPrice.text = oldPriceText
-            name.text = item.isim
+            name.text = item.name
             oldPrice.paintFlags = oldPrice.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
-            colorVariants.text = stringToList(item.uyumluBedenler.toString()).size.toString()
+            colorVariants.text = stringToList(item.compatibleSize.toString()).size.toString()
 
             itemButton.onSingleClickListener { onClickItem(item) }
 
             colorVariants.onSingleClickListener {
-                onClickVariants(item.uyumluBedenler.toString())
+                onClickVariants(item.compatibleSize.toString())
             }
 
             indirimLayout.onSingleClickListener {}
             kargoLayout.onSingleClickListener {}
-        }
-
-        private fun discountCalculate(oldPrice: Double, newPrice: Double): Int {
-            return (((oldPrice - newPrice) / oldPrice) * 100).toInt()
         }
     }
 

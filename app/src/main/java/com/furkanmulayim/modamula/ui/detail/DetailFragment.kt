@@ -16,6 +16,7 @@ import com.furkanmulayim.modamula.databinding.FragmentProductDetailBinding
 import com.furkanmulayim.modamula.ui.detail.adapters.CompatibleSizeAdapter
 import com.furkanmulayim.modamula.ui.detail.adapters.SimilarProductAdapter
 import com.furkanmulayim.modamula.ui.detail.slider.ProductImageAdapter
+import com.furkanmulayim.modamula.utils.discountCalculate
 import com.furkanmulayim.modamula.utils.onSingleClickListener
 import com.furkanmulayim.modamula.utils.stringToList
 import com.furkanmulayim.modamula.utils.viewVisible
@@ -46,13 +47,18 @@ class DetailFragment : BaseFragment<FragmentProductDetailBinding, DetailViewMode
     private fun observeData() {
         viewModel.productItem.observe(viewLifecycleOwner) { item ->
             with(binding) {
-                productName.text = item.isim
-                productDetail.text = item.aciklama
-                productDiscountDescription.text = item.indirimAciklama
-                buyToolBar.productOldPrice.text = item.oncekiFiyat + getString(R.string.tl)
-                buyToolBar.productCurrentPrice.text = item.gecerliFiyat + getString(R.string.tl)
+                productName.text = item.name
+                productDetail.text = item.description
+                productDiscountDescription.text = item.discDesc
+                val oldPrice = item.beforePrice + getString(R.string.tl)
+                val newPrice = item.currentPrice + getString(R.string.tl)
+                buyToolBar.productOldPrice.text = oldPrice
+                buyToolBar.productCurrentPrice.text = newPrice
+                indirimYuzde.text = item.beforePrice?.toDoubleOrNull()?.let {
+                    item.currentPrice?.toDoubleOrNull()?.let { it1 -> discountCalculate(it, it1) }
+                }
             }
-            item.isim?.let { buyButtoClickListener(it) }
+            item.name?.let { buyButtoClickListener(it) }
             initClickListeners()
             item.image?.let { stringToList(it) }?.let { setSliderImages(it) }
         }
@@ -72,7 +78,6 @@ class DetailFragment : BaseFragment<FragmentProductDetailBinding, DetailViewMode
             val similarList: ArrayList<Product> = arrayListOf()
             it?.let { similar ->
                 similar.forEach { s ->
-                    s
                     if (s.isNotEmpty()) {
                         if (viewModel.searchById(s.toInt()) != null) {
                             similarList.add(viewModel.searchById(s.toInt())!!)

@@ -63,7 +63,7 @@ class ProductDataSource(
                 for (i in value.documents) {
                     val product = i.toObject(Product::class.java)
                     if (product != null) {
-                        if (product.isim?.lowercase()?.contains(searchText.lowercase()) == true) {
+                        if (product.name?.lowercase()?.contains(searchText.lowercase()) == true) {
                             product.documentId = i.id
                             list.add(product)
                         }
@@ -76,44 +76,20 @@ class ProductDataSource(
     }
 
     fun saveData(
-        aciklama: String,
-        gecerliFiyat: String,
-        id: Int,
-        image: String,
-        isAktif: Int,
-        isKargoUcret: Int,
-        indirimAciklama: String,
-        ilgiliUrunId: String,
-        hastags: String,
-        isUreticiSecimi: Int,
-        isYeni: Int,
-        isim: String,
-        kategori: String,
-        numara: String,
-        oncekiFiyat: String,
-        renk: String,
-        uyumluBedenler: String,
-        satilanAdet: Int
+        description: String, documentId: String, currentPrice: String,
+        hastags: String, id: Int, relatedProductId: String,
+        image: String, discDesc: String, active: Int,
+        cargoPrice: Int, producerSelect: Int, new: Int, name: String,
+        category: String, number: String, beforePrice: String,
+        color: String, unitSold: Int, compatibleSize: String
     ) {
         val newProduct = Product(
-            id = id,
-            isim = isim,
-            aciklama = aciklama,
-            image = image,
-            gecerliFiyat = gecerliFiyat,
-            oncekiFiyat = oncekiFiyat,
-            indirimAciklama = indirimAciklama,
-            kategori = kategori,
-            numara = numara,
-            renk = renk,
-            uyumluBedenler = uyumluBedenler,
-            satilanAdet = satilanAdet,
-            ilgiliUrunId = ilgiliUrunId,
-            hastags = hastags,
-            isAktif = isAktif,
-            isKargoUcret = isKargoUcret,
-            isUreticiSecimi = isUreticiSecimi,
-            isYeni = isYeni
+            description = description, documentId = documentId, currentPrice = currentPrice,
+            hastags = hastags, id = id, relatedProductId = relatedProductId,
+            image = image, discDesc = discDesc, active = active, cargoPrice = cargoPrice,
+            producerSelect = producerSelect, new = new, name = name,
+            category = category, number = number, beforePrice = beforePrice,
+            color = color, unitSold = unitSold, compatibleSize = compatibleSize
         )
         collectionProduct.document().set(newProduct)
     }

@@ -65,7 +65,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
     private fun observeData() {
         viewModel.productList.observe(viewLifecycleOwner) { plist ->
             plist?.let { list ->
-                setProductAdapter(list.filter { it.isAktif == 1 } as ArrayList<Product>)
+                setProductAdapter(list.filter { it.active == 1 } as ArrayList<Product>)
             }
         }
     }

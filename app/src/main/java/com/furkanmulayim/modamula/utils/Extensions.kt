@@ -62,3 +62,7 @@ fun viewErrorMessage(context: Context, message: String) {
     ).show()
 }
 
+fun discountCalculate(oldPrice: Double, newPrice: Double): String {
+    return "%" + ((((oldPrice - newPrice) / oldPrice) * 100).toInt().toString())
+}
+

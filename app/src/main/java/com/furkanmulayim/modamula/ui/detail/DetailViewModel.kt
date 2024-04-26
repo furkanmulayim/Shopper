@@ -37,9 +37,9 @@ class DetailViewModel @Inject constructor(
             savedStateHandle.get<Product>("ProductItem")?.let {
                 productItem.value = it
                 imageList.value = it.image?.let { images -> stringToList(images) }
-                sizedList.value = it.uyumluBedenler?.let { size -> stringToList(size) }
+                sizedList.value = it.compatibleSize?.let { size -> stringToList(size) }
                 coloVariantList.value = it.image?.let { variant -> stringToList(variant) }
-                similarList.value = it.ilgiliUrunId?.let { sim -> stringToList(sim) }
+                similarList.value = it.relatedProductId?.let { sim -> stringToList(sim) }
             }
         }
     }

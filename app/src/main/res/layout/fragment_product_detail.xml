@@ -49,10 +49,10 @@
 
                 <me.relex.circleindicator.CircleIndicator3
                     android:id="@+id/indicator"
-                    android:elevation="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginBottom="10dp"
+                    android:elevation="5dp"
                     app:ci_drawable="@drawable/circle_indicator_selected"
                     app:ci_drawable_unselected="@drawable/circle_indicator_un_selected"
                     app:ci_height="15dp"
@@ -132,7 +132,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:background="@color/white"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingStart="15dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp">
 
                 <LinearLayout
                     android:id="@+id/indirimLayout"
@@ -186,8 +189,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="2dp"
-                        android:textAlignment="center"
                         android:text="@string/kargo"
+                        android:textAlignment="center"
                         android:textColor="@color/dark_purple"
                         android:textSize="8sp" />
                 </LinearLayout>
@@ -197,6 +200,7 @@
                     android:id="@+id/productDiscountDescription"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_marginStart="15dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="15dp"
@@ -264,14 +268,10 @@
                     android:layout_marginBottom="15dp"
                     android:overScrollMode="never" />
             </LinearLayout>
-
-
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
     <include
         android:id="@+id/buyToolBar"
         layout="@layout/custom_pay_toolbar" />
-
-
 </LinearLayout>
