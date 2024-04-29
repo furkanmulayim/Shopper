@@ -10,7 +10,12 @@ import kotlinx.coroutines.launch
 class SharedPrefs {
 
     companion object {
-        const val preferencesTime = "preferences_time"
+        const val PREFTIME = "preferences_time"
+
+        const val billingSaveTime = "pref_billing_firebase"
+        const val productSaveTime = "pref_product_firebase"
+        const val sliderSaveTime = "pref_slider_firebase"
+
         const val preferencesWelcome = "preferences_welcome"
         const val preferencesLanguage = "preferences_language"
 
@@ -56,10 +61,38 @@ class SharedPrefs {
     fun saveTime(time: Long) {
         CoroutineScope(Dispatchers.Default).launch {
             sp?.edit(commit = true) {
-                putLong(preferencesTime, time)
+                putLong(PREFTIME, time)
             }
         }
     }
 
-    fun getTime() = sp?.getLong(preferencesTime, 0)
+    fun getSaveTimeBilling() = sp?.getLong(billingSaveTime, 0)
+    fun saveTimeForBillingDownload(time: Long) {
+        CoroutineScope(Dispatchers.Default).launch {
+            sp?.edit(commit = true) {
+                putLong(billingSaveTime, time)
+            }
+        }
+    }
+
+    fun getSaveTimeProduct() = sp?.getLong(productSaveTime, 0)
+    fun saveTimeForProductDownload(time: Long) {
+        CoroutineScope(Dispatchers.Default).launch {
+            sp?.edit(commit = true) {
+                putLong(productSaveTime, time)
+            }
+        }
+    }
+
+    fun getSaveTimeSlider() = sp?.getLong(sliderSaveTime, 0)
+    fun saveTimeForSliderDownload(time: Long) {
+        CoroutineScope(Dispatchers.Default).launch {
+            sp?.edit(commit = true) {
+                putLong(sliderSaveTime, time)
+            }
+        }
+    }
+
+
+    fun getTime() = sp?.getLong(PREFTIME, 0)
 }

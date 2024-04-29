@@ -10,11 +10,11 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.furkanmulayim.modamula.R
 import com.furkanmulayim.modamula.base.BaseFragment
 import com.furkanmulayim.modamula.data.model.Product
+import com.furkanmulayim.modamula.data.model.Slider
 import com.furkanmulayim.modamula.databinding.FragmentHomeBinding
 import com.furkanmulayim.modamula.ui.home.slider.ImageAdapter
 import com.furkanmulayim.modamula.ui.home.slider.ZoomOutPageTransformer
 import com.furkanmulayim.modamula.utils.onSingleClickListener
-import com.furkanmulayim.modamula.utils.stringToList
 import com.furkanmulayim.modamula.utils.viewGone
 import com.furkanmulayim.modamula.utils.viewVisible
 import dagger.hilt.android.AndroidEntryPoint
@@ -33,10 +33,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initClicks(); observeData(); observSlider(); setScrollSettings();deneme()
+        initClicks(); observeData(); observSlider(); setScrollSettings()
     }
 
-    private fun setSlider(list: List<String>) {
+    private fun setSlider(list: List<Slider>) {
         adapter = ImageAdapter(requireContext(), binding.viewPager, list)
         binding.viewPager.adapter = adapter
         binding.viewPager.setPageTransformer(ZoomOutPageTransformer(5))
@@ -55,10 +55,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
     }
 
     private fun observSlider() {
-        viewModel.sliderList.observe(viewLifecycleOwner) {
-            it?.let {
-                it[0].image?.let { filteredlist -> stringToList(filteredlist) }
-                    ?.let { list -> setSlider(list) }
+        viewModel.sliderList.observe(viewLifecycleOwner) { sliderList ->
+            setSlider(sliderList)
+            if (!viewModel.isSqliteData && sliderList != null) {
+                viewModel.setSqliteSliderList(sliderList)
             }
         }
     }
@@ -66,7 +66,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
     private fun observeData() {
         viewModel.productList.observe(viewLifecycleOwner) { plist ->
             plist?.let { list ->
-                setProductAdapter(list.filter { it.active == 1 } as ArrayList<Product>)
+                val filteredList = list.filter { it.active == 1 }
+                setProductAdapter(filteredList as ArrayList<Product>)
+                if (!viewModel.isSqliteData) {
+                    viewModel.setSqliteproductList(filteredList)
+                }
             }
         }
     }
@@ -122,14 +126,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                 viewGone(binding.upToButton)
             } else {
                 viewVisible(binding.upToButton)
-            }
-        }
-    }
-
-    private fun deneme() {
-        viewModel.denek.observe(viewLifecycleOwner) {
-            it?.let { x ->
-                println("LOGDF" + x.size)
             }
         }
     }

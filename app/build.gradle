@@ -66,12 +66,12 @@ dependencies {
     kapt "com.google.dagger:hilt-compiler:$hiltVersion"
 
 
-    // ROOM //noinspection GradleDependency
+    // ROOM
     implementation "androidx.room:room-runtime:$roomVersion"
     kapt "androidx.room:room-compiler:$roomVersion"
     implementation "androidx.room:room-rxjava2:2.6.1"
 
-    //COROUTİNE //noinspection GradleDependency
+    //COROUTİNE
     implementation "androidx.room:room-ktx:$roomVersion"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion"
 
@@ -93,7 +93,7 @@ dependencies {
     //SHARED PREFERENCES
     implementation 'androidx.preference:preference-ktx:1.2.1'
 
-    //VIEV PAGER INDICATOR
+    //VIEW PAGER INDICATOR
     implementation 'me.relex:circleindicator:2.1.6'
 
 

@@ -4,11 +4,12 @@ import androidx.lifecycle.MutableLiveData
 import com.furkanmulayim.modamula.data.datasource.ProductDataSource
 import com.furkanmulayim.modamula.data.model.Product
 
-class ProductRepository(private var pds: ProductDataSource) {
+class ProductRepository(private var productDataSource: ProductDataSource) {
 
-    fun getData(): MutableLiveData<List<Product>> = pds.getData()
-    fun searchById(id: Int): MutableLiveData<Product?> = pds.searchById(id)
-    fun search(searchText: String): MutableLiveData<List<Product>> = pds.search(searchText)
+    fun getData(): MutableLiveData<List<Product>> = productDataSource.getData()
+    fun searchById(id: Int): MutableLiveData<Product?> = productDataSource.searchById(id)
+    fun search(searchText: String): MutableLiveData<List<Product>> =
+        productDataSource.search(searchText)
 
     fun saveData(
         description: String, documentId: String, currentPrice: String,
@@ -18,7 +19,7 @@ class ProductRepository(private var pds: ProductDataSource) {
         category: String, number: String, beforePrice: String,
         color: String, unitSold: Int, compatibleSize: String
     ) {
-        pds.saveData(
+        productDataSource.saveData(
             description = description, documentId = documentId, currentPrice = currentPrice,
             hastags = hastags, id = id, relatedProductId = relatedProductId,
             image = image, discDesc = discDesc, active = active, cargoPrice = cargoPrice,

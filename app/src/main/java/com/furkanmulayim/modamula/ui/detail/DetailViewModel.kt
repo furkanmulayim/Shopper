@@ -16,7 +16,7 @@ import javax.inject.Inject
 class DetailViewModel @Inject constructor(
     application: Application,
     private val savedStateHandle: SavedStateHandle,
-    private val cpr: ProductRepository
+    private val firebaseProductRepo: ProductRepository
 ) : BaseViewModel(application) {
 
     val similarProductItem: MutableLiveData<List<Product>> = MutableLiveData()
@@ -45,7 +45,7 @@ class DetailViewModel @Inject constructor(
     }
 
     fun searchById(id: Int): Product? {
-        val a = cpr.getData()
+        val a = firebaseProductRepo.getData()
         return a.value?.firstOrNull { it.id == id }
     }
 

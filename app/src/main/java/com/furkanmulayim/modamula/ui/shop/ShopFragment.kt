@@ -35,10 +35,15 @@ class ShopFragment : BaseFragment<FragmentShopBinding, ShopViewModel>() {
     private fun observeData() {
         viewModel.billing.observe(viewLifecycleOwner) {
             it?.let { bill ->
-                val filteredBill = bill[0]
-                with(binding) {
-                    isimSoyisim.text = filteredBill.nameSurname.toString()
-                    iletisim.text = filteredBill.inTouch.toString()
+                println("LOGDF: " + bill.bankName)
+                if (!viewModel.isSqliteData && bill != null) {
+                    viewModel.setSqliteData(bill)
+                }
+                if (bill != null) {
+                    with(binding) {
+                        isimSoyisim.text = bill.nameSurname.toString()
+                        iletisim.text = bill.inTouch.toString()
+                    }
                 }
             }
         }
