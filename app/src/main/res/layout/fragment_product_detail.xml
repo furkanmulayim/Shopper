@@ -186,10 +186,10 @@
                         android:background="@drawable/product_item_cargo" />
 
                     <TextView
+                        android:id="@+id/cargoPrice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="2dp"
-                        android:text="@string/kargo"
                         android:textAlignment="center"
                         android:textColor="@color/dark_purple"
                         android:textSize="8sp" />

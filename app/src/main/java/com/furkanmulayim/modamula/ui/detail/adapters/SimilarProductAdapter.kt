@@ -4,24 +4,17 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.furkanmulayim.modamula.R
-import com.furkanmulayim.modamula.data.model.Product
 import com.furkanmulayim.modamula.databinding.ItemProductSimilarBinding
-import com.furkanmulayim.modamula.utils.loadImage
 import com.google.android.material.imageview.ShapeableImageView
 
 class SimilarProductAdapter(
-    private val dataList: ArrayList<Product>
+    private val dataList: ArrayList<String>
 ) : RecyclerView.Adapter<SimilarProductAdapter.ViewHolder>() {
 
     class ViewHolder(binding: ItemProductSimilarBinding) : RecyclerView.ViewHolder(binding.root) {
         val image: ShapeableImageView = binding.image
 
-        fun bind(item: Product) {
-            val firstImage = item.image?.split(",")?.get(0)
-            if (firstImage != null) {
-                image.loadImage(firstImage, R.drawable.png_failed)
-            }
+        fun bind(item: String) {
         }
     }
 
@@ -42,7 +35,7 @@ class SimilarProductAdapter(
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun updateList(newList: ArrayList<Product>?) {
+    fun updateList(newList: ArrayList<String>?) {
         if (newList != null) {
             dataList.clear()
             dataList.addAll(newList)

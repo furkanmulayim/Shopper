@@ -5,10 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
-import com.furkanmulayim.modamula.R
-import com.furkanmulayim.modamula.data.enums.CategoryName
+import com.furkanmulayim.modamula.data.model.Categorie
 import com.furkanmulayim.modamula.data.model.Product
-import com.furkanmulayim.modamula.data.model.ProductCategory
+import com.furkanmulayim.modamula.repository.CategorieRepository
 import com.furkanmulayim.modamula.repository.ProductRepository
 import com.furkanmulayim.tarifce.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,14 +17,30 @@ import javax.inject.Inject
 @HiltViewModel
 class CategoryViewModel @Inject constructor(
     app: Application,
-    private val ssh: SavedStateHandle,
-    private val cpr: ProductRepository
+    private val savedStateHandle: SavedStateHandle,
+    private val productRepository: ProductRepository,
+    private val categorieRepository: CategorieRepository
 ) : BaseViewModel(app) {
 
+    //HOVER SEARCH & KEYBOARD
     var isSearchFocused: MutableLiveData<Boolean> = MutableLiveData()
+
+    //PRODUCTS
     private var _productList = MutableLiveData<List<Product>>()
     val products: LiveData<List<Product>>
         get() = _productList
+
+    //CATEGORİES
+    private var _categorieList = MutableLiveData<List<Categorie>>()
+    val categorie: LiveData<List<Categorie>>
+        get() = _categorieList
+
+
+    //DENEME
+    private var _deneme = MutableLiveData<List<Product>>()
+    val deneme: LiveData<List<Product>>
+        get() = _deneme
+
 
     init {
         getBundle()
@@ -34,7 +49,7 @@ class CategoryViewModel @Inject constructor(
 
     private fun getBundle() {
         viewModelScope.launch {
-            val bundle = ssh.get<Boolean>("search")
+            val bundle = savedStateHandle.get<Boolean>("search")
             bundle?.let {
                 isSearchFocused.value = it
             }
@@ -42,26 +57,12 @@ class CategoryViewModel @Inject constructor(
     }
 
     private fun fetchData() {
-        _productList = cpr.getData()
+        _productList = productRepository.getData()
+        _categorieList = categorieRepository.getData()
     }
 
-    val categories = arrayListOf(
-        ProductCategory(
-            image = R.drawable.menu_item_shopping_car,
-            back = R.drawable.category_item_white,
-            name = CategoryName.TUMU.id
-        ),
-        ProductCategory(
-            image = R.drawable.menu_item_shopping_car,
-            back = R.drawable.category_item_white,
-            name = CategoryName.JIK.id
-        ),
-        ProductCategory(
-            image = R.drawable.menu_item_shopping_car,
-            back = R.drawable.category_item_white,
-            name = CategoryName.BEBEK.id
-        )
-    )
-
+    fun selectedCategQuery(categ: String) {
+        _productList = productRepository.searchByCateg(categ)
+    }
 
 }

@@ -10,8 +10,7 @@ class ProductDataSource(
 
 
     private var productList = MutableLiveData<List<Product>>()
-    private var searchList = MutableLiveData<List<Product>>()
-    private var searchById = MutableLiveData<Product>()
+    private var denek = MutableLiveData<List<Product>>()
 
     fun getData(): MutableLiveData<List<Product>> {
         collectionProduct.addSnapshotListener { value, error ->
@@ -30,50 +29,27 @@ class ProductDataSource(
         return productList
     }
 
-    fun searchById(id: Int): MutableLiveData<Product?> {
-        val searchResult = MutableLiveData<Product?>()
-
-        collectionProduct
-            .whereEqualTo("id", id)
-            .limit(1)
-            .get()
-            .addOnSuccessListener { documents ->
-                if (!documents.isEmpty) {
-                    val product = documents.documents[0].toObject(Product::class.java)
-                    product?.documentId = documents.documents[0].id
-                    searchResult.postValue(product)
-                } else {
-                    // Belirli bir ID ile eşleşen belge bulunamadı.
-                    // Uygun bir şekilde işlem yapılabilir, örneğin null döndürmek veya bir hata mesajı göstermek.
-                }
-            }
-            .addOnFailureListener { e ->
-                // Hata oluştuğunda uygun şekilde işlem yapılabilir.
-                throw e // Hata durumunda istisna fırlatılabilir.
-            }
-
-        return searchResult
-    }
-
-
-    fun search(searchText: String): MutableLiveData<List<Product>> {
+    fun searchCategText(categ: String): MutableLiveData<List<Product>> {
         collectionProduct.addSnapshotListener { value, error ->
             if (value != null) {
+                println("LOGDF: pds-> girdi")
                 val list = ArrayList<Product>()
                 for (i in value.documents) {
                     val product = i.toObject(Product::class.java)
                     if (product != null) {
-                        if (product.name?.lowercase()?.contains(searchText.lowercase()) == true) {
-                            product.documentId = i.id
+                        if (categ == product.category) {
+                            println("LOGDF: pds-> eklendi")
                             list.add(product)
                         }
                     }
                 }
-                searchList.value = list
-            }
+                denek.value = list
+            } else
+                println("LOGDF: pds-> nıoo")
         }
-        return searchList
+        return denek
     }
+
 
     fun saveData(
         description: String, documentId: String, currentPrice: String,

@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/theme"
     android:orientation="vertical"
     tools:context=".ui.category.CategoryFragment">
@@ -17,6 +18,39 @@
             layout="@layout/custom_category_header" />
 
     </androidx.cardview.widget.CardView>
+
+    <LinearLayout
+        android:id="@+id/emptSearchPanel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:layout_marginTop="20dp"
+        android:visibility="gone"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/product_not_found" />
+
+
+        <TextView
+            android:id="@+id/productName"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_height="match_parent"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/inter_light"
+            android:singleLine="true"
+            android:text="Aradığınız bu ürün bulunmamaktadır."
+            android:textColor="@color/dark_purple_50_trans"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/productImage" />
+    </LinearLayout>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"

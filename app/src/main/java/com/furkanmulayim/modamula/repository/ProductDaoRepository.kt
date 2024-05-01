@@ -7,13 +7,27 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class ProductDaoRepository(var productDao: ProductDao) {
+class ProductDaoRepository(private var productDao: ProductDao) {
 
     private var productList: MutableLiveData<List<Product>> = MutableLiveData()
+    private var product: MutableLiveData<Product> = MutableLiveData()
 
-    fun getAllProductListSqlite(): MutableLiveData<List<Product>> {
+    fun getLikeDatas(): MutableLiveData<List<Product>> {
         getAll()
         return productList
+    }
+
+    fun getSingleLikeData(id: Int): MutableLiveData<Product> {
+        getSingle(id)
+        return product
+    }
+
+    fun saveLikeData(product: Product) {
+        saveProduct(product)
+    }
+
+    fun deleteSingleData(id: Int) {
+        deleteSingle(id)
     }
 
 
@@ -23,17 +37,22 @@ class ProductDaoRepository(var productDao: ProductDao) {
         }
     }
 
-    fun setAllProductListSqlite(
-        producList: List<Product>
-    ) {
+    private fun getSingle(id: Int) {
         CoroutineScope(Dispatchers.IO).launch {
-            productDao.deleteAllProduct()
-            val ll = productDao.instert(*producList.toTypedArray())
-            var i = 0
-            while (i < producList.size) {
-                producList[i].uuid = ll[i].toInt()
-                i++
-            }
+            product.postValue(productDao.getProduct(id))
+        }
+    }
+
+    private fun saveProduct(product: Product) {
+        CoroutineScope(Dispatchers.IO).launch {
+            val uuid = productDao.insertFav(product)
+            product.uuid = uuid[0].toInt()
+        }
+    }
+
+    private fun deleteSingle(id: Int) {
+        CoroutineScope(Dispatchers.IO).launch {
+            productDao.deleteSingle(id)
         }
     }
 }

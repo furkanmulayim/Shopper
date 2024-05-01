@@ -33,62 +33,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initClicks(); observeData(); observSlider(); setScrollSettings()
-    }
-
-    private fun setSlider(list: List<Slider>) {
-        adapter = ImageAdapter(requireContext(), binding.viewPager, list)
-        binding.viewPager.adapter = adapter
-        binding.viewPager.setPageTransformer(ZoomOutPageTransformer(5))
-    }
-
-    private fun setProductAdapter(arrayList: ArrayList<Product>) {
-        productAdapter =
-            HomeProductAdapter(
-                mcontext,
-                arrayList,
-                ::showProductDetails,
-                ::showProductVariants
-            )
-        binding.productRcyc.adapter = productAdapter
-        binding.productRcyc.layoutManager = GridLayoutManager(mcontext, 2)
-    }
-
-    private fun observSlider() {
-        viewModel.sliderList.observe(viewLifecycleOwner) { sliderList ->
-            setSlider(sliderList)
-            if (!viewModel.isSqliteData && sliderList != null) {
-                viewModel.setSqliteSliderList(sliderList)
-            }
-        }
-    }
-
-    private fun observeData() {
-        viewModel.productList.observe(viewLifecycleOwner) { plist ->
-            plist?.let { list ->
-                val filteredList = list.filter { it.active == 1 }
-                setProductAdapter(filteredList as ArrayList<Product>)
-                if (!viewModel.isSqliteData) {
-                    viewModel.setSqliteproductList(filteredList)
-                }
-            }
-        }
-    }
-
-    private fun showProductVariants(productItemVariants: String) {
-        val bundle = Bundle().apply {
-            putString("variant_ids", productItemVariants)
-        }
-        val action = HomeFragmentDirections.actionHomeFragmentToColorVariantFragment().actionId
-        navigateTo(actionId = action, bundle = bundle)
-    }
-
-    private fun showProductDetails(productItemName: Product) {
-        val bundle = Bundle().apply {
-            putParcelable("ProductItem", productItemName)
-        }
-        val action = HomeFragmentDirections.actionHomeFragmentToProductDetailFragment().actionId
-        navigateTo(actionId = action, bundle = bundle)
+        initClicks(); observeDatas(); setScrollSettings()
     }
 
     private fun initClicks() {
@@ -118,6 +63,51 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                 return@setOnLongClickListener true
             }
         }
+    }
+
+    private fun observeDatas() {
+        viewModel.productList.observe(viewLifecycleOwner) { plist ->
+            plist?.let { list ->
+                val filteredList = list.filter { it.active == 1 }
+                setProductAdapter(filteredList as ArrayList<Product>)
+            }
+        }
+
+        viewModel.sliderList.observe(viewLifecycleOwner) { sliderList ->
+            setSlider(sliderList)
+        }
+    }
+
+    private fun showProductVariants(item: Product) {
+        // HIGHER ORDER FUNCTİON -> Ürün Varyant Bottom Nav Bar Açar
+        val bundle = Bundle().apply {
+            putString("variant_ids", item.compatibleSize.toString())
+        }
+        val action = HomeFragmentDirections.actionHomeFragmentToColorVariantFragment().actionId
+        navigateTo(actionId = action, bundle = bundle)
+    }
+
+    private fun showProductDetails(productItemName: Product) {
+        // HIGHER ORDER FUNCTİON -> Ürün Detayı Açar
+        val bundle = Bundle().apply {
+            putParcelable("ProductItem", productItemName)
+        }
+        val action = HomeFragmentDirections.actionHomeFragmentToProductDetailFragment().actionId
+        navigateTo(actionId = action, bundle = bundle)
+    }
+
+    private fun setSlider(list: List<Slider>) {
+        // VIEW PAGER -> Set Slider List
+        adapter = ImageAdapter(requireContext(), binding.viewPager, list)
+        binding.viewPager.adapter = adapter
+        binding.viewPager.setPageTransformer(ZoomOutPageTransformer(5))
+    }
+
+    private fun setProductAdapter(arrayList: ArrayList<Product>) {
+        productAdapter =
+            HomeProductAdapter(mcontext, arrayList, ::showProductDetails, ::showProductVariants)
+        binding.productRcyc.adapter = productAdapter
+        binding.productRcyc.layoutManager = GridLayoutManager(mcontext, 2)
     }
 
     private fun setScrollSettings() {

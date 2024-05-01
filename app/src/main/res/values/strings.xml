@@ -13,7 +13,8 @@
     <!--''''''''''''''''''''HOME''''''''''''''''''''''''''''''''''-->
     <string name="search">Aramaya Başla</string>
     <string name="news">Yeni</string>
-    <string name="kargo">Kargo Ücretsiz</string>
+    <string name="cargo_free">Kargo Ücretsiz</string>
+    <string name="cargo_not_free">Ücretli Kargo</string>
 
 
     <!--''''''''''''''''''''HOME''''''''''''''''''''''''''''''''''-->
@@ -27,6 +28,7 @@
 
     <!--''''''''''''''''''''CATEGORY''''''''''''''''''''''''''''''-->
     <string name="category">Kategoriler</string>
+    <string name="product_not_found">Aradığınız Ürünü Bulamadık..</string>
 
     <!--''''''''''''''''''''CATEGORY''''''''''''''''''''''''''''''-->
 
@@ -76,7 +78,8 @@
 
     <!--''''''''''''''''''''DETAİL''''''''''''''''''''''''''-->
     <string name="tl">₺</string>
-
+    <string name="newtext">Yeni Ürün</string>
+    <string name="saved_hata">Bu ürün beğenilirken hataya düştü.</string>
     <!--''''''''''''''''''''DETAİL''''''''''''''''''''''''''-->
 
     <!--''''''''''''''''''''Panel''''''''''''''''''''''''''''''''''-->

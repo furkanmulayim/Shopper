@@ -4,14 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.furkanmulayim.modamula.R
 import com.furkanmulayim.modamula.base.BaseFragment
 import com.furkanmulayim.modamula.data.model.Product
 import com.furkanmulayim.modamula.databinding.FragmentFavoriteBinding
 import com.furkanmulayim.modamula.utils.viewGone
-import com.furkanmulayim.modamula.utils.viewMessage
 import com.furkanmulayim.modamula.utils.viewVisible
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class FavoriteFragment : BaseFragment<FragmentFavoriteBinding, FavoriteViewModel>() {
 
     private lateinit var adapter: FavoriteAdapter
@@ -24,21 +26,41 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding, FavoriteViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.getDatas()
         initSetup()
-        initAdapter()
+        observeData()
     }
 
     private fun initSetup() {
         viewGone(binding.toolBar.toolbarStart)
         viewGone(binding.toolBar.toolbarEnd)
         binding.toolBar.toolbarTitle.text = getString(R.string.favorie)
+        initAdapter()
+    }
+
+    private fun observeData() {
+        viewModel.productList.observe(viewLifecycleOwner) { fav ->
+            fav?.let {
+                if (fav.isNotEmpty()) {
+                    viewGone(binding.emptyListPanel)
+                    adapter.updateList(fav as ArrayList<Product>)
+                } else {
+                    viewGone(binding.FavoriteRcyc)
+                    viewVisible(binding.emptyListPanel)
+                }
+            }
+        }
     }
 
     private fun initAdapter() {
-        // adapter = FavoriteAdapter(viewModel.favorite, ::onClickItemDelete, ::onClickItem)
-        //binding.FavoriteRcyc.layoutManager = LinearLayoutManager(mcontext)
-        // binding.FavoriteRcyc.adapter = adapter
-        // emptyAdapterControl()
+        adapter = FavoriteAdapter(
+            arrayListOf(),
+            ::onClickItemDelete,
+            ::onClickItem
+        )
+        binding.FavoriteRcyc.layoutManager = LinearLayoutManager(mcontext)
+        binding.FavoriteRcyc.adapter = adapter
+        emptyAdapterControl()
     }
 
     private fun onClickItem(item: Product) {
@@ -50,7 +72,10 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding, FavoriteViewModel
     }
 
     private fun onClickItemDelete(id: Int) {
-        viewMessage(mcontext, id.toString())
+        viewModel.deleteFav(id)
+        val newlist = viewModel.productList.value?.filter { it.id != id }
+        adapter.updateList(newlist as ArrayList<Product>)
+        emptyAdapterControl()
     }
 
     private fun emptyAdapterControl() {
@@ -59,5 +84,10 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding, FavoriteViewModel
         } else {
             viewGone(binding.emptyListPanel)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        emptyAdapterControl()
     }
 }

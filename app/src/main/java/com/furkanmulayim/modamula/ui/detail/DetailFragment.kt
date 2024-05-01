@@ -2,11 +2,13 @@ package com.furkanmulayim.modamula.ui.detail
 
 import android.content.Intent
 import android.graphics.Paint
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.furkanmulayim.modamula.R
@@ -14,12 +16,12 @@ import com.furkanmulayim.modamula.base.BaseFragment
 import com.furkanmulayim.modamula.data.model.Product
 import com.furkanmulayim.modamula.databinding.FragmentProductDetailBinding
 import com.furkanmulayim.modamula.ui.detail.adapters.CompatibleSizeAdapter
-import com.furkanmulayim.modamula.ui.detail.adapters.SimilarProductAdapter
 import com.furkanmulayim.modamula.ui.detail.slider.ProductImageAdapter
 import com.furkanmulayim.modamula.utils.discountCalculate
 import com.furkanmulayim.modamula.utils.onSingleClickListener
 import com.furkanmulayim.modamula.utils.stringToList
-import com.furkanmulayim.modamula.utils.viewVisible
+import com.furkanmulayim.modamula.utils.viewGone
+import com.furkanmulayim.modamula.utils.viewMessage
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -28,7 +30,7 @@ class DetailFragment : BaseFragment<FragmentProductDetailBinding, DetailViewMode
     private lateinit var productVP: ViewPager2
     private lateinit var sliderAdapter: ProductImageAdapter
     private lateinit var sizeAdapter: CompatibleSizeAdapter
-    private lateinit var similarAdapter: SimilarProductAdapter
+    private var isProductFav: Boolean = false
 
     override fun getFragmentBinding(
         inflater: LayoutInflater,
@@ -41,89 +43,116 @@ class DetailFragment : BaseFragment<FragmentProductDetailBinding, DetailViewMode
         super.onViewCreated(view, savedInstanceState)
         binding.buyToolBar.productOldPrice.paintFlags =
             binding.buyToolBar.productOldPrice.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
-        observeData(); initAdaptersAsObserver()
+        observeData(); savedObserver()
+    }
+
+    private fun savedObserver() {
+        viewModel.favItem.observe(viewLifecycleOwner) {
+            it?.let {
+                if (it.id != null) {
+                    val foreground =
+                        AppCompatResources.getDrawable(mcontext, R.drawable.favorie_red_heart)
+                    binding.likeButton.foreground = foreground
+                    isProductFav = true
+                }
+            }
+        }
     }
 
     private fun observeData() {
         viewModel.productItem.observe(viewLifecycleOwner) { item ->
-            with(binding) {
+            applyProductDetails(item)
+
+            item.name?.let { buyButtoClickListener(it) }
+            initClickListeners()
+
+            val imageList = item.image?.let { stringToList(it) }
+            if (imageList != null) {
+                setSliderImages(imageList)
+            }
+
+            val compatibleSizeList = item.compatibleSize?.let { stringToList(it) }
+            if (compatibleSizeList != null) {
+                setCompatibleSizeList(compatibleSizeList)
+            }
+        }
+    }
+
+    private fun setSliderImages(imageList: List<String>?) {
+        imageList?.let {
+            productVP = binding.productViewPager
+            sliderAdapter = ProductImageAdapter(requireContext(), it)
+            binding.productViewPager.adapter = sliderAdapter
+            binding.indicator.setViewPager(productVP)
+        }
+    }
+
+    private fun setCompatibleSizeList(compSizeList: List<String>?) {
+        compSizeList?.let {
+            sizeAdapter = CompatibleSizeAdapter(it)
+            binding.compatibleSizeRcyc.layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            binding.compatibleSizeRcyc.adapter = sizeAdapter
+        }
+    }
+
+    private fun applyProductDetails(item: Product) {
+        with(binding) {
+            apply {
+                if (item.favorite == 1) {
+                    viewGone(likeButton)
+                }
                 productName.text = item.name
                 productDetail.text = item.description
                 productDiscountDescription.text = item.discDesc
-                val oldPrice = item.beforePrice + getString(R.string.tl)
-                val newPrice = item.currentPrice + getString(R.string.tl)
+                if (item.cargoPrice == 0) {
+                    cargoPrice.text = mcontext.getString(R.string.cargo_not_free)
+                } else {
+                    cargoPrice.text = mcontext.getString(R.string.cargo_free)
+                }
+                cargoPrice
+                val oldPrice = "${item.beforePrice} TL"
+                val newPrice = "${item.currentPrice} TL"
                 buyToolBar.productOldPrice.text = oldPrice
                 buyToolBar.productCurrentPrice.text = newPrice
-                indirimYuzde.text = item.beforePrice?.toDoubleOrNull()?.let {
-                    item.currentPrice?.toDoubleOrNull()?.let { it1 -> discountCalculate(it, it1) }
-                }
-            }
-            item.name?.let { buyButtoClickListener(it) }
-            initClickListeners()
-            item.image?.let { stringToList(it) }?.let { setSliderImages(it) }
-        }
-    }
-
-    private fun initAdaptersAsObserver() {
-        viewModel.sizedList.observe(viewLifecycleOwner) {
-            it?.let { sized ->
-                sizeAdapter = CompatibleSizeAdapter(sized as ArrayList<String>)
-                binding.compatibleSizeRcyc.layoutManager =
-                    LinearLayoutManager(mcontext, LinearLayoutManager.HORIZONTAL, false)
-                binding.compatibleSizeRcyc.adapter = sizeAdapter
-            }
-        }
-
-        viewModel.similarList.observe(viewLifecycleOwner) {
-            val similarList: ArrayList<Product> = arrayListOf()
-            it?.let { similar ->
-                similar.forEach { s ->
-                    if (s.isNotEmpty()) {
-                        if (viewModel.searchById(s.toInt()) != null) {
-                            similarList.add(viewModel.searchById(s.toInt())!!)
-                        }
+                indirimYuzde.text = item.beforePrice?.toDoubleOrNull()?.let { beforePrice ->
+                    item.currentPrice?.toDoubleOrNull()?.let { currentPrice ->
+                        discountCalculate(beforePrice, currentPrice)
                     }
                 }
             }
-            similarData(similarList)
         }
     }
 
-    private fun similarData(list: ArrayList<Product>) {
-        if (list.isNotEmpty()) {
-            with(binding) {
-                similarAdapter = SimilarProductAdapter(list)
-                similarRcyc.layoutManager =
-                    LinearLayoutManager(mcontext, LinearLayoutManager.HORIZONTAL, false)
-                similarRcyc.adapter = similarAdapter
-                if (similarAdapter.itemCount > 0) viewVisible(colorVariantPanel)
-            }
-
-        }
-    }
-
-
-    private fun setSliderImages(imageList: List<String>) {
-        productVP = binding.productViewPager
-        sliderAdapter = ProductImageAdapter(mcontext, imageList)
-        binding.productViewPager.adapter = sliderAdapter
-        binding.indicator.setViewPager(productVP)
-    }
 
     private fun initClickListeners() {
         binding.likeButton.onSingleClickListener {
-
+            viewModel.productItem.value?.let { prod ->
+                if (prod.id != null) {
+                    val f: Drawable?
+                    if (isProductFav) {
+                        isProductFav = false
+                        f = AppCompatResources.getDrawable(
+                            mcontext, R.drawable.favorie_line_heart
+                        )
+                        viewModel.deleteSingleProducct(prod.id!!)
+                    } else {
+                        isProductFav = true
+                        f = AppCompatResources.getDrawable(
+                            mcontext, R.drawable.favorie_red_heart
+                        )
+                        viewModel.saveFavoriProduct(prod)
+                    }
+                    if (f != null) binding.likeButton.foreground = f
+                } else {
+                    viewMessage(mcontext, getString(R.string.saved_hata))
+                }
+            }
         }
-
-        binding.shareButton.onSingleClickListener {
-
-        }
-
-        binding.backButton.onSingleClickListener {
-            onBackPressed()
-        }
-
+        binding.shareButton.onSingleClickListener {}
+        binding.backButton.onSingleClickListener { onBackPressed() }
     }
+
 
     private fun buyButtoClickListener(description: String) {
         binding.buyToolBar.productBuyButton.onSingleClickListener {
@@ -131,12 +160,9 @@ class DetailFragment : BaseFragment<FragmentProductDetailBinding, DetailViewMode
         }
     }
 
-
     private fun sendWhatsAppMessage(phoneNumber: String, message: String) {
         val intent = Intent(Intent.ACTION_VIEW)
         intent.data = Uri.parse("https://api.whatsapp.com/send?phone=$phoneNumber&text=$message")
         startActivity(intent)
     }
-
-
 }

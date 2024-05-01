@@ -14,6 +14,7 @@ interface BillingDao {
     @Query("SELECT * FROM billing")
     fun getAllBilling(): Billing
 
+
     @Query("DELETE FROM billing")
     fun deleteAllBilling()
 

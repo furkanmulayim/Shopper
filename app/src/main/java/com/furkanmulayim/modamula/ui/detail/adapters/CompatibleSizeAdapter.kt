@@ -1,6 +1,5 @@
 package com.furkanmulayim.modamula.ui.detail.adapters
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
@@ -8,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.furkanmulayim.modamula.databinding.ItemProductSizesBinding
 
 class CompatibleSizeAdapter(
-    private val dataList: ArrayList<String>,
+    private val dataList: List<String>,
 ) : RecyclerView.Adapter<CompatibleSizeAdapter.ViewHolder>() {
 
     class ViewHolder(binding: ItemProductSizesBinding) :
@@ -38,14 +37,4 @@ class CompatibleSizeAdapter(
     override fun getItemCount(): Int {
         return dataList.size
     }
-
-    @SuppressLint("NotifyDataSetChanged")
-    fun updateList(newList: ArrayList<String>?) {
-        if (newList != null) {
-            dataList.clear()
-            dataList.addAll(newList)
-            notifyDataSetChanged()
-        }
-    }
-
 }

@@ -2,6 +2,8 @@ package com.furkanmulayim.modamula.ui.category
 
 import android.content.Context
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,10 +12,13 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.furkanmulayim.modamula.base.BaseFragment
 import com.furkanmulayim.modamula.data.enums.CategoryName
+import com.furkanmulayim.modamula.data.model.Categorie
 import com.furkanmulayim.modamula.data.model.Product
 import com.furkanmulayim.modamula.databinding.FragmentCategoryBinding
 import com.furkanmulayim.modamula.ui.home.HomeProductAdapter
+import com.furkanmulayim.modamula.utils.viewGone
 import com.furkanmulayim.modamula.utils.viewMessage
+import com.furkanmulayim.modamula.utils.viewVisible
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -30,27 +35,33 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding, CategoryViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        isFocusedBunleDataObserve(); observeData()
+        isFocusedBunleDataObserve(); observeDatas(); setProductAdapter(arrayListOf()); searchProduct()
     }
 
-    private fun observeData() {
+    private fun observeDatas() {
         viewModel.products.observe(viewLifecycleOwner) {
             it?.let {
-                setCategoryAdapter()
-                setProductAdapter(it as ArrayList<Product>)
+                productAdapter.updateList(it as ArrayList<Product>)
+            }
+        }
+
+        viewModel.categorie.observe(viewLifecycleOwner) {
+            it?.let {
+                setCategoryAdapter(it)
             }
         }
     }
 
     //Kategorileri Listelemek İçin Kullanılan adapter
-    private fun setCategoryAdapter() {
-        categoryAdapter = CategoryAdapter(viewModel.categories, ::categoryClickListener)
+    private fun setCategoryAdapter(categorie: List<Categorie>) {
+        categoryAdapter =
+            CategoryAdapter(categorie as ArrayList<Categorie>, ::categoryClickListener)
         binding.toolBar.categoryRcyc.layoutManager =
             LinearLayoutManager(mcontext, LinearLayoutManager.HORIZONTAL, false)
         binding.toolBar.categoryRcyc.adapter = categoryAdapter
     }
 
-    //Ürünleri Listelemek İçin Kullanılan adapter
+    //Ürün Listele
     private fun setProductAdapter(list: ArrayList<Product>) {
         val filteredList = list.filter { it.active == 1 }
         productAdapter = HomeProductAdapter(
@@ -63,26 +74,43 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding, CategoryViewModel
         binding.productRcyc.layoutManager = GridLayoutManager(mcontext, 2)
     }
 
-    //Kategorilerde tıklanan itemler için kullanılan higher order fonks.
+    //HIGHER ORDER FUNCTİON -> Tıklanan Kategoriye Göre filtered list
     private fun categoryClickListener(categoryName: String) {
-        when (categoryName) {
-            CategoryName.TUMU.id -> {
-                //productAdapter.updateList(viewModel.products)
-            }
+        if (CategoryName.TUMU.id != categoryName)
+            setProductAdapter(
+                viewModel.products.value?.filter {
+                    it.category == categoryName
+                } as ArrayList<Product>
+            )
+        else setProductAdapter(viewModel.products.value as ArrayList<Product>)
 
-            CategoryName.JIK.id -> {
-                //productAdapter.updateList(viewModel.products2)
-            }
-
-            CategoryName.BEBEK.id -> {
-                //productAdapter.updateList(viewModel.products1)
-            }
-        }
     }
 
+    private fun searchProduct() {
+        binding.toolBar.searchbar.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
-    private fun showProductVariants(productItemVariants: String) {
-        viewMessage(mcontext, productItemVariants)
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val searchText = s.toString()
+                setProductAdapter(
+                    viewModel.products.value?.filter { product ->
+                        product.description?.contains(searchText, ignoreCase = true) ?: false ||
+                                product.name?.contains(searchText, ignoreCase = true) ?: false
+                    } as ArrayList<Product>)
+                if (productAdapter.itemCount == 0) {
+                    viewVisible(binding.emptSearchPanel)
+                } else {
+                    viewGone(binding.emptSearchPanel)
+                }
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        })
+    }
+
+    //HIGHER ORDER FUNCTİON -> Compatible Size
+    private fun showProductVariants(item: Product) {
+        viewMessage(mcontext, item.relatedProductId.toString())
         val act = CategoryFragmentDirections.actionCategoryFragmentToColorVariantFragment()
         navigateTo(act.actionId)
     }

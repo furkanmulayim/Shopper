@@ -1,6 +1,5 @@
 package com.furkanmulayim.modamula.ui.home
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Paint
 import android.view.LayoutInflater
@@ -16,14 +15,14 @@ import com.furkanmulayim.modamula.utils.discountCalculate
 import com.furkanmulayim.modamula.utils.loadImage
 import com.furkanmulayim.modamula.utils.onSingleClickListener
 import com.furkanmulayim.modamula.utils.stringToList
-import com.furkanmulayim.modamula.utils.viewGone
+import com.furkanmulayim.modamula.utils.viewVisible
 import com.google.android.material.imageview.ShapeableImageView
 
 class HomeProductAdapter(
-    val context: Context,
+    private val mcontext: Context,
     private val dataList: ArrayList<Product>,
     private val onClickItem: (Product) -> (Unit),
-    private val onClickVariants: (String) -> (Unit)
+    private val onClickVariants: (Product) -> (Unit)
 ) : RecyclerView.Adapter<HomeProductAdapter.ViewHolder>() {
 
     inner class ViewHolder(binding: ItemProductBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -35,20 +34,24 @@ class HomeProductAdapter(
         private val newPrice: TextView = binding.productCurrentPrice
         private val name: TextView = binding.productName
         private val colorVariants: TextView = binding.colorVariants
-        private val kargoLayout: LinearLayout = binding.kargoLayout
+        private val kargoPice: TextView = binding.kargo
         private val indirimLayout: LinearLayout = binding.indirimLayout
         private val indirimYuzde: TextView = binding.indirimYuzde
 
-        fun bind(item: Product, context: Context) {
+        fun bind(item: Product) {
 
-            if (item.new == 1) viewGone(newText)
+            if (item.new == 1) viewVisible(newText)
 
             val firstImage = item.image?.split(",")?.get(0)
             if (firstImage != null) {
                 image.loadImage(firstImage, R.drawable.png_failed)
             }
 
-            if (item.cargoPrice == 0) viewGone(kargoLayout)
+            if (item.cargoPrice == 0) {
+                kargoPice.text = mcontext.getString(R.string.cargo_not_free)
+            } else {
+                kargoPice.text = mcontext.getString(R.string.cargo_free)
+            }
 
             val currentPriceText = item.currentPrice + "₺"
             val oldPriceText = item.beforePrice + "₺"
@@ -67,11 +70,10 @@ class HomeProductAdapter(
             itemButton.onSingleClickListener { onClickItem(item) }
 
             colorVariants.onSingleClickListener {
-                onClickVariants(item.compatibleSize.toString())
+                onClickVariants(item)
             }
 
             indirimLayout.onSingleClickListener {}
-            kargoLayout.onSingleClickListener {}
         }
     }
 
@@ -83,14 +85,13 @@ class HomeProductAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = dataList[position]
-        holder.bind(item, context)
+        holder.bind(item)
     }
 
     override fun getItemCount(): Int {
         return dataList.size
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     fun updateList(newList: ArrayList<Product>?) {
         if (newList != null) {
             dataList.clear()

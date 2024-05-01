@@ -21,6 +21,9 @@
             android:id="@+id/shapeableImageView"
             android:layout_width="144dp"
             android:layout_height="0dp"
+            android:paddingStart="7dp"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp"
             android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="3:4"
@@ -41,7 +44,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:orientation="horizontal">
 
             <TextView
@@ -54,8 +57,7 @@
                 android:textColor="@color/normal_text"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/productImage"
-                android:text="Ürün Adı Burda" />
+                app:layout_constraintTop_toBottomOf="@+id/productImage" />
 
 
             <ImageView
@@ -75,20 +77,19 @@
             android:id="@+id/productDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
             android:layout_marginEnd="10dp"
             android:fontFamily="@font/inter_semibold"
-            android:singleLine="true"
+            android:maxLines="2"
             android:textColor="@color/not_selected"
-            android:textSize="16sp"
+            android:textSize="13sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/productImage"
-            android:text="Ürün Acıklaması Burada Olacak" />
+            app:layout_constraintTop_toBottomOf="@+id/productImage" />
 
         <LinearLayout
             android:layout_width="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -118,8 +119,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="3dp"
                     android:textColor="@color/light_purple"
-                    android:textSize="11sp"
-                    android:text="-%50" />
+                    android:textSize="11sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -139,8 +139,7 @@
                     android:fontFamily="@font/inter_light"
                     android:singleLine="true"
                     android:textColor="@color/black_50_trans"
-                    android:textSize="14sp"
-                    android:text="120.00₺" />
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/productCurrentPrice"
@@ -149,8 +148,7 @@
                     android:fontFamily="@font/inter_semibold"
                     android:singleLine="true"
                     android:textColor="@color/dark_purple"
-                    android:textSize="16sp"
-                    android:text="120.00₺" />
+                    android:textSize="16sp" />
 
             </LinearLayout>
         </LinearLayout>
@@ -159,7 +157,6 @@
             android:id="@+id/productSize"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
             android:background="@drawable/favori_size_back"
             android:fontFamily="@font/inter_light"
@@ -167,13 +164,12 @@
             android:padding="5dp"
             android:singleLine="true"
             android:textColor="@color/black_50_trans"
-            android:textSize="12sp"
-            android:text="36-42 Numara" />
+            android:textSize="12sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="5dp"
             android:gravity="bottom"
             android:orientation="horizontal"
             app:layout_constraintStart_toEndOf="@+id/indirimLayout"
@@ -183,7 +179,7 @@
                 android:id="@+id/productDetailButton"
                 style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/light_purple"
@@ -198,7 +194,7 @@
                 android:id="@+id/productBuyButton"
                 style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/dark_purple"

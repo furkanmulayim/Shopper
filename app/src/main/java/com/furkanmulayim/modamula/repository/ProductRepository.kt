@@ -7,9 +7,8 @@ import com.furkanmulayim.modamula.data.model.Product
 class ProductRepository(private var productDataSource: ProductDataSource) {
 
     fun getData(): MutableLiveData<List<Product>> = productDataSource.getData()
-    fun searchById(id: Int): MutableLiveData<Product?> = productDataSource.searchById(id)
-    fun search(searchText: String): MutableLiveData<List<Product>> =
-        productDataSource.search(searchText)
+    fun searchByCateg(categ: String): MutableLiveData<List<Product>> =
+        productDataSource.searchCategText(categ)
 
     fun saveData(
         description: String, documentId: String, currentPrice: String,
