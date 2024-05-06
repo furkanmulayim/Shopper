@@ -62,6 +62,7 @@ class DetailFragment : BaseFragment<FragmentProductDetailBinding, DetailViewMode
     private fun observeData() {
         viewModel.productItem.observe(viewLifecycleOwner) { item ->
             applyProductDetails(item)
+            viewModel.productImages.value = item.image
 
             item.name?.let { buyButtoClickListener(it) }
             initClickListeners()
@@ -81,7 +82,8 @@ class DetailFragment : BaseFragment<FragmentProductDetailBinding, DetailViewMode
     private fun setSliderImages(imageList: List<String>?) {
         imageList?.let {
             productVP = binding.productViewPager
-            sliderAdapter = ProductImageAdapter(requireContext(), it)
+            sliderAdapter =
+                ProductImageAdapter(requireContext(), it)
             binding.productViewPager.adapter = sliderAdapter
             binding.indicator.setViewPager(productVP)
         }

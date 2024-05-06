@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.furkanmulayim.modamula.R
 import com.furkanmulayim.modamula.data.model.Product
 import com.furkanmulayim.modamula.databinding.ItemProductBinding
+import com.furkanmulayim.modamula.utils.animProduct
 import com.furkanmulayim.modamula.utils.discountCalculate
 import com.furkanmulayim.modamula.utils.loadImage
 import com.furkanmulayim.modamula.utils.onSingleClickListener
@@ -40,6 +41,7 @@ class HomeProductAdapter(
 
         fun bind(item: Product) {
 
+            animProduct(itemButton)
             if (item.new == 1) viewVisible(newText)
 
             val firstImage = item.image?.split(",")?.get(0)

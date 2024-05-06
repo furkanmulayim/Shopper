@@ -83,7 +83,6 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding, CategoryViewModel
                 } as ArrayList<Product>
             )
         else setProductAdapter(viewModel.products.value as ArrayList<Product>)
-
     }
 
     private fun searchProduct() {

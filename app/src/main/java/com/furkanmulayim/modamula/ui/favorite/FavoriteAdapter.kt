@@ -1,6 +1,5 @@
 package com.furkanmulayim.modamula.ui.favorite
 
-import android.annotation.SuppressLint
 import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,83 +7,74 @@ import androidx.recyclerview.widget.RecyclerView
 import com.furkanmulayim.modamula.R
 import com.furkanmulayim.modamula.data.model.Product
 import com.furkanmulayim.modamula.databinding.ItemProductFavoriBinding
+import com.furkanmulayim.modamula.utils.animFast
 import com.furkanmulayim.modamula.utils.discountCalculate
 import com.furkanmulayim.modamula.utils.loadImage
 import com.furkanmulayim.modamula.utils.onSingleClickListener
 
 class FavoriteAdapter(
     private val dataList: ArrayList<Product>,
-    val onClickDeleteItem: (Int) -> (Unit),
-    private val onClickItem: (Product) -> (Unit),
+    private val onClickDeleteItem: (Int) -> Unit,
+    private val onClickItem: (Product) -> Unit
 ) : RecyclerView.Adapter<FavoriteAdapter.ViewHolder>() {
 
-
-    inner class ViewHolder(binding: ItemProductFavoriBinding) :
+    inner class ViewHolder(private val binding: ItemProductFavoriBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        private val detailButton = binding.productDetailButton
-        private val buyButton = binding.productBuyButton
-        private val deleteButton = binding.deleteButton
-        private val itemButton = binding.itemFoodCategoryBack
 
-        private val name = binding.productName
-        private val desc = binding.productDescription
-        private val old = binding.productOldPrice
-        private val curr = binding.productCurrentPrice
-        private val nums = binding.productSize
-        private val img = binding.shapeableImageView
-        private val discPercentage = binding.indirimYuzde
+        init {
+            binding.apply {
+                productDetailButton.onSingleClickListener { onClickItem(dataList[adapterPosition]) }
+                itemFoodCategoryBack.onSingleClickListener { onClickItem(dataList[adapterPosition]) }
+                animFast(itemFoodCategoryBack)
+                deleteButton.onSingleClickListener {
+                    onClickDeleteItem(dataList[adapterPosition].id ?: -1)
+                }
+            }
+        }
 
         fun bind(item: Product) {
+            binding.apply {
+                val firstImage = item.image?.split(",")?.firstOrNull()
+                firstImage?.let { shapeableImageView.loadImage(it, R.drawable.png_failed) }
 
-            val firstImage = item.image?.split(",")?.get(0)
-            if (firstImage != null) {
-                img.loadImage(firstImage, R.drawable.png_failed)
+                productName.text = item.name
+                productDescription.text = item.description
+                val opc = "${item.beforePrice}₺"
+                val cpc = "${item.currentPrice}₺"
+                productOldPrice.text = opc
+                productCurrentPrice.text = cpc
+                productOldPrice.paintFlags =
+                    productOldPrice.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+                productSize.text = item.compatibleSize
+
+                val discountPercentage = item.beforePrice?.toDoubleOrNull()?.let { beforePrice ->
+                    item.currentPrice?.toDoubleOrNull()?.let { currentPrice ->
+                        discountCalculate(beforePrice, currentPrice)
+                    }
+                }
+                indirimYuzde.text = discountPercentage ?: ""
             }
-
-            val currentPriceText = item.currentPrice + "₺"
-            val oldPriceText = item.beforePrice + "₺"
-            val discountPercentage = item.beforePrice?.toDoubleOrNull()?.let {
-                item.currentPrice?.toDoubleOrNull()?.let { it1 -> discountCalculate(it, it1) }
-            }
-
-            name.text = item.name
-            desc.text = item.description
-            old.text = oldPriceText
-            curr.text = currentPriceText
-            old.paintFlags = old.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
-            discPercentage.text = discountPercentage
-            nums.text = item.compatibleSize
-
-            buyButton.onSingleClickListener {}
-            detailButton.onSingleClickListener { onClickItem(item) }
-            itemButton.onSingleClickListener { onClickItem(item) }
-            deleteButton.onSingleClickListener { item.id?.let { it1 -> onClickDeleteItem(it1) } }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ItemProductFavoriBinding.inflate(
-            LayoutInflater.from(parent.context),
-            parent,
-            false
-        )
+        val binding =
+            ItemProductFavoriBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = dataList[position]
-        holder.bind(item)
+        holder.bind(dataList[position])
     }
 
-    override fun getItemCount(): Int {
-        return dataList.size
-    }
+    override fun getItemCount(): Int = dataList.size
 
-    @SuppressLint("NotifyDataSetChanged")
     fun updateList(newList: ArrayList<Product>?) {
-        if (newList != null) {
-            dataList.clear()
-            dataList.addAll(newList)
+        newList?.let {
+            dataList.apply {
+                clear()
+                addAll(it)
+            }
             notifyDataSetChanged()
         }
     }

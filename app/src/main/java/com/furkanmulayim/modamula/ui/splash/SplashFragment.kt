@@ -30,11 +30,17 @@ class SplashFragment : BaseFragment<FragmentSplashBinding, SplashViewModel>() {
                     navigateTo(
                         actionId = action.actionId,
                         popUpToId = R.id.splashFragment,
-                        inclusive = true
+                        inclusive = true,
+                        animControl = false
                     )
                 } else {
                     val action = SplashFragmentDirections.actionSplashFragmentToWelcomeFragment()
-                    navigateTo(action.actionId, popUpToId = R.id.splashFragment, inclusive = true)
+                    navigateTo(
+                        action.actionId,
+                        popUpToId = R.id.splashFragment,
+                        inclusive = true,
+                        animControl = false
+                    )
                 }
             }
         }

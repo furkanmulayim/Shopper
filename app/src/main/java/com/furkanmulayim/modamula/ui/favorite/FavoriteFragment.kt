@@ -12,6 +12,9 @@ import com.furkanmulayim.modamula.databinding.FragmentFavoriteBinding
 import com.furkanmulayim.modamula.utils.viewGone
 import com.furkanmulayim.modamula.utils.viewVisible
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class FavoriteFragment : BaseFragment<FragmentFavoriteBinding, FavoriteViewModel>() {
@@ -60,7 +63,6 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding, FavoriteViewModel
         )
         binding.FavoriteRcyc.layoutManager = LinearLayoutManager(mcontext)
         binding.FavoriteRcyc.adapter = adapter
-        emptyAdapterControl()
     }
 
     private fun onClickItem(item: Product) {
@@ -73,8 +75,12 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding, FavoriteViewModel
 
     private fun onClickItemDelete(id: Int) {
         viewModel.deleteFav(id)
-        val newlist = viewModel.productList.value?.filter { it.id != id }
-        adapter.updateList(newlist as ArrayList<Product>)
+        CoroutineScope(Dispatchers.Default).launch {
+            val newlist = viewModel.productList.value?.filter { it.id != id }
+            adapter.updateList(newlist as ArrayList<Product>)
+        }
+
+
         emptyAdapterControl()
     }
 
@@ -84,10 +90,5 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding, FavoriteViewModel
         } else {
             viewGone(binding.emptyListPanel)
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        emptyAdapterControl()
     }
 }

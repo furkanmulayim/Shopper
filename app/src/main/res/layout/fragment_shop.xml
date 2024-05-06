@@ -1,214 +1,203 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/theme"
+    android:orientation="vertical"
     tools:context=".ui.shop.ShopFragment">
 
     <include
         android:id="@+id/toolBar"
         layout="@layout/custom_toolbar" />
 
+
     <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="12dp"
-        android:background="@drawable/category_search_back"
-        android:orientation="horizontal"
-        android:padding="15dp"
-        app:layout_constraintTop_toBottomOf="@+id/toolBar">
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/shop_text_bavk">
 
         <TextView
+            android:id="@+id/eftButton"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_marginEnd="5dp"
-            android:fontFamily="@font/inter_semibold"
-            android:singleLine="true"
-            android:text="@string/desc"
-            android:textColor="@color/dark_purple"
-            android:textSize="16sp" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:fontFamily="@font/inter"
-            android:singleLine="true"
-            android:textColor="@color/dark_purple"
-            android:textSize="16sp" />
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="12dp"
-        android:background="@drawable/category_search_back"
-        android:orientation="vertical"
-        android:padding="15dp"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-        tools:layout_editor_absoluteX="12dp">
-
-
-        <TextView
-            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="12dp"
+            android:layout_margin="7dp"
+            android:background="@drawable/shop_bar_back"
             android:fontFamily="@font/inter_bold"
-            android:gravity="center"
-            android:singleLine="true"
-            android:text="@string/acc_detail"
-            android:textColor="@color/dark_purple_50_trans"
-            android:textSize="16sp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_marginEnd="5dp"
-                android:fontFamily="@font/inter_semibold"
-                android:singleLine="true"
-                android:text="İsim Soyisim"
-                android:textColor="@color/dark_purple"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/isimSoyisim"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:fontFamily="@font/inter"
-                android:singleLine="true"
-                android:textColor="@color/dark_purple"
-                android:textSize="16sp" />
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_marginEnd="5dp"
-                android:fontFamily="@font/inter_semibold"
-                android:singleLine="true"
-                android:text="İletişim"
-                android:textColor="@color/dark_purple"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/iletisim"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:fontFamily="@font/inter"
-                android:singleLine="true"
-                android:textColor="@color/dark_purple"
-                android:textSize="16sp" />
-        </LinearLayout>
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="12dp"
-        android:background="@drawable/category_search_back"
-        android:orientation="vertical"
-        android:padding="15dp"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
-        tools:layout_editor_absoluteX="12dp">
-
+            android:paddingStart="10dp"
+            android:paddingTop="4dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="4dp"
+            android:text="@string/shop_bar_eft"
+            android:textColor="@color/not_selected"
+            android:textSize="15sp" />
 
         <TextView
-            android:layout_width="match_parent"
+            android:id="@+id/socialButton"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="12dp"
+            android:layout_margin="7dp"
             android:fontFamily="@font/inter_bold"
-            android:gravity="center"
-            android:singleLine="true"
-            android:text="@string/acc_social_detail"
-            android:textColor="@color/dark_purple_50_trans"
-            android:textSize="16sp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_marginEnd="5dp"
-                android:fontFamily="@font/inter_semibold"
-                android:singleLine="true"
-                android:text="@string/instagramAccount"
-                android:textColor="@color/dark_purple"
-                android:textSize="16sp" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:fontFamily="@font/inter"
-                android:singleLine="true"
-                android:textColor="@color/dark_purple"
-                android:textSize="16sp" />
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_marginEnd="5dp"
-                android:fontFamily="@font/inter_semibold"
-                android:singleLine="true"
-                android:text="@string/dolapAccount"
-                android:textColor="@color/dark_purple"
-                android:textSize="16sp" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:fontFamily="@font/inter"
-                android:singleLine="true"
-                android:textColor="@color/dark_purple"
-                android:textSize="16sp" />
-        </LinearLayout>
+            android:paddingStart="10dp"
+            android:paddingTop="4dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="4dp"
+            android:text="@string/shop_bar_social"
+            android:textColor="@color/not_selected"
+            android:textSize="15sp" />
     </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="15dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/eftLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/layoutProductHow"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:visibility="gone"
+                    android:orientation="vertical"
+                    android:paddingTop="15dp"
+                    android:paddingBottom="25dp">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginBottom="12dp"
+                        android:fontFamily="@font/inter_semibold"
+                        android:paddingBottom="5dp"
+                        android:text="@string/how_to_use"
+                        android:textColor="@color/normal_text"
+                        android:textSize="19sp" />
+
+                    <include
+                        android:id="@+id/descButton"
+                        layout="@layout/custom_text_view" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/shop_text_line" />
+
+                    <include
+                        android:id="@+id/descWhatsapp"
+                        layout="@layout/custom_text_view" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/shop_text_line" />
+
+                    <include
+                        android:id="@+id/descPay"
+                        layout="@layout/custom_text_view" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/shop_text_line" />
+
+                    <include
+                        android:id="@+id/descSendSheet"
+                        layout="@layout/custom_text_view" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/shop_text_line" />
+
+                    <include
+                        android:id="@+id/descOk"
+                        layout="@layout/custom_text_view" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layoutBuyDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:visibility="gone"
+                    android:layout_marginBottom="25dp"
+                    android:background="@color/white"
+                    android:orientation="vertical"
+                    android:paddingTop="15dp"
+                    android:paddingBottom="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="12dp"
+                        android:fontFamily="@font/inter_semibold"
+                        android:paddingBottom="5dp"
+                        android:text="@string/bank"
+                        android:textColor="@color/normal_text"
+                        android:textSize="19sp" />
+
+                    <include
+                        android:id="@+id/bankName"
+                        layout="@layout/custom_text_view_bank_detail" />
+
+                    <include
+                        android:id="@+id/accountName"
+                        layout="@layout/custom_text_view_bank_detail" />
+
+                    <include
+                        android:id="@+id/accountIban"
+                        layout="@layout/custom_text_view_bank_detail" />
+
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/socialLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:paddingTop="20dp"
+                android:paddingBottom="8dp"
+                android:visibility="gone">
+
+                <include
+                    android:id="@+id/wp"
+                    layout="@layout/custom_text_contact" />
+
+                <include
+                    android:id="@+id/insta"
+                    layout="@layout/custom_text_contact" />
+
+                <include
+                    android:id="@+id/trendyolDolap"
+                    layout="@layout/custom_text_contact" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

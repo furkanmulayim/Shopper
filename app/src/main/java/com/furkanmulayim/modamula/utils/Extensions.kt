@@ -2,9 +2,12 @@ package com.furkanmulayim.modamula.utils
 
 import OnSingleClickListener
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.furkanmulayim.modamula.R
@@ -44,6 +47,36 @@ fun View.onSingleClickListener(listener: View.OnClickListener) {
     )
 }
 
+fun animFast(view: View) {
+    viewVisible(view)
+    view.alpha = 0f
+    view.postDelayed({
+        view.animate()
+            .alpha(1f)
+            .setDuration(300)
+    }, 100)
+}
+
+fun animFirst(view: View) {
+    viewVisible(view)
+    view.alpha = 0f
+    view.postDelayed({
+        view.animate()
+            .alpha(1f)
+            .setDuration(500)
+    }, 200)
+}
+
+fun animSecond(view: View) {
+    viewVisible(view)
+    view.alpha = 0f
+    view.postDelayed({
+        view.animate()
+            .alpha(1f)
+            .setDuration(300)
+    }, 0)
+}
+
 
 fun viewMessage(context: Context, message: String) {
     Toasty.custom(
@@ -66,3 +99,10 @@ fun discountCalculate(oldPrice: Double, newPrice: Double): String {
     return "%" + ((((oldPrice - newPrice) / oldPrice) * 100).toInt().toString())
 }
 
+fun getBackgrounDrawavle(context: Context, dra: Int): Drawable? {
+    return AppCompatResources.getDrawable(context, dra)
+}
+
+fun getColor(context: Context, color: Int): Int {
+    return ContextCompat.getColor(context, color)
+}

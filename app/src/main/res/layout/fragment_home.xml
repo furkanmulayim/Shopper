@@ -4,17 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/theme"
     android:orientation="vertical"
     tools:context=".ui.home.HomeFragment">
 
     <RelativeLayout
         android:id="@+id/headerToolBar"
         android:layout_width="match_parent"
-        android:layout_height="52dp"
+        android:layout_height="80dp"
         android:layout_weight="0"
         android:background="@color/white"
-        android:elevation="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -24,7 +22,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
-            android:layout_margin="15dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:scaleType="centerInside"
             android:src="@drawable/shopper" />
 
@@ -34,7 +33,7 @@
         android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="80dp"
         android:overScrollMode="never"
         app:layout_constraintTop_toBottomOf="@+id/headerToolBar">
 
@@ -57,6 +56,16 @@
                 android:layout_marginStart="12dp"
                 android:layout_marginEnd="12dp"
                 app:shapeAppearanceOverlay="@style/rounded20" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Üreticinin Seçtikleri "
+                android:fontFamily="@font/inter_bold"
+                android:layout_marginTop="12dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:textSize="20sp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/productRcyc"
@@ -81,4 +90,6 @@
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

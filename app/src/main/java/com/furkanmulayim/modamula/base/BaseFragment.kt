@@ -66,21 +66,37 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel> : Fragment() {
         actionId: Int,
         bundle: Bundle? = null,
         popUpToId: Int? = null,
-        inclusive: Boolean = false
+        inclusive: Boolean = false,
+        animControl: Boolean? = true
     ) {
         val navController = findNavController()
-        val options = NavOptions.Builder()
-            .setEnterAnim(R.anim.slide_in_right)
-            .setExitAnim(R.anim.slide_in_left)
-            .setPopEnterAnim(androidx.navigation.ui.R.anim.nav_default_pop_enter_anim)
-            .setPopExitAnim(androidx.navigation.ui.R.anim.nav_default_pop_exit_anim)
-            .apply {
-                popUpToId?.let {
-                    setPopUpTo(it, inclusive)
+        if (animControl == true) {
+            val options = NavOptions.Builder()
+                .setEnterAnim(R.anim.slide_in_right)
+                .setExitAnim(R.anim.slide_in_left)
+                .setPopEnterAnim(androidx.navigation.ui.R.anim.nav_default_pop_enter_anim)
+                .setPopExitAnim(androidx.navigation.ui.R.anim.nav_default_pop_exit_anim)
+                .apply {
+                    popUpToId?.let {
+                        setPopUpTo(it, inclusive)
+                    }
                 }
-            }
-            .build()
-        navController.navigate(actionId, bundle, options)
+                .build()
+            navController.navigate(actionId, bundle, options)
+        } else {
+            val options = NavOptions.Builder()
+                .setEnterAnim(androidx.navigation.ui.R.anim.nav_default_pop_enter_anim)
+                .setExitAnim(androidx.navigation.ui.R.anim.nav_default_exit_anim)
+                .setPopEnterAnim(androidx.navigation.ui.R.anim.nav_default_pop_enter_anim)
+                .setPopExitAnim(androidx.navigation.ui.R.anim.nav_default_pop_exit_anim)
+                .apply {
+                    popUpToId?.let {
+                        setPopUpTo(it, inclusive)
+                    }
+                }
+                .build()
+            navController.navigate(actionId, bundle, options)
+        }
     }
 
 

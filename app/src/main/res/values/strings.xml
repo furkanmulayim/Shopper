@@ -52,20 +52,33 @@
 
     <!--''''''''''''''''''''SHOP''''''''''''''''''''''''''''''''''-->
     <string name="shop">Alışveriş</string>
-    <string name="desc">Açıklama</string>
+
+    <string name="shop_bar_eft">EFT/Havale</string>
+    <string name="shop_bar_social">Sosyal Medya</string>
+
+
+    <string name="how_to_use">Bir Ürünü Nasıl Satın Alırım?</string>
+
+    <string name="desc_button">Bir üründe SATIN AL butonuna tıklayın.</string>
+    <string name="desc_wp">Gönder butonuna tıklamanız yeterlidir.</string>
+    <string name="desc_pay">Onay aldıktan sonra ödemeyi yapabilirsiniz.</string>
+    <string name="desc_sheet">Dekont ve Kargo bilgileri bize gönderin.</string>
+    <string name="desc_ok">Satın alma tamamdır. Ürününüz Hazırlanıyor.</string>
 
     <string name="acc_detail">Banka Hesap Bilgileri</string>
+    <string name="in_touch">WhatsApp İletişim Numarası</string>
 
-    <string name="name_surname">İsim Soyisim:</string>
-    <string name="in_touch">İletişim:</string>
-    <string name="b_name">Banka Adı:</string>
-    <string name="desCargoCompany">İban No:</string>
-    <string name="iban">İban No:</string>
+    <string name="bank">Banka Ödeme Bilgileri</string>
+    <string name="b_name">Banka Adı</string>
+    <string name="b_acc_pers">Hesap Kullanıcısı</string>
+    <string name="b_iban">İban No</string>
 
-    <string name="acc_social_detail">Sosyal Medya Bilgileri</string>
-    <string name="instagramAccount">İnstagram Hesabım:</string>
-    <string name="dolapAccount">Dolap Hesabım:</string>
+    <string name="acc_social_detail">Sosyal Medya Bilgilerimiz</string>
+    <string name="instagramAccount">İnstagram Hesabımız</string>
+    <string name="dolapAccount">Dolap Hesabımız</string>
 
+    <string name="eft_desc">EFT / Havale İle Alışveriş</string>
+    <string name="copytext">Kopyala</string>
 
     <!--''''''''''''''''''''SHOP''''''''''''''''''''''''''''''''''-->
 
@@ -80,6 +93,9 @@
     <string name="tl">₺</string>
     <string name="newtext">Yeni Ürün</string>
     <string name="saved_hata">Bu ürün beğenilirken hataya düştü.</string>
+    <string name="shimmer1">        </string>
+    <string name="shimmer2">             </string>
+    <string name="shimmer3">                      </string>
     <!--''''''''''''''''''''DETAİL''''''''''''''''''''''''''-->
 
     <!--''''''''''''''''''''Panel''''''''''''''''''''''''''''''''''-->

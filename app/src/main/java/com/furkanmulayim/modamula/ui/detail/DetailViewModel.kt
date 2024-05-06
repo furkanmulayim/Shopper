@@ -20,10 +20,9 @@ class DetailViewModel @Inject constructor(
 ) : BaseViewModel(application) {
 
     var productItem: MutableLiveData<Product> = MutableLiveData()
-
-    var productSizeList: MutableLiveData<List<String>> = MutableLiveData()
-
+    private var productSizeList: MutableLiveData<List<String>> = MutableLiveData()
     var favItem: MutableLiveData<Product> = MutableLiveData()
+    var productImages: MutableLiveData<String> = MutableLiveData()
 
     init {
         getSavedStateHandle()

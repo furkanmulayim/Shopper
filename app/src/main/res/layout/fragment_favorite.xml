@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/theme"
     android:layout_height="match_parent"
+    android:background="@color/theme"
     tools:context=".ui.favorite.FavoriteFragment">
 
     <include
@@ -14,18 +14,19 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/FavoriteRcyc"
         android:layout_width="match_parent"
-        android:overScrollMode="never"
         android:layout_height="match_parent"
-        android:layout_marginTop="52dp" />
+        android:layout_marginTop="52dp"
+        android:overScrollMode="never" />
 
     <LinearLayout
         android:id="@+id/emptyListPanel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
-        android:layout_gravity="center"
-        android:orientation="vertical">
+        android:visibility="gone">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:layout_width="wrap_content"
@@ -36,8 +37,8 @@
         <TextView
             android:id="@+id/productName"
             android:layout_width="wrap_content"
-            android:layout_gravity="center"
             android:layout_height="match_parent"
+            android:layout_gravity="center"
             android:layout_marginTop="15dp"
             android:fontFamily="@font/inter_light"
             android:singleLine="true"

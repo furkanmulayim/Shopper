@@ -79,7 +79,7 @@
         android:id="@+id/productDetailFragment"
         android:name="com.furkanmulayim.modamula.ui.detail.DetailFragment"
         android:label="fragment_product_detail"
-        tools:layout="@layout/fragment_product_detail" />
+        tools:layout="@layout/fragment_product_detail"></fragment>
     <dialog
         android:id="@+id/colorVariantFragment"
         android:name="com.furkanmulayim.modamula.ui.home.modal_bottom_sheet.ColorVariantFragment"

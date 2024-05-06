@@ -19,8 +19,9 @@ class ProductImageAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(imageLink: String, position: Int, size: Int) {
-            binding.imageView.loadImage(imageLink, R.drawable.png_failed)
-            binding.imageView.onSingleClickListener {
+            binding.imageViewViewPagers.loadImage(imageLink, R.drawable.png_failed)
+            binding.imageViewViewPagers.onSingleClickListener {
+
             }
         }
     }
@@ -38,6 +39,4 @@ class ProductImageAdapter(
     override fun getItemCount(): Int {
         return images.size
     }
-
-
 }

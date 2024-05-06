@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.furkanmulayim.modamula.R
 import com.furkanmulayim.modamula.data.model.Categorie
 import com.furkanmulayim.modamula.databinding.ItemProductCategoryBinding
+import com.furkanmulayim.modamula.utils.animFast
 import com.furkanmulayim.modamula.utils.loadImage
 
 class CategoryAdapter(
@@ -32,6 +33,7 @@ class CategoryAdapter(
 
         fun bind(item: Categorie) {
             binding.apply {
+                animFast(itemFoodCategoryBack)
                 item.logo?.let { logo.loadImage(it, R.drawable.png_failed) }
                 name.text = item.name
                 if (adapterPosition == selectedPosition) {
@@ -39,18 +41,14 @@ class CategoryAdapter(
                     name.setTextColor(getColor(itemView.context, R.color.dark_purple))
                 } else {
                     itemFoodCategoryBack.setBackgroundResource(R.drawable.category_item_white)
-                    name.setTextColor(getColor(itemView.context, R.color.light_purple))
                 }
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ItemProductCategoryBinding.inflate(
-            LayoutInflater.from(parent.context),
-            parent,
-            false
-        )
+        val binding =
+            ItemProductCategoryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 

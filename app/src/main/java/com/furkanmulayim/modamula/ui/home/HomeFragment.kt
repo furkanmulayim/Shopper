@@ -14,6 +14,8 @@ import com.furkanmulayim.modamula.data.model.Slider
 import com.furkanmulayim.modamula.databinding.FragmentHomeBinding
 import com.furkanmulayim.modamula.ui.home.slider.ImageAdapter
 import com.furkanmulayim.modamula.ui.home.slider.ZoomOutPageTransformer
+import com.furkanmulayim.modamula.utils.animSearch
+import com.furkanmulayim.modamula.utils.animSlider
 import com.furkanmulayim.modamula.utils.onSingleClickListener
 import com.furkanmulayim.modamula.utils.viewGone
 import com.furkanmulayim.modamula.utils.viewVisible
@@ -33,7 +35,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initClicks(); observeDatas(); setScrollSettings()
+        initClicks(); observeDatas(); setScrollSettings();setAnim()
+    }
+
+    private fun setAnim() {
+        binding.apply {
+            animSlider(viewPager)
+            animSearch(searchBar.searchbar)
+        }
     }
 
     private fun initClicks() {
@@ -76,6 +85,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
         viewModel.sliderList.observe(viewLifecycleOwner) { sliderList ->
             setSlider(sliderList)
         }
+
     }
 
     private fun showProductVariants(item: Product) {
@@ -84,7 +94,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
             putString("variant_ids", item.compatibleSize.toString())
         }
         val action = HomeFragmentDirections.actionHomeFragmentToColorVariantFragment().actionId
-        navigateTo(actionId = action, bundle = bundle)
+        navigateTo(action, bundle)
     }
 
     private fun showProductDetails(productItemName: Product) {
@@ -93,7 +103,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
             putParcelable("ProductItem", productItemName)
         }
         val action = HomeFragmentDirections.actionHomeFragmentToProductDetailFragment().actionId
-        navigateTo(actionId = action, bundle = bundle)
+        navigateTo(action, bundle)
     }
 
     private fun setSlider(list: List<Slider>) {

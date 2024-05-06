@@ -3,16 +3,16 @@ package com.furkanmulayim.modamula.ui.detail.adapters
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.furkanmulayim.modamula.databinding.ItemProductSimilarBinding
-import com.google.android.material.imageview.ShapeableImageView
 
 class SimilarProductAdapter(
     private val dataList: ArrayList<String>
 ) : RecyclerView.Adapter<SimilarProductAdapter.ViewHolder>() {
 
     class ViewHolder(binding: ItemProductSimilarBinding) : RecyclerView.ViewHolder(binding.root) {
-        val image: ShapeableImageView = binding.image
+        val image: ImageView = binding.image
 
         fun bind(item: String) {
         }

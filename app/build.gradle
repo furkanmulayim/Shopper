@@ -96,6 +96,11 @@ dependencies {
     //VIEW PAGER INDICATOR
     implementation 'me.relex:circleindicator:2.1.6'
 
+    //SHİMMER EFFECT
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
+
+    //PHOTO VIEW
+    implementation 'com.github.chrisbanes:PhotoView:2.3.0'
 
     implementation 'androidx.core:core-ktx:1.13.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'

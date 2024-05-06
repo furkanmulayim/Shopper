@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/item_food_category_back"
+    android:id="@+id/back"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginEnd="5dp"
@@ -11,6 +11,7 @@
         android:id="@+id/image"
         android:layout_width="100dp"
         android:layout_height="125dp"
+        android:layout_margin="3dp"
         android:background="@drawable/item"
         android:scaleType="centerCrop"
         app:layout_constraintDimensionRatio="4:8"
