@@ -12,7 +12,6 @@
         android:layout_width="100dp"
         android:layout_height="125dp"
         android:layout_margin="3dp"
-        android:background="@drawable/item"
         android:scaleType="centerCrop"
         app:layout_constraintDimensionRatio="4:8"
         app:shapeAppearanceOverlay="@style/rounded15" />
