@@ -9,4 +9,10 @@
         android:id="@+id/toolBar"
         layout="@layout/custom_toolbar" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/notifyRcyc"
+        android:layout_marginTop="57dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
 </FrameLayout>

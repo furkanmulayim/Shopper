@@ -8,7 +8,6 @@ import com.furkanmulayim.modamula.R
 import com.furkanmulayim.modamula.base.BaseFragment
 import com.furkanmulayim.modamula.databinding.FragmentShopBinding
 import com.furkanmulayim.modamula.utils.animFast
-import com.furkanmulayim.modamula.utils.animFirst
 import com.furkanmulayim.modamula.utils.animSecond
 import com.furkanmulayim.modamula.utils.getBackgrounDrawavle
 import com.furkanmulayim.modamula.utils.onSingleClickListener
@@ -29,7 +28,7 @@ class ShopFragment : BaseFragment<FragmentShopBinding, ShopViewModel>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initUI(); observeData(); initClickListeners()
+        viewModel.getBillData(); initUI(); observeData(); initClickListeners()
     }
 
     private fun observeData() {
@@ -46,7 +45,7 @@ class ShopFragment : BaseFragment<FragmentShopBinding, ShopViewModel>() {
 
     private fun initUI() {
         binding.apply {
-            animFirst(layoutProductHow)
+            //animFirst(layoutProductHow)
             with(toolBar) {
                 viewGone(toolbarStart)
                 viewGone(toolbarEnd)

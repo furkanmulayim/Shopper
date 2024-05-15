@@ -15,6 +15,7 @@ import com.furkanmulayim.modamula.R
 import com.furkanmulayim.modamula.base.BaseFragment
 import com.furkanmulayim.modamula.data.model.Product
 import com.furkanmulayim.modamula.databinding.FragmentProductDetailBinding
+import com.furkanmulayim.modamula.ui.detail.adapters.ColorVariantAdapter
 import com.furkanmulayim.modamula.ui.detail.adapters.CompatibleSizeAdapter
 import com.furkanmulayim.modamula.ui.detail.slider.ProductImageAdapter
 import com.furkanmulayim.modamula.utils.discountCalculate
@@ -30,6 +31,7 @@ class DetailFragment : BaseFragment<FragmentProductDetailBinding, DetailViewMode
     private lateinit var productVP: ViewPager2
     private lateinit var sliderAdapter: ProductImageAdapter
     private lateinit var sizeAdapter: CompatibleSizeAdapter
+    private lateinit var colorsAdapter: ColorVariantAdapter
     private var isProductFav: Boolean = false
 
     override fun getFragmentBinding(
@@ -76,6 +78,12 @@ class DetailFragment : BaseFragment<FragmentProductDetailBinding, DetailViewMode
             if (compatibleSizeList != null) {
                 setCompatibleSizeList(compatibleSizeList)
             }
+
+            val colors = item.color?.let { stringToList(it) }
+            if (colors != null) {
+                setColors(colors)
+            }
+
         }
     }
 
@@ -95,6 +103,15 @@ class DetailFragment : BaseFragment<FragmentProductDetailBinding, DetailViewMode
             binding.compatibleSizeRcyc.layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             binding.compatibleSizeRcyc.adapter = sizeAdapter
+        }
+    }
+
+    private fun setColors(colors: List<String>) {
+        colors.let {
+            colorsAdapter = ColorVariantAdapter(it)
+            binding.colorsRcyc.layoutManager =
+                LinearLayoutManager(mcontext, LinearLayoutManager.HORIZONTAL, false)
+            binding.colorsRcyc.adapter = colorsAdapter
         }
     }
 

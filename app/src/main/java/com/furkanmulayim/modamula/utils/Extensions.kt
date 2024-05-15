@@ -57,16 +57,6 @@ fun animFast(view: View) {
     }, 100)
 }
 
-fun animFirst(view: View) {
-    viewVisible(view)
-    view.alpha = 0f
-    view.postDelayed({
-        view.animate()
-            .alpha(1f)
-            .setDuration(500)
-    }, 200)
-}
-
 fun animSecond(view: View) {
     viewVisible(view)
     view.alpha = 0f

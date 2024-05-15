@@ -1,6 +1,7 @@
 package com.furkanmulayim.modamula.ui
 
 import android.os.Bundle
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
@@ -21,6 +22,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         setBottomNavBar()
+        closedBackButton()
     }
 
     private fun setBottomNavBar() {
@@ -38,5 +40,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
+    private fun closedBackButton() {
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {}
+        })
+    }
 }

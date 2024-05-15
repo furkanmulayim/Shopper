@@ -20,11 +20,7 @@ class ShopViewModel @Inject constructor(
     val billing: LiveData<Billing?>
         get() = _billing
 
-    init {
-        getBillData()
-    }
-
-    private fun getBillData() {
+    fun getBillData() {
         _billing = billingFirebaseRepo.getData()
     }
 

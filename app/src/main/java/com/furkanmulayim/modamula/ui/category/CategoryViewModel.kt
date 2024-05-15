@@ -44,7 +44,6 @@ class CategoryViewModel @Inject constructor(
 
     init {
         getBundle()
-        fetchData()
     }
 
     private fun getBundle() {
@@ -56,7 +55,7 @@ class CategoryViewModel @Inject constructor(
         }
     }
 
-    private fun fetchData() {
+    fun fetchData() {
         _productList = productRepository.getData()
         _categorieList = categorieRepository.getData()
     }

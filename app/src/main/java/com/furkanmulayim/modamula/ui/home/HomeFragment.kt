@@ -35,7 +35,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initClicks(); observeDatas(); setScrollSettings();setAnim()
+        viewModel.getDatas(); initClicks(); observeDatas(); setScrollSettings();setAnim()
     }
 
     private fun setAnim() {
@@ -77,7 +77,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
     private fun observeDatas() {
         viewModel.productList.observe(viewLifecycleOwner) { plist ->
             plist?.let { list ->
-                val filteredList = list.filter { it.active == 1 }
+                val filteredList = list.filter { it.active == 1 && it.producerSelect == 1 }
                 setProductAdapter(filteredList as ArrayList<Product>)
             }
         }

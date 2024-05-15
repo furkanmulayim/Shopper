@@ -43,7 +43,9 @@
 
     <!--''''''''''''''''''''CATEGORY''''''''''''''''''''''''''''''-->
     <string name="color">Renk</string>
-    <string name="size">Uyumlu Bedenler</string>
+    <string name="product_color">Ürün Renkleri</string>
+    <string name="product_firs">Ürün Fırsatları</string>
+    <string name="product_size">Uyumlu Bedenler</string>
     <string name="product_detail">Ürün Açıklaması</string>
     <string name="similar">Benzer Ürünler</string>
 

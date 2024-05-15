@@ -35,7 +35,8 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding, CategoryViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        isFocusedBunleDataObserve(); observeDatas(); setProductAdapter(arrayListOf()); searchProduct()
+        viewModel.fetchData(); isFocusedBunleDataObserve(); observeDatas()
+        setProductAdapter(arrayListOf()); searchProduct()
     }
 
     private fun observeDatas() {
@@ -79,7 +80,7 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding, CategoryViewModel
         if (CategoryName.TUMU.id != categoryName)
             setProductAdapter(
                 viewModel.products.value?.filter {
-                    it.category == categoryName
+                    it.category?.contains(categoryName) ?: true
                 } as ArrayList<Product>
             )
         else setProductAdapter(viewModel.products.value as ArrayList<Product>)

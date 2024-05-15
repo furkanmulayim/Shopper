@@ -32,14 +32,13 @@ class HomeViewModel @Inject constructor(
 
     init {
         isAppAlreadyBefore()
-        getDatas()
     }
 
     private fun isAppAlreadyBefore() {
         sharedPrefs.saveWelcome()
     }
 
-    private fun getDatas() {
+    fun getDatas() {
         fetchData()
     }
 
